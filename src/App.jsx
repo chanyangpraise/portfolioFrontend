@@ -1,11 +1,12 @@
-
+import "./reset.css";
+import Main from "./Routers/Main";
 
 function App() {
   return (
     <div className="App">
-      <h1>fasdfasdfdasf</h1>
+      <Main />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
