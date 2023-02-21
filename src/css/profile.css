@@ -41,13 +41,7 @@ img {
   outline: 0.5rem auto #4d90fe;
 }
 
-.visually-hidden {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-}
+
 
 /* Profile Section */
 
@@ -134,7 +128,7 @@ img {
   font-weight: 600;
 }
 
-/* Gallery Section */
+/* G Section */
 
 .gallery {
   display: flex;
@@ -143,7 +137,7 @@ img {
   padding-bottom: 3rem;
 }
 
-.gallery_item {
+.g_item {
   position: relative;
   flex: 1 0 22rem;
   margin: 1rem;
@@ -151,8 +145,8 @@ img {
   cursor: pointer;
 }
 
-.gallery_item:hover .gallery_item_info,
-.gallery_item:focus .gallery_item-info {
+.g_item:hover .g_item_info,
+.g_item:focus .g_item_info {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,21 +157,21 @@ img {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.gallery_item_info {
+.g_item_info {
   display: none;
 }
 
-.gallery_item_info li {
+.g_item_info li {
   display: inline-block;
   font-size: 1.7rem;
   font-weight: 600;
 }
 
-.gallery_item-likes {
+.g_item_likes {
   margin-right: 2.2rem;
 }
 
-.gallery_item_type {
+.g_item_type {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -185,7 +179,7 @@ img {
   text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
-.gallery_image {
+.g_image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -314,7 +308,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
       grid-row: 1 / -1;
   }
 
-  .gallery {
+  .g {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
       grid-gap: 2rem;
@@ -324,8 +318,8 @@ Remove or comment-out the code block below to see how the browser will fall-back
   .p_user_settings,
   .p_stats,
   .p_bio,
-  .gallery_item,
-  .gallery {
+  .g_item,
+  .g {
       width: auto;
       margin: 0;
   }

@@ -1,5 +1,7 @@
 import React from 'react';
 import './css/profile.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 function Profile() {
   return (
@@ -44,9 +46,42 @@ function Profile() {
       </header>
 
       <div className="container">
-        <div className="gallery">
-          <div className="gallery_item">
-            
+        <div class="gallery">
+          <div class="g_item">
+            <img
+              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
+              class="g_image"
+              alt=""
+            />
+
+            <div class="g_item_info">
+              <ul>
+                <li class="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 56
+                </li>
+                <li class="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 2
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="g_item">
+            <img
+              src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop"
+              class="g_image"
+              alt=""
+            />
+
+            <div class="g_item_info">
+              <ul>
+                <li class="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 89
+                </li>
+                <li class="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 5
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
