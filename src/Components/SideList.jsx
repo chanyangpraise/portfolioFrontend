@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function SideList() {
   return (
-    <div>
+    <>
       <ul className="sidebar_ul">
         <li>
           <Link to="/">
@@ -21,7 +21,7 @@ function SideList() {
           </Link>
         </li>
       </ul>
-    </div>
+    </>
   );
 }
 
