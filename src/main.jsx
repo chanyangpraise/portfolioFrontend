@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './loginPage/login'
+import App from './loginPage/components/login'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
