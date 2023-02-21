@@ -1,11 +1,11 @@
-
+import Profile from './Profile'
 
 function App() {
   return (
     <div className="App">
-      <h1>fasdfasdfdasf</h1>
+      <Profile></Profile>
     </div>
   )
 }
 
-export default App
+export default App;
