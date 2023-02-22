@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/profile.css';
+import '../css/profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,19 +21,20 @@ function Profile() {
   return (
     <div className="profile_main">
       <header>
-        <div className="container">
+        <div className="p_container">
           <div className="profile">
             <div className="p_image">
-              <img
+              <img 
                 src="https://i.ibb.co/G54dpvC/tim-cook-image.png"
                 alt="프로필"
+                className='p_img'
               />
             </div>
 
             <div className="p_user_settings">
               <h1 className="p_user_name">Tim Cook</h1>
 
-              <button className="btn p_edit_btn">프로필 편집</button>
+              <button className="p_btn p_edit_btn">프로필 편집</button>
             </div>
             <div className="p_stats">
               <ul>
@@ -49,10 +50,10 @@ function Profile() {
               </ul>
             </div>
             <div className="p_bio">
-              <p>
+              <p className='p_explain'>
                 Apple CEO Auburn 🏀 🏈 Duke 🏀 National Parks 🏞️ “Life's most
                 persistent and urgent question is, 'What are you doing for
-                others?'” - MLK. he/him
+                others?'” - MLK. You know what? I'm gay.
               </p>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import "./reset.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideBar from "./Routers/SideBar";
-import TestProfile from "./Routers/TestProfile";
+import Profile from "./Routers/Profile";
 import RightMain from "./Routers/RightMain";
 import Login from "./Routers/login";
 
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route element={<SideBar />}>
           <Route path="/main" element={<RightMain />} />
-          <Route path="/profile" element={<TestProfile />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </Router>
