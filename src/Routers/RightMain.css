@@ -35,6 +35,12 @@
   overflow: hidden;
 }
 
+.main_input_img {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .main_input::placeholder {
   font-size: 1.2rem;
 }
@@ -60,4 +66,10 @@
   border-radius: 1rem;
   cursor: pointer;
   font-weight: bold;
+}
+
+.main_post_wrap {
+  margin: 0 auto;
+  width: 80%;
+  line-break: auto;
 }
