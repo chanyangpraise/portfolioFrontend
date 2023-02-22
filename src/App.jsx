@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideBar from "./Routers/SideBar";
 import Profile from "./Routers/Profile";
 import RightMain from "./Routers/RightMain";
-import Login from "./Routers/login";
+import Login from "./Routers/Login";
 
 function App() {
   return (
