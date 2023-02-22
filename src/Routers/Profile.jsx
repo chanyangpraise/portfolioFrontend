@@ -1,7 +1,7 @@
-import React from 'react';
-import '../css/profile.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import "./Profile.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
   // const [selectedImage, setSelectedImage] = useState(null);
@@ -16,19 +16,13 @@ function Profile() {
 
   // ------------------ //
 
-
-
   return (
     <div className="profile_main">
       <header>
         <div className="p_container">
           <div className="profile">
             <div className="p_image">
-              <img 
-                src="https://i.ibb.co/G54dpvC/tim-cook-image.png"
-                alt="프로필"
-                className='p_img'
-              />
+              <img src="https://i.ibb.co/G54dpvC/tim-cook-image.png" alt="프로필" className="p_img" />
             </div>
 
             <div className="p_user_settings">
@@ -50,10 +44,9 @@ function Profile() {
               </ul>
             </div>
             <div className="p_bio">
-              <p className='p_explain'>
-                Apple CEO Auburn 🏀 🏈 Duke 🏀 National Parks 🏞️ “Life's most
-                persistent and urgent question is, 'What are you doing for
-                others?'” - MLK. You know what? I'm gay.
+              <p className="p_explain">
+                Apple CEO Auburn 🏀 🏈 Duke 🏀 National Parks 🏞️ “Life's most persistent and urgent question is, 'What
+                are you doing for others?'” - MLK. You know what? I'm gay.
               </p>
             </div>
           </div>
