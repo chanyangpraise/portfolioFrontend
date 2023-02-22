@@ -9,7 +9,7 @@ function RightMain() {
   const [text, setText] = useState();
   const [texts, setTexts] = useState([]);
   const [img, setImg] = useState();
-  const [imgs, setImgs] = useState([]);
+  const [imgs, setImgs] = useState();
 
   const TextAdd = (event) => {
     setText(event.target.value);
@@ -36,7 +36,8 @@ function RightMain() {
     //
     //
     setTexts((current) => [text, ...current]);
-    setImgs((current) => [imgs, ...current]);
+    setImgs(img);
+    console.log(imgs);
   };
 
   // img add //
@@ -92,6 +93,7 @@ function RightMain() {
               </div>
             </div>
             <li style={{ wordBreak: "break-word" }}>{v}</li>
+            <img src={imgs} alt="" />
           </Fragment>
         ))}
       </ul>
