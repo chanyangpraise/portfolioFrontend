@@ -1,9 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Login from './loginPage/components/login';
+import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <>
-    <Login />
-  </>
-);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
