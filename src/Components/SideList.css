@@ -1,0 +1,19 @@
+.sidebar_ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar_ul li {
+  margin-bottom: 3rem;
+}
+
+.sidebar_ul span {
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sidebar_icon {
+  width: 2rem;
+  margin-right: 1rem;
+}
