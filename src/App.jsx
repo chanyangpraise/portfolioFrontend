@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideBar from "./Routers/SideBar";
 import TestProfile from "./Routers/TestProfile";
 import RightMain from "./Routers/RightMain";
+
 function App() {
   return (
     <Router>
@@ -15,4 +16,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;
