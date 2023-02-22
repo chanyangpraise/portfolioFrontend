@@ -14,6 +14,10 @@ function Profile() {
   //   setSelectedImage(null);
   // };
 
+  // ------------------ //
+
+
+
   return (
     <div className="profile_main">
       <header>
@@ -63,7 +67,6 @@ function Profile() {
               className="g_image"
               alt="img1"
             />
-
             <div className="g_item_info">
               <ul>
                 <li className="g_item_likes">
