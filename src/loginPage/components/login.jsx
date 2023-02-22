@@ -1,7 +1,7 @@
 import React from "react";
 import "./login.css";
 
-function App() {
+function Login() {
   return (
     <div className="container">
       <div className="box">
@@ -28,4 +28,4 @@ function App() {
   )
 }
 
-export default App
+export default Login
