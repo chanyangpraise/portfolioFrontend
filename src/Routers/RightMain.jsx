@@ -9,7 +9,6 @@ function RightMain() {
   const [text, setText] = useState();
   const [texts, setTexts] = useState([]);
   const [img, setImg] = useState();
-  const [imgs, setImgs] = useState();
 
   const TextAdd = (event) => {
     setText(event.target.value);
@@ -32,12 +31,8 @@ function RightMain() {
       return;
     }
     // 배열에 담기
-    //
-    //
-    //
+
     setTexts((current) => [text, ...current]);
-    setImgs(img);
-    console.log(imgs);
   };
 
   // img add //
@@ -47,7 +42,6 @@ function RightMain() {
     reader.onloadend = () => {
       setImg(reader.result);
     };
-    console.log(e.target.files[0]);
   };
 
   return (
@@ -93,7 +87,6 @@ function RightMain() {
               </div>
             </div>
             <li style={{ wordBreak: "break-word" }}>{v}</li>
-            <img src={imgs} alt="" />
           </Fragment>
         ))}
       </ul>

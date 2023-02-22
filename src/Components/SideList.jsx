@@ -9,7 +9,7 @@ function SideList() {
     <>
       <ul className="sidebar_ul">
         <li>
-          <Link to="/">
+          <Link to="/main">
             <img className="sidebar_icon" src={Home} alt="home_img" />
             <span>Home</span>
           </Link>
