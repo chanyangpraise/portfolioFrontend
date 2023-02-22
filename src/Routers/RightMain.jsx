@@ -36,7 +36,6 @@ function RightMain() {
     //
     //
     setTexts((current) => [text, ...current]);
-    console.log(texts);
     setImgs((current) => [imgs, ...current]);
   };
 
@@ -84,15 +83,15 @@ function RightMain() {
       <ul className="main_post_wrap">
         {texts.map((v) => (
           <Fragment key={v}>
-            <SideProfile />
-            <li style={{ wordBreak: "break-word" }}>
-              {v}
-              {imgs.map((v) => {
-                {
-                  v;
-                }
-              })}
-            </li>
+            <div className="main_post_profile">
+              <div>
+                <SideProfile />
+              </div>
+              <div>
+                <button className="main_follow_button">Follow</button>
+              </div>
+            </div>
+            <li style={{ wordBreak: "break-word" }}>{v}</li>
           </Fragment>
         ))}
       </ul>
