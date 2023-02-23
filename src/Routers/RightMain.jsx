@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./RightMain.css";
-// import imgButton from "../asset/image-regular.svg";
+import imgButton from "../asset/image-regular.svg";
 import HeartImg from "../asset/heart-regular.svg";
 import SideProfile from "../Components/SideProfile";
 
@@ -66,15 +66,19 @@ function RightMain() {
     };
   };
 
+  const imgInputClick = () => {
+    imgbutton.current.click();
+  };
+
   return (
     <>
       <div className="main_header">
         <h1>Home</h1>
       </div>
-      <span ref={imgAlert} className="main_img_alert">
-        사진을 첨부해주세요.
-      </span>
       <form onSubmit={onSubmit} className="main_wrap">
+        <span ref={imgAlert} className="main_img_alert">
+          사진을 첨부해주세요.
+        </span>
         <div>
           <textarea
             onChange={textAdd}
@@ -88,7 +92,15 @@ function RightMain() {
           <img src={img} alt="#" className="main_input_img" />
         </div>
         <div className="main_bottom_box">
-          <input type="file" className="main_img_button" accept="image/*" ref={imgbutton} onChange={ImgAdd} />
+          <input
+            type="file"
+            className="main_img_button"
+            accept="image/*"
+            ref={imgbutton}
+            onChange={ImgAdd}
+            style={{ display: "none" }}
+          />
+          <img src={imgButton} className="img_send_button" alt="imgSendButton" onClick={imgInputClick}></img>
           <button className="main_send_button" ref={sendButton} disabled>
             Send
           </button>
