@@ -4,7 +4,7 @@ import "./SideLogo.css";
 function SideLogo() {
   return (
     <div>
-      <h1 className="sidebar_header">G</h1>
+      <img className="sidebar_header" src="/src/asset/Teamstagramlogo.png"></img>
     </div>
   );
 }

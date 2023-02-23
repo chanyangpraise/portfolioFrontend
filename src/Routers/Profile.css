@@ -1,20 +1,21 @@
-.profile_main {
-  font-size: 10px;
-  font-family: "Open Sans", Arial, sans-serif;
-  min-height: 100vh;
-  background-color: #fafafa;
-  color: #262626;
-  padding-bottom: 3rem;
-}
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* 
-.p_img {
+.profile_main {
+  font-size: 10px;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #fff;
+  color: #262626;
+  /* 인스타 검정색 */
+  padding-bottom: 3rem;
+}
+
+
+/* .p_img {
   display: block;
 } */
 
@@ -24,6 +25,14 @@
   padding: 0 2rem;
   border-bottom: 2px solid rgb(219, 219, 219);
 }
+
+.g_container {
+  max-width: 55.5rem;
+  margin: 6em auto;
+  border-bottom: 2px solid rgb(219, 219, 219);
+}
+
+/* border-bottom: 2px solid rgb(219, 219, 219); */
 
 .p_btn {
   display: inline-block;
@@ -36,12 +45,12 @@
 }
 
 .p_btn:focus {
-  outline: 0.5rem auto #4d90fe; 
+  outline: 0.5rem auto #4d90fe;
 }
 
 
 
-/* Profile Section */
+/* 프로필 섹션 */
 
 .profile {
   padding: 3rem 0;
@@ -79,18 +88,24 @@
 
 .p_user_name {
   display: inline-block;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 300;
 }
 
 .p_edit_btn {
-  font-size: 1.4rem;
+  font-size: 1rem;
   line-height: 1.8;
-  border: 0.1rem solid #dbdbdb;
+  background-color: #efefef;
   border-radius: 0.3rem;
   padding: 0 2.4rem;
   margin-left: 2rem;
+  margin-right: 1.5rem;
 }
+
+.p_edit_btn:hover {
+  background-color: #dbdbdb;
+}
+
 
 .p_settings_btn {
   font-size: 2rem;
@@ -98,6 +113,7 @@
 }
 
 .p_stats {
+  padding-top: 20px;
   margin-top: 2.3rem;
 }
 
@@ -107,6 +123,7 @@
   line-height: 1.5;
   margin-right: 4rem;
   cursor: pointer;
+  font-size: 20px;
 }
 
 .p_stats li:last-of-type {
@@ -121,7 +138,8 @@
 }
 
 .p_explain {
-  padding-top: 1em;
+  padding-top: 2em;
+  padding-right: 14em;
   font-size: 1.2rem;
 }
 
@@ -131,12 +149,12 @@
   font-weight: 600;
 }
 
-/* G Section */
+/* 갤러리 섹션 */
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  margin: 2rem 3rem;
+  margin: -1rem -1rem;
   padding-bottom: 3rem;
 }
 
@@ -166,16 +184,12 @@
 
 .g_item_info li {
   display: inline-block;
-  font-size: 1.7rem;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
 .g_item_likes {
   margin-right: 2.2rem;
-}
-
-.g_item_comments {
-  margin-right: 4rem;
 }
 
 .g_image {
@@ -184,106 +198,117 @@
   object-fit: cover;
 }
 
-/* Media Query */
+/* 미디어 쿼리 - root 크기 의 * 40rem 이하일 경우 */
 
-@media screen and (max-width: 40rem) {
+@media screen and (max-width: 735px) {
   .profile {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 4rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4rem 0;
   }
 
   .profile::after {
-      display: none;
+    display: none;
   }
 
   .p_image,
   .p_user_settings,
   .p_bio,
   .p_stats {
-      float: none;
-      width: auto;
+    float: none;
+    width: auto;
   }
 
   .p_image img {
-      width: 7.7rem;
+    width: 7.7rem;
   }
 
   .p_user_settings {
-      flex-basis: calc(100% - 10.7rem);
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 1rem;
+    flex-basis: calc(100% - 10.7rem);
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
   }
 
   .p_user_name {
-      font-size: 2.2rem;
+    font-size: 2.2rem;
   }
 
   .p_edit_btn {
-      order: 1;
-      padding: 0;
-      text-align: center;
-      margin-top: 1rem;
+    order: 1;
+    padding: 0;
+    text-align: center;
+    margin-top: 1rem;
   }
 
   .p_edit_btn {
-      margin-left: 0;
+    margin-left: 0;
   }
 
   .p_bio {
-      font-size: 1.4rem;
-      margin-top: 1.5rem;
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
   }
 
   .p_edit_btn,
   .p_bio,
   .p_stats {
-      flex-basis: 100%;
+    flex-basis: 100%;
   }
 
   .p_stats {
-      order: 1;
-      margin-top: 1.5rem;
+    order: 1;
+    margin-top: 1.5rem;
   }
 
   .p_stats ul {
-      display: flex;
-      text-align: center;
-      padding: 1.2rem 0;
-      border-top: 0.1rem solid #dadada;
-      border-bottom: 0.1rem solid #dadada;
+    display: flex;
+    text-align: center;
+    padding: 1.2rem 0;
+    border-top: 0.1rem solid #dadada;
+    border-bottom: 0.1rem solid #dadada;
   }
 
   .p_stats li {
-      font-size: 1.4rem;
-      flex: 1;
-      margin: 0;
+    font-size: 1.4rem;
+    flex: 1;
+    margin: 0;
   }
 
   .p_stat {
-      display: block;
+    display: block;
+  }
+
+  .p_explain {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .p_explain {
+    padding: 0;
   }
 }
 
 
+
 @supports (display: grid) {
   .profile {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      grid-template-rows: repeat(3, auto);
-      grid-column-gap: 5rem;
-      /* align-items: center; */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(3, auto);
+    grid-column-gap: 3rem;
+    align-items: center;
   }
 
   .p_image {
-      grid-row: 1 / -1;
+    grid-row: 1 / -1;
   }
 
   .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-      grid-gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(1rem, 293px));
+    grid-gap: 2rem;
   }
 
   .p_image,
@@ -291,33 +316,45 @@
   .p_stats,
   .p_bio,
   .g_item,
-  .g {
-      width: auto;
-      margin: 0;
+  .gallery {
+    width: auto;
+    margin: 0;
   }
 
 
   /* 반응형 */
-  @media (max-width: 40rem) {
-      .profile {
-          grid-template-columns: auto 1fr;
-          grid-row-gap: 1.5rem;
-      }
+  @media (max-width: 735px) {
+    .profile {
+      grid-template-columns: auto 1fr;
+      grid-row-gap: 1.5rem;
+    }
 
-      .p_image {
-          grid-row: 1 / 2;
-      }
+    .p_image {
+      grid-row: 1 / 2;
+    }
 
-      .p_user_settings {
-          display: grid;
-          grid-template-columns: auto 1fr;
-          grid-gap: 1rem;
-      }
+    .p_user_settings {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-gap: 1rem;
+    }
 
-      .p_edit_btn,
-      .p_stats,
-      .p_bio {
-          grid-column: 1 / -1;
-      }
+    .p_edit_btn,
+    .p_stats,
+    .p_bio {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 1028px) {
+    .gallery {
+      grid-template-columns: repeat(2, minmax(15rem, 1fr));
+    }
+  }
+
+  @media (max-width: 690px) {
+    .gallery {
+      grid-template-columns: repeat(1, minmax(15rem, 1fr));
+    }
   }
 }

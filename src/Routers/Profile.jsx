@@ -1,35 +1,41 @@
-import React from "react";
-import "./Profile.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import './Profile.css';
+import './Modal.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faGear, faHeart } from '@fortawesome/free-solid-svg-icons';
+import Modal from './Modal';
 
 function Profile() {
-  // const [selectedImage, setSelectedImage] = useState(null);
-
-  // const viewPost = (e) => {
-  //   setSelectedImage(e.target.src);
-  // };
-
-  // const closeModal = () => {
-  //   setSelectedImage(null);
-  // };
+  const [openModal, setOpenModal] = useState(false);
 
   // ------------------ //
 
   return (
     <div className="profile_main">
       <header>
-        <div className="p_container">
+        <div className="page_container p_container">
           <div className="profile">
             <div className="p_image">
-              <img src="https://i.ibb.co/G54dpvC/tim-cook-image.png" alt="프로필" className="p_img" />
+              <img
+                src="https://i.ibb.co/G54dpvC/tim-cook-image.png"
+                alt="프로필"
+                className="p_img"
+              />
             </div>
 
             <div className="p_user_settings">
               <h1 className="p_user_name">Tim Cook</h1>
 
-              <button className="p_btn p_edit_btn">프로필 편집</button>
+              <button
+                className="p_btn p_edit_btn modalBtn"
+                onClick={() => setOpenModal(true)}
+              >
+                계정 설정
+              </button>
+              {/* <FontAwesomeIcon icon={faGear} size="10x" /> */}
+              <Modal open={openModal} onClose={() => setOpenModal(false)} />
             </div>
+
             <div className="p_stats">
               <ul>
                 <li>
@@ -45,15 +51,16 @@ function Profile() {
             </div>
             <div className="p_bio">
               <p className="p_explain">
-                Apple CEO Auburn 🏀 🏈 Duke 🏀 National Parks 🏞️ “Life's most persistent and urgent question is, 'What
-                are you doing for others?'” - MLK. You know what? I'm gay.
+                Apple CEO Auburn 🏀 🏈 Duke 🏀 National Parks 🏞️ “Life's most
+                persistent and urgent question is, 'What are you doing for
+                others?'” - MLK. p.s. You know what? I'm gay.
               </p>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container">
+      <div className="g_container">
         <div className="gallery">
           <div className="g_item">
             <img
