@@ -13,9 +13,7 @@ function RightMain() {
   const [texts, setTexts] = useState([]);
   const [img, setImg] = useState();
   const [imgs, setImgs] = useState([]);
-  const [count, setCount] = useState(0);
 
-  const btnActivate = () => {};
   const textAdd = (event) => {
     // 버튼 활성화 비활성화
     if (textarea.current.value === "") {
@@ -68,10 +66,6 @@ function RightMain() {
     };
   };
 
-  const countClick = () => {
-    setCount("gdgdag");
-  };
-
   return (
     <>
       <div className="main_header">
@@ -83,7 +77,6 @@ function RightMain() {
       <form onSubmit={onSubmit} className="main_wrap">
         <div>
           <textarea
-            onKeyDown={btnActivate}
             onChange={textAdd}
             ref={textarea}
             className="main_input"
@@ -96,15 +89,6 @@ function RightMain() {
         </div>
         <div className="main_bottom_box">
           <input type="file" className="main_img_button" accept="image/*" ref={imgbutton} onChange={ImgAdd} />
-          {/* <img
-            id="main_img_button2"
-            src={imgButton}
-            type="file"
-            alt="imgButton"
-            accept="image/*"
-            ref={imgbutton}
-            onChange={ImgAdd}
-          /> */}
           <button className="main_send_button" ref={sendButton} disabled>
             Send
           </button>
@@ -128,7 +112,7 @@ function RightMain() {
             <div className="main_post_bottom">
               <div className="main_post_heart_check">
                 <img src={HeartImg} alt="heart_check" className="main_post_heart_img" />
-                <span onClick={countClick}>{count}</span>
+                <span>1</span>
               </div>
               <div className="main_post_bottom_menu">
                 <span>댓글</span>

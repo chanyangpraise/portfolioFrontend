@@ -49,11 +49,14 @@
 }
 
 .main_input_img {
+  width: 40%;
+  height: 40%;
   margin: 0 auto;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 1rem;
+  border-radius: 20px;
 }
 
 .main_input::placeholder {
@@ -68,6 +71,7 @@
   display: flex;
   width: 49vw;
   justify-content: space-between;
+  margin-bottom: 3rem;
 }
 
 .main_img_button {
@@ -111,7 +115,7 @@
   padding-bottom: 0;
   margin: 0 auto;
   margin-bottom: 2rem;
-  width: 90%;
+  width: 55%;
   line-break: auto;
 }
 
@@ -137,11 +141,13 @@
 }
 
 .main_post_img {
+  width: 70%;
+  height: 50%;
   margin-top: 2rem;
+  border-radius: 20px;
 }
 
 .main_post_heart_img {
-  width: 30px;
   margin-left: 0.5rem;
   cursor: pointer;
 }
