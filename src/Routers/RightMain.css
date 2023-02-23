@@ -1,4 +1,5 @@
 /* header */
+
 .main_header {
   font-weight: bold;
   font-size: 2rem;
@@ -7,8 +8,20 @@
   padding: 1rem;
   position: fixed;
   z-index: 100;
-  border-bottom: 1px solid rgb(208, 208, 208);
+  border-bottom: 1px solid rgb(235, 235, 235);
   height: 10vh;
+}
+
+.main_img_alert {
+  position: absolute;
+  top: 200px;
+  right: 1300px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 20px;
+  opacity: 0;
+  transition: 1s;
 }
 
 /* main */
@@ -36,9 +49,11 @@
 }
 
 .main_input_img {
+  margin: 0 auto;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  margin-bottom: 1rem;
 }
 
 .main_input::placeholder {
@@ -56,12 +71,26 @@
 }
 
 .main_img_button {
-  width: 2vw;
+  position: relative;
+  bottom: 18px;
+  width: 10vw;
+  height: 6vh;
   cursor: pointer;
+  z-index: 10;
+  opacity: 1;
 }
 .main_send_button {
   all: unset;
-  border: 1px solid black;
+  border: 3px solid black;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+.main_send_button:disabled {
+  all: unset;
+  border: 3px solid gray;
+  color: gray;
   padding: 0.8rem;
   border-radius: 1rem;
   cursor: pointer;
@@ -74,10 +103,25 @@
   line-break: auto;
 }
 
+.main_post_in_wrap {
+  background-color: rgb(253, 253, 253);
+  border: 1px solid rgb(194, 194, 194);
+  border-radius: 10px;
+  padding: 3rem;
+  padding-bottom: 0;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  width: 90%;
+  line-break: auto;
+}
+
 .main_post_profile {
   display: flex;
 }
 
+.main_post_imgText {
+  margin-left: 4rem;
+}
 .main_follow_button {
   all: unset;
   color: white;
@@ -90,4 +134,41 @@
   transform: translateY(-50%);
   margin-left: 1rem;
   cursor: pointer;
+}
+
+.main_post_img {
+  margin-top: 2rem;
+}
+
+.main_post_heart_img {
+  width: 30px;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.main_post_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  border-top: 1px solid rgb(194, 194, 194);
+  border-radius: 100px;
+  padding: 2rem;
+}
+
+.main_post_bottom_menu {
+  font-size: 0.8rem;
+}
+.main_post_bottom_menu span {
+  font-size: 0.8rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.main_post_heart_check {
+  display: flex;
+  align-items: center;
+}
+.main_post_heart_check span {
+  margin-left: 1rem;
 }
