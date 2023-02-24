@@ -4,6 +4,7 @@ import './Modal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faGear, faHeart } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
+import ProfileModal from './ProfileModal';
 
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
@@ -25,6 +26,15 @@ function Profile() {
 
             <div className="p_user_settings">
               <h1 className="p_user_name">Tim Cook</h1>
+
+              <input
+                className="p_avatarInput"
+                type="file"
+                id="avatar"
+                name="avatar"
+                accept="image/*"
+              />
+              <label for="avatar">프로필 사진 변경</label>
 
               <button
                 className="p_btn p_edit_btn modalBtn"
