@@ -6,7 +6,6 @@ import picture1 from "../asset/loginimg/photo-1.png"
 import picture2 from "../asset/loginimg/photo-2.png"
 import picture3 from "../asset/loginimg/photo-3.png"
 import picture4 from "../asset/loginimg/photo-4.png"
-import picture5 from "../asset/loginimg/photo-5.png"
 import logo from "../asset/loginimg/Teamstagramlogo.png"
 
 function Login() {
@@ -21,7 +20,6 @@ function Login() {
                 <img className="picture" src={picture2} alt="#" />
                 <img className="picture" src={picture3} alt="#" />
                 <img className="picture" src={picture4} alt="#" />
-                <img className="picture" src={picture5} alt="#" />
             </div>
   </div>
             {/*User's log in section*/}
