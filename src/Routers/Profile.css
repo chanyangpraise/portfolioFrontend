@@ -59,7 +59,6 @@
 
 .p_image {
   float: left;
-  width: calc(33.333% - 1rem);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,6 +67,8 @@
 
 .p_image img {
   border-radius: 50%;
+  width: 152px;
+  height: 152px;
 }
 
 .p_avatarInput {

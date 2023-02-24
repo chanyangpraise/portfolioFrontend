@@ -4,11 +4,14 @@ import './Modal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faGear, faHeart } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
-import ProfileModal from './ProfileModal';
 
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
+  const [avatar, setAvatar] = useState(null);
 
+  const handleAvatarChange = (e) => {
+    setAvatar(e.target.files[0]);
+  };
   // ------------------ //
 
   return (
@@ -17,15 +20,23 @@ function Profile() {
         <div className="page_container p_container">
           <div className="profile">
             <div className="p_image">
-              <img
-                src="https://i.ibb.co/G54dpvC/tim-cook-image.png"
-                alt="프로필"
-                className="p_img"
-              />
+              {avatar ? (
+                <img
+                  src={URL.createObjectURL(avatar)}
+                  alt="프로필"
+                  className="p_img"
+                />
+              ) : (
+                <img
+                  src="https://i.ibb.co/G54dpvC/tim-cook-image.png"
+                  alt="프로필"
+                  className="p_img"
+                />
+              )}
             </div>
 
             <div className="p_user_settings">
-              <h1 className="p_user_name">Tim Cook</h1>
+              <h1 className="p_user_name">tcook@apple.com</h1>
 
               <input
                 className="p_avatarInput"
@@ -33,6 +44,7 @@ function Profile() {
                 id="avatar"
                 name="avatar"
                 accept="image/*"
+                onChange={handleAvatarChange}
               />
               <label for="avatar">프로필 사진 변경</label>
 

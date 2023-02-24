@@ -31,7 +31,7 @@ btnContainer - same
 
 .modalContainer {
   max-width: 400px;
-  max-height: 400px;
+  max-height: 600px;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -64,7 +64,9 @@ btnContainer - same
   padding: 1rem 1rem;
 }
 
-.btnContainer button {
+.modalLogout,
+.changeBio,
+.changeEmail {
   font-weight: bold;
   font-size: 16px;
   position: relative;
@@ -82,11 +84,41 @@ btnContainer - same
   margin-bottom: 2.5em;
 }
 
-/* .changeEmail {}
-
-.changeBio {} */
-
 .modalLogout {
   color: #fff !important;
   background-color: #ff4343;
+}
+
+/* 여기부터 form */
+form {
+  position: relative;
+  left: 5%;
+  top: 5%;
+  margin-bottom: 3.5em;
+  width: 100%;
+}
+
+input, textarea {
+  width: 90%;
+  border: 2px solid #262626;
+  border-radius: 0.3rem;
+  height: 4em;
+}
+
+form button {
+  font-weight: 600;
+  display: flexbox;
+  width: 35%;
+  height: 5em;
+  color: white;
+  background-color: #2f93f5;
+  border-radius: 0.3rem;
+  padding: 0 1em;
+  margin: 10px 10px;
+  cursor: pointer;
+}
+
+
+form button:hover {
+  background-color: #1877f2;
 }
