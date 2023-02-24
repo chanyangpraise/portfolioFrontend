@@ -113,36 +113,24 @@ body{
 
 .login-button{
   font-family: sans-serif;
-  background-color: rgb(178,223,252);
+  background-color:rgb(178,223,252);
   color: rgb(255,255,255);
   font-weight: bold;
   padding: 8px;
-  border-radius: 4px;
+  border: 1px solid transparent;
+  border-radius: 9px;
   text-align: center;
   width: 94%;
   margin: 8px 40px;
   box-sizing: content-box;
+  cursor: pointer;
+  margin: auto;
+  width: 300px;
 }
 
 .login-button:hover{
-  background-color: var(--main-color);
+  background-color: #3897f0;
 }
-
-.line{
-  background-color: rgb(var(--border-color));
-  height: 1px;
-  position: relative;
-  top: .45em;
-}
-
-.or{
-  text-align: center;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgb(114, 114, 114);
-}
-
-
 
 .password-forgot{
   color: var(--footer-text-color);
@@ -161,6 +149,7 @@ body{
 .signup-container p{
   margin: 15px;
   text-align: center;
+  font-family: sans-serif;
 }
 
 .signup{

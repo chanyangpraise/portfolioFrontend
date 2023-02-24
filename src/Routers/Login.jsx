@@ -37,15 +37,16 @@ function Login() {
                   <div className="inputs-container">
                       <input type="password" name="password" placeholder="Password" />
                   </div>
-                  <a className="login-button" href="#" target="_blank">Log In</a>
+                  <Link to="/main">
+                  <button className="login-button">Log In</button></Link>
                   </form>
                   {/*Password recovery*/}
                   <a className="password-forgot" href="#" target="_blank">Forgot password?</a>
-              </div>
-              {/*Sign up*/}
-              <div className="signup-container">
-                  <p>Don't have an account? <a className="signup" href="#" target="_blank">Sign up</a></p>
-              </div>
+            </div>
+            {/*Sign up*/}
+            <div className="signup-container">
+                <p>Don't have an account? <a className="signup" href="#" target="_blank">Sign up</a></p>
+            </div>
             </div>
         </div>
         </div>
