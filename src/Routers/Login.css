@@ -1,15 +1,8 @@
-:root {
+.loginpage {
   --main-color: #0095f6;
   --text-color: #262626;
   --background-color: rgb(250, 250, 250);
   --border-color: 219, 219, 219;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,10 +10,7 @@
   text-decoration: none;
   font-size: 14px;
   border: none;
-}
-
-body{
-  background-color: var(--background-color);
+  background-color: #fafafa;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -139,6 +129,7 @@ body{
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .signup-container p, 
@@ -156,34 +147,6 @@ body{
   color: var(--main-color);
   font-weight: 600;
   cursor: pointer;
-}
-
-.page-footer{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 20px;
-}
-
-.links-container, 
-.footer-span-container{
-  margin-bottom: 20px;
-}
-
-.links-list{
-  text-align: center;
-}
-
-.links-list li{
-  display: inline-block;
-}
-
-.links-list li a{
-  color: var(--footer-text-color);
-  font-size: 12px;
-  font-weight: 600;
-  margin: 0 16px 7px 0;
 }
 
 @media(max-width: 785px){

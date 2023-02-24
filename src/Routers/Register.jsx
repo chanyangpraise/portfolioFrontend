@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import logo from "../asset/loginimg/Teamstagramlogo.png"
 function Register() {
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
@@ -18,19 +18,22 @@ const handleSubmit = (event) => {
 };
 
 return (
+    <div className="user">
+        <div className="login-container">
+        <div className="instagram-logo-box">
+        <img className="instagram-logo" src={logo} />
+    </div>
     <form onSubmit={handleSubmit}>
-    <label>
-        Email:
-        <input type="email" value={email} onChange={handleEmailChange} />
-    </label>
-    <br />
-    <label>
-        Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-    </label>
-    <br />
-    <button type="submit">Register</button>
+    <div className="inputs-container">
+        <input type="email" value={email} onChange={handleEmailChange} placeholder= "Email"/>
+        </div>
+        <div className="inputs-container">
+        <input type="password" value={password} onChange={handlePasswordChange} name="password" placeholder="Password" />
+    </div>
+    <button className="login-button" type="submit">Register</button>
     </form>
+    </div>
+    </div>
 );
 }
 

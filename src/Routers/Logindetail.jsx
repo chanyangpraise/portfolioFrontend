@@ -9,6 +9,9 @@ function Logindetail(props) {
     const movetoregister = () => {
         navigate("/register");
     }
+    const movetoforgotpw = () => {
+        navigate("/forgotpw");
+    }
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -25,7 +28,7 @@ function Logindetail(props) {
       // send login request to server and handle response
     };
 return (
-    <div className="user2222">
+    <div className="user">
 <div className="login-container">
     {/*Instagram Logo*/}
     <div className="instagram-logo-box">
@@ -43,11 +46,11 @@ return (
     <button className="login-button" type="submit">Log In</button></Link>
     </form>
     {/*Password recovery*/}
-    <a className="password-forgot" href="#" target="_blank">Forgot password?</a>
+    <a className="password-forgot" onClick={movetoforgotpw}>Forgot password?</a>
 </div>
 {/*Sign up*/}
 <div className="signup-container">
-    <p>Don't have an account? <span className="signup"  onClick={movetoregister}>Sign up</span></p>
+    <p>Don't have an account? <span className="signup" onClick={movetoregister}>Sign up</span></p>
 </div>
 </div>
 )

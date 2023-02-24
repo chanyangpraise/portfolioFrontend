@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import logo from "../asset/loginimg/Teamstagramlogo.png"
 const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -34,23 +34,24 @@ const ChangePassword = () => {
   };
 
   return (
-    <div>
-      <h1>Change Password</h1>
+    <div className="user">
+              <div className="login-container">
+        <div className="instagram-logo-box">
+        <img className="instagram-logo" src={logo} />
+    </div>
       <form onSubmit={handleSubmit}>
-        <label>
-          Current Password:
-          <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
-        </label>
-        <label>
-          New Password:
-          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-        </label>
-        <label>
-          Confirm New Password:
-          <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
-        </label>
-        <button type="submit">Change Password</button>
+      <div className="inputs-container">
+          <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="Current Password:"/>
+          </div>
+          <div className="inputs-container">
+          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="New Password:"/>
+          </div>
+          <div className="inputs-container">
+          <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password:"/>
+          </div>
+          <button className="login-button" type="submit">Change Password</button>
       </form>
+    </div>
     </div>
   );
 };

@@ -25,7 +25,7 @@ function Login() {
       // send login request to server and handle response
     };
 return (
-    <div>
+    <div className="loginpage">
     <div id="content-container">
             {/*Phone's pictures section*/}
 <div className="phones">
