@@ -10,7 +10,7 @@
   text-decoration: none;
   font-size: 14px;
   border: none;
-  background-color: var(--background-color);
+  background-color: #fafafa;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -147,34 +147,6 @@
   color: var(--main-color);
   font-weight: 600;
   cursor: pointer;
-}
-
-.page-footer{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 20px;
-}
-
-.links-container, 
-.footer-span-container{
-  margin-bottom: 20px;
-}
-
-.links-list{
-  text-align: center;
-}
-
-.links-list li{
-  display: inline-block;
-}
-
-.links-list li a{
-  color: var(--footer-text-color);
-  font-size: 12px;
-  font-weight: 600;
-  margin: 0 16px 7px 0;
 }
 
 @media(max-width: 785px){
