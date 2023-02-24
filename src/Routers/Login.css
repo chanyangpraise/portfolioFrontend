@@ -1,15 +1,8 @@
-:root {
+.loginpage {
   --main-color: #0095f6;
   --text-color: #262626;
   --background-color: rgb(250, 250, 250);
   --border-color: 219, 219, 219;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,9 +10,6 @@
   text-decoration: none;
   font-size: 14px;
   border: none;
-}
-
-body{
   background-color: var(--background-color);
   display: flex;
   justify-content: center;
