@@ -139,6 +139,7 @@ body{
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .signup-container p, 
