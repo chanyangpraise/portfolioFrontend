@@ -90,7 +90,7 @@ btnContainer - same
 }
 
 /* 여기부터 form */
-form {
+.modalForm {
   position: relative;
   left: 5%;
   top: 5%;
@@ -98,14 +98,15 @@ form {
   width: 100%;
 }
 
-input, textarea {
+.modalInput,
+.modalTxtarea {
   width: 90%;
   border: 2px solid #262626;
   border-radius: 0.3rem;
   height: 4em;
 }
 
-form button {
+.formBtn {
   font-weight: 600;
   display: flexbox;
   width: 35%;
@@ -119,6 +120,6 @@ form button {
 }
 
 
-form button:hover {
+.formBtn:hover {
   background-color: #1877f2;
 }

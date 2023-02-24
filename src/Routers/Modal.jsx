@@ -39,34 +39,58 @@ const Modal = ({ open, onClose }) => {
           </p>
           <div className="btnContainer">
             {showEmailForm ? (
-              <form onSubmit={handleSubmitEmail}>
+              <form className="modalForm" onSubmit={handleSubmitEmail}>
                 <input
+                  className="modalInput"
                   type="email"
                   placeholder="새 이메일을 입력하세요"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <button type="submit">변경</button>
-                <button onClick={() => setShowEmailForm(false)}>취소</button>
+                <button className="formBtn" type="submit">
+                  변경
+                </button>
+                <button
+                  className="formBtn"
+                  onClick={() => setShowEmailForm(false)}
+                >
+                  취소
+                </button>
               </form>
             ) : (
-              <button className='changeEmail' onClick={() => setShowEmailForm(true)}>
+              <button
+                className="changeEmail"
+                onClick={() => setShowEmailForm(true)}
+              >
                 이메일 변경
               </button>
             )}
 
             {showBioForm ? (
-              <form onSubmit={handleSubmitBio}>
+              <form className="modalForm" onSubmit={handleSubmitBio}>
                 <textarea
+                  className="modalTxtarea"
                   placeholder="자기 소개(bio)를 입력하세요"
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                 />
-                <button type="submit">변경</button>
-                <button onClick={() => setShowBioForm(false)}>취소</button>
+                <button className="formBtn" type="submit">
+                  변경
+                </button>
+                <button
+                  className="formBtn"
+                  onClick={() => setShowBioForm(false)}
+                >
+                  취소
+                </button>
               </form>
             ) : (
-              <button className='changeBio' onClick={() => setShowBioForm(true)}>설명 변경</button>
+              <button
+                className="changeBio"
+                onClick={() => setShowBioForm(true)}
+              >
+                설명 변경
+              </button>
             )}
 
             <button className="modalLogout">로그아웃</button>
