@@ -1,11 +1,3 @@
-/* main */
-
-.main_post_wrap {
-  margin: 0 auto;
-  width: 80%;
-  line-break: auto;
-}
-
 .main_post_in_wrap {
   background-color: rgb(253, 253, 253);
   border: 1px solid rgb(194, 194, 194);
@@ -17,13 +9,8 @@
   width: 70%;
   line-break: auto;
 }
-
 .main_post_profile {
   display: flex;
-}
-
-.main_post_imgText {
-  margin-left: 4rem;
 }
 .main_follow_button {
   all: unset;
@@ -38,19 +25,15 @@
   margin-left: 1rem;
   cursor: pointer;
 }
-
+.main_post_imgText {
+  margin-left: 4rem;
+}
 .main_post_img {
   width: 70%;
   height: 50%;
   margin-top: 2rem;
   border-radius: 20px;
 }
-
-.main_post_heart_img {
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
-
 .main_post_bottom {
   display: flex;
   justify-content: space-between;
@@ -59,20 +42,15 @@
   margin-bottom: 2rem;
   padding-bottom: 1rem;
 }
-
-.main_post_bottom_menu {
-  font-size: 0.8rem;
-}
-.main_post_bottom_menu span {
-  font-size: 0.8rem;
-  margin-left: 1rem;
-  cursor: pointer;
-}
-
 .main_post_heart_check {
   display: flex;
   align-items: center;
 }
-.main_post_heart_check span {
-  margin-left: 1rem;
+.main_post_heart_img {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.main_post_bottom_menu {
+  font-size: 0.8rem;
 }

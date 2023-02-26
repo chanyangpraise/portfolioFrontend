@@ -1,0 +1,60 @@
+.main_comment_modal_wrap {
+  background-color: rgba(0, 0, 0, 0.359);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.main_comment_modal_textarea::placeholder {
+  font-size: 1.2rem;
+}
+
+.main_comment_modal_textarea {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50vw;
+  height: 7vh;
+  margin-top: 2rem;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  padding: 1rem;
+  resize: none;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.main_comment_modal_in_wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.main_comment_button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10%;
+  margin-top: 1rem;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main_comment_close_button {
+  cursor: pointer;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  left: 20rem;
+  top: 2rem;
+}
