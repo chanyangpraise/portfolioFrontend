@@ -4,7 +4,7 @@ import "./MainPost.css";
 import HeartImg from "../../asset/heart-regular.svg";
 import MainComment from "./MainComment";
 
-function MainPost({ v, i, imgs, setCmtModal, comments }) {
+function MainPost({ v, i, imgs, setCmtModal, comments, setEditing }) {
   const Post = useRef();
   const Comment = useRef();
   console.log(Post);
@@ -35,7 +35,7 @@ function MainPost({ v, i, imgs, setCmtModal, comments }) {
         </div>
         <div className="main_post_bottom_menu">
           <span onClick={() => setCmtModal(true)}>댓글</span>
-          <span>수정</span>
+          <span onClick={() => setEditing(true)}>수정</span>
           <span onClick={() => removeView()}>삭제</span>
         </div>
       </div>
