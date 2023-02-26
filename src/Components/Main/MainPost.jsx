@@ -1,5 +1,5 @@
 import React from "react";
-import SideProfile from "../SideProfile";
+import SideProfile from "../Side/SideProfile";
 import "./MainPost.css";
 import HeartImg from "../../asset/heart-regular.svg";
 

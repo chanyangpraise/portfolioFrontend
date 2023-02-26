@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import SideList from "../Components/SideList";
-import SideLogo from "../Components/SideLogo";
-import SideProfile from "../Components/SideProfile";
+import SideList from "../Components/Side/SideList";
+import SideLogo from "../Components/Side/SideLogo";
+import SideProfile from "../Components/Side/SideProfile";
 import "./SideBar.css";
 
 function SideBar() {

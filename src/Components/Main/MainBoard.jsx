@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { useRef } from "react";
 import "./MainBoard.css";
 import imgButton from "../../asset/image-regular.svg";
 
