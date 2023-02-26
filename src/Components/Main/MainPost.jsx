@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import SideProfile from "../Side/SideProfile";
 import "./MainPost.css";
 import HeartImg from "../../asset/heart-regular.svg";
 import MainComment from "./MainComment";
 
 function MainPost({ v, i, imgs, setCmtModal, comments }) {
+  const Post = useRef();
+  const Comment = useRef();
+  console.log(Post);
+
+  function removeView() {
+    if (window.confirm("게시물을 삭제하시겠습니까?")) {
+      console.log("삭제완료");
+    }
+  }
   return (
-    <div className="main_post_in_wrap" id={i} key={(i += 1)}>
+    <div ref={Post} className="main_post_in_wrap" id={i} key={(i += 1)}>
       <div className="main_post_profile">
         <div>
           <SideProfile />
@@ -27,12 +36,10 @@ function MainPost({ v, i, imgs, setCmtModal, comments }) {
         <div className="main_post_bottom_menu">
           <span onClick={() => setCmtModal(true)}>댓글</span>
           <span>수정</span>
-          <span>삭제</span>
+          <span onClick={() => removeView()}>삭제</span>
         </div>
       </div>
-      {comments.map((v, i) => (
-        <MainComment v={v} id={i} />
-      ))}
+      {comments.map((v, i) => (Post.id === Comment.id ? <MainComment ref={Comment} v={v} id={i} /> : null))}
     </div>
   );
 }
