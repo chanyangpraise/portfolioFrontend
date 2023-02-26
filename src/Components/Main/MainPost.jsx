@@ -2,10 +2,11 @@ import React from "react";
 import SideProfile from "../Side/SideProfile";
 import "./MainPost.css";
 import HeartImg from "../../asset/heart-regular.svg";
+import MainComment from "./MainComment";
 
-function MainPost({ v, i, imgs, setCmtModal }) {
+function MainPost({ v, i, imgs, setCmtModal, comments }) {
   return (
-    <div className="main_post_in_wrap" key={i}>
+    <div className="main_post_in_wrap" id={i} key={(i += 1)}>
       <div className="main_post_profile">
         <div>
           <SideProfile />
@@ -29,6 +30,9 @@ function MainPost({ v, i, imgs, setCmtModal }) {
           <span>삭제</span>
         </div>
       </div>
+      {comments.map((v, i) => (
+        <MainComment v={v} id={i} />
+      ))}
     </div>
   );
 }

@@ -2,10 +2,11 @@ import React, { useRef } from "react";
 import "./MainBoard.css";
 import imgButton from "../../asset/image-regular.svg";
 
-function MainBoard({ imgAlert, img, text, setImg, setText, setTexts, setImgs }) {
+function MainBoard({ img, text, setImg, setText, setTexts, setImgs }) {
   const textarea = useRef();
   const imgbutton = useRef();
   const sendButton = useRef();
+  const imgAlert = useRef();
 
   const onSubmit = (event) => {
     // onSubmit 새로고침 안되게

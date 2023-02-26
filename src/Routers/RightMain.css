@@ -6,73 +6,12 @@
   line-break: auto;
 }
 
-.main_post_in_wrap {
-  background-color: rgb(253, 253, 253);
-  border: 1px solid rgb(194, 194, 194);
-  border-radius: 10px;
-  padding: 3rem;
-  padding-bottom: 0;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-  width: 70%;
-  line-break: auto;
-}
-
-.main_post_profile {
-  display: flex;
-}
-
-.main_post_imgText {
-  margin-left: 4rem;
-}
-.main_follow_button {
-  all: unset;
-  color: white;
-  border: 1px solid rgb(94, 94, 255);
-  background-color: rgb(94, 94, 255);
-  padding: 0.3rem;
-  border-radius: 10px;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 1rem;
-  cursor: pointer;
-}
-
-.main_post_img {
-  width: 70%;
-  height: 50%;
-  margin-top: 2rem;
-  border-radius: 20px;
-}
-
-.main_post_heart_img {
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
-
-.main_post_bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-}
-
-.main_post_bottom_menu {
-  font-size: 0.8rem;
-}
 .main_post_bottom_menu span {
   font-size: 0.8rem;
   margin-left: 1rem;
   cursor: pointer;
 }
 
-.main_post_heart_check {
-  display: flex;
-  align-items: center;
-}
 .main_post_heart_check span {
   margin-left: 1rem;
 }
