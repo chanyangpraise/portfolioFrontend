@@ -24,6 +24,7 @@ function Login() {
       // send login request to server and handle response
     };
 return (
+    <div className='wholepage'>
     <div className="loginpage">
     <div id="content-container">
             {/*Phone's pictures section*/}
@@ -38,6 +39,7 @@ return (
 </div>
             {/*User's log in section*/}
         <Outlet/>
+        </div>
         </div>
         </div>
     );

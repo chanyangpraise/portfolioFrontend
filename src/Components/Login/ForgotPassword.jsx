@@ -32,6 +32,8 @@ return (
 <img className="instagram-logo" src={logo} />
 
     <form onSubmit={handleSubmit}>
+        <div className='forgotpwinput'>
+            <div className='forgotpwinputcontainer'>
     <div className="inputs-container">
         <input
 type="email"
@@ -40,7 +42,11 @@ type="email"
     required
 placeholder='Email'
         />
+        </div>
     </div>
+    </div>
+    <div className='forgotpwinput'>
+    <div className='forgotpwinputcontainer'>
     <div className="inputs-container">
         <input
         type="tel"
@@ -49,8 +55,12 @@ placeholder='Email'
         required
         placeholder='Phone Number'
         />
+            </div>
     </div>
+    </div>
+    <div className='resetpwbtn'>
     <button className="login-button" type="submit">Reset Password</button>
+    </div>
     {isValid && (
         <div>
                 <div className="inputs-container">
