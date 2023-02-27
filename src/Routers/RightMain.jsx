@@ -3,7 +3,6 @@ import "./RightMain.css";
 import MainCommentModal from "../Components/Main/MainCommentModal";
 import MainBoard from "../Components/Main/MainBoard";
 import MainPost from "../Components/Main/MainPost";
-import MainPostEdit from "../Components/Main/MainPostEdit";
 
 function RightMain() {
   //MainBoard,MainPost
@@ -15,9 +14,6 @@ function RightMain() {
   //MainComment,MainCommentModal
   const [cmtModal, setCmtModal] = useState(false);
   const [comment, setComment] = useState("");
-
-  //EditPost
-  const [editing, setEditing] = useState(false);
 
   return (
     <>
@@ -44,7 +40,6 @@ function RightMain() {
           post={post}
         />
       )}
-      {editing && <MainPostEdit setCmtModal={setCmtModal} />}
     </>
   );
 }
