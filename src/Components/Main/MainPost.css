@@ -1,14 +1,15 @@
 .main_post_in_wrap {
-  background-color: rgb(253, 253, 253);
-  border: 1px solid rgb(194, 194, 194);
-  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 40px;
   padding: 3rem;
   padding-bottom: 0;
   margin: 0 auto;
   margin-bottom: 2rem;
-  width: 70%;
+  width: 60%;
   line-break: auto;
+  border: 0.01px solid #e5e5e5;
 }
+
 .main_post_profile {
   display: flex;
 }

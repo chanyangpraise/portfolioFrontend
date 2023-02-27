@@ -1,5 +1,4 @@
 .main_wrap {
-  margin-top: 5rem;
   padding-bottom: 1rem;
   display: flex;
   justify-content: center;
@@ -18,9 +17,13 @@
   opacity: 0;
   transition: 1s;
   position: relative;
-  top: 1.5rem;
+  top: 15.5rem;
 }
 
+.img_send_button {
+  width: 30px;
+  cursor: pointer;
+}
 .main_input {
   position: relative;
   left: 50%;
@@ -37,6 +40,9 @@
 }
 .main_input::placeholder {
   font-size: 1.2rem;
+}
+.main_input textarea {
+  background-color: black;
 }
 
 .main_input_img {

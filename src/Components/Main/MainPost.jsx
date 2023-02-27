@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import SideProfile from "../Side/SideProfile";
 import "./MainPost.css";
 import HeartImg from "../../asset/heart-regular.svg";
@@ -14,6 +14,7 @@ function MainPost({ v, i, imgs, setCmtModal, setCommentIndex, setEditing }) {
       console.log("삭제완료");
     }
   }
+
   return (
     <div ref={Post} className="main_post_in_wrap" key={i}>
       <div className="main_post_profile">

@@ -75,6 +75,7 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
         </span>
         <div>
           <textarea
+            style={{ backgroundColor: "#fafafa" }}
             onChange={textAdd}
             ref={textarea}
             className="main_input"
