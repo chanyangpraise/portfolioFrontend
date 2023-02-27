@@ -4,7 +4,7 @@ import "./MainPost.css";
 import HeartImg from "../../asset/heart-regular.svg";
 import MainComment from "./MainComment";
 
-function MainPost({ v, i, imgs, setCmtModal, comments, setEditing }) {
+function MainPost({ v, i, imgs, setCmtModal, setCommentIndex, setEditing }) {
   const Post = useRef();
   const Comment = useRef();
   console.log(Post);
@@ -15,7 +15,7 @@ function MainPost({ v, i, imgs, setCmtModal, comments, setEditing }) {
     }
   }
   return (
-    <div ref={Post} className="main_post_in_wrap" id={i} key={(i += 1)}>
+    <div ref={Post} className="main_post_in_wrap" key={i}>
       <div className="main_post_profile">
         <div>
           <SideProfile />
@@ -25,8 +25,8 @@ function MainPost({ v, i, imgs, setCmtModal, comments, setEditing }) {
         </div>
       </div>
       <div className="main_post_imgText">
-        <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}>{v}</pre>
-        <img className="main_post_img" src={imgs[i]} alt="#"></img>
+        <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}>{v.text}</pre>
+        <img className="main_post_img" src={imgs} alt="#"></img>
       </div>
       <div className="main_post_bottom">
         <div className="main_post_heart_check">
@@ -34,12 +34,21 @@ function MainPost({ v, i, imgs, setCmtModal, comments, setEditing }) {
           <span>1</span>
         </div>
         <div className="main_post_bottom_menu">
-          <span onClick={() => setCmtModal(true)}>댓글</span>
+          <span
+            onClick={() => {
+              setCmtModal(true);
+              setCommentIndex(i);
+            }}
+          >
+            댓글
+          </span>
           <span onClick={() => setEditing(true)}>수정</span>
           <span onClick={() => removeView()}>삭제</span>
         </div>
       </div>
-      {comments.map((v, i) => (Post.id === Comment.id ? <MainComment ref={Comment} v={v} id={i} /> : null))}
+      {v.comment.map((v, i) => (
+        <MainComment ref={Comment} v={v} id={i} />
+      ))}
     </div>
   );
 }

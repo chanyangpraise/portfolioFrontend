@@ -10,14 +10,13 @@ import MainPostEdit from "../Components/Main/MainPostEdit";
 function RightMain() {
   //MainBoard,MainPost
   const [text, setText] = useState();
-  const [texts, setTexts] = useState([]);
   const [img, setImg] = useState();
-  const [imgs, setImgs] = useState([]);
+  const [post, setPost] = useState([]);
+  const [commentIndex, setCommentIndex] = useState();
 
   //MainComment,MainCommentModal
   const [cmtModal, setCmtModal] = useState(false);
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
 
   //EditPost
   const [editing, setEditing] = useState(false);
@@ -25,21 +24,30 @@ function RightMain() {
   return (
     <>
       <MainHeader />
-      <MainBoard text={text} img={img} setText={setText} setImg={setImg} setTexts={setTexts} setImgs={setImgs} />
+      <MainBoard setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
       <div className="main_post_out_wrap">
-        {texts.map((v, i) => (
-          <MainPost imgs={imgs} v={v} i={i} setCmtModal={setCmtModal} comments={comments} setEditing={setEditing} />
+        {post.map((v, i) => (
+          <MainPost
+            setCommentIndex={setCommentIndex}
+            imgs={v.img}
+            v={v}
+            i={i}
+            setCmtModal={setCmtModal}
+            setEditing={setEditing}
+          />
         ))}
       </div>
       {cmtModal && (
         <MainCommentModal
+          setPost={setPost}
+          commentIndex={commentIndex}
           setComment={setComment}
-          setComments={setComments}
           comment={comment}
           setCmtModal={setCmtModal}
+          post={post}
         />
       )}
-      {editing && <MainPostEdit setCmtModal={setCmtModal} comments={comments} />}
+      {editing && <MainPostEdit setCmtModal={setCmtModal} />}
     </>
   );
 }

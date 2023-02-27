@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
 import "./MainCommentModal.css";
 
-function MainCommentModal({ comment, setComment, setComments, setCmtModal }) {
+function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post, setPost }) {
   const commentTextArea = useRef();
+
+  console.log(post);
   const cmtTextAdd = (e) => {
     setComment(e.target.value);
     // textarea ResizeHeight //
@@ -19,8 +21,10 @@ function MainCommentModal({ comment, setComment, setComments, setCmtModal }) {
     if (comment === "") {
       return;
     }
+    post[commentIndex].comment = [comment, ...post[commentIndex].comment];
+    setPost([...post]);
+    console.log(post);
     // 배열에 담기
-    setComments((current) => [comment, ...current]);
     setCmtModal(false);
   };
   return (
