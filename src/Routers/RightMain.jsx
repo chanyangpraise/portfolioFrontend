@@ -1,11 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./RightMain.css";
 import MainCommentModal from "../Components/Main/MainCommentModal";
-import MainHeader from "../Components/Main/MainHeader";
 import MainBoard from "../Components/Main/MainBoard";
 import MainPost from "../Components/Main/MainPost";
-import MainPostEdit from "../Components/Main/MainPostEdit";
-// import SideProfile from "../Components/Side/SideProfile";
 
 function RightMain() {
   //MainBoard,MainPost
@@ -18,23 +15,12 @@ function RightMain() {
   const [cmtModal, setCmtModal] = useState(false);
   const [comment, setComment] = useState("");
 
-  //EditPost
-  const [editing, setEditing] = useState(false);
-
   return (
     <>
-      <MainHeader />
       <MainBoard setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
       <div className="main_post_out_wrap">
         {post.map((v, i) => (
-          <MainPost
-            setCommentIndex={setCommentIndex}
-            imgs={v.img}
-            v={v}
-            i={i}
-            setCmtModal={setCmtModal}
-            setEditing={setEditing}
-          />
+          <MainPost setCommentIndex={setCommentIndex} imgs={v.img} v={v} i={i} setCmtModal={setCmtModal} />
         ))}
       </div>
       {cmtModal && (
@@ -47,7 +33,6 @@ function RightMain() {
           post={post}
         />
       )}
-      {editing && <MainPostEdit setCmtModal={setCmtModal} />}
     </>
   );
 }
