@@ -1,0 +1,125 @@
+/*
+overlay - moralOverlay
+modalContainer - same
+modalRight - modalSettings
+closeBtn - modalCloseBtn
+content - deleted
+btnContainer - same
+
+이메일 변경 - changeEmail
+설명 변경 - changeBio
+로그아웃 - logout
+*/
+
+.modalBtn {
+  z-index: -1;
+}
+
+.modalOverlay {
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+/* .modalOverlay:active {
+  background-color: #e5e5e5
+} */
+
+.modalContainer {
+  max-width: 400px;
+  max-height: 600px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+  border: 1px solid #d5d5d5;
+  border-radius: 12px;
+}
+
+.modalSettings {
+  height: 100%;
+  width: 100%;
+}
+
+.modalCloseBtn {
+  font-size: 19px;
+  font-weight: 600;
+  position: fixed;
+  top: 5px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.btnContainer {
+  width: 100%;
+  height: 100%;
+  padding: 1rem 1rem;
+}
+
+.modalLogout,
+.changeBio,
+.changeEmail {
+  font-weight: bold;
+  font-size: 16px;
+  position: relative;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  margin: 0.5rem;
+  padding: 16px 0;
+  border: none;
+  color: #262626;
+  cursor: pointer;
+  box-shadow: 3px 3px 8px 0px rgb(0 0 0 / 75%);
+  border: 0px solid none;
+  border-radius: 10px;
+  margin-bottom: 2.5em;
+}
+
+.modalLogout {
+  color: #fff !important;
+  background-color: #ff4343;
+}
+
+/* 여기부터 form */
+.modalForm {
+  position: relative;
+  left: 5%;
+  top: 5%;
+  margin-bottom: 3.5em;
+  width: 100%;
+}
+
+.modalInput,
+.modalTxtarea {
+  width: 90%;
+  border: 2px solid #262626;
+  border-radius: 0.3rem;
+  height: 4em;
+}
+
+.formBtn {
+  font-weight: 600;
+  display: flexbox;
+  width: 35%;
+  height: 5em;
+  color: white;
+  background-color: #2f93f5;
+  border-radius: 0.3rem;
+  padding: 0 1em;
+  margin: 10px 10px;
+  cursor: pointer;
+}
+
+
+.formBtn:hover {
+  background-color: #1877f2;
+}

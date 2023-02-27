@@ -4,10 +4,12 @@ import '../Components/Profile/css/Modal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 import Modal from '../Components/Profile/Modal';
+import PostEditor from '../Components/Profile/PostEditor';
 import PostViewer from '../Components/Profile/PostViewer';
 
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
+  const [galleryItems, setGalleryItems] = useState([]);
   const [avatar, setAvatar] = useState(null);
   const [openViewer, setOpenViewer] = useState(false);
 
@@ -87,7 +89,7 @@ function Profile() {
         <div className="gallery">
           <div className="g_item" onClick={() => setOpenViewer(true)}>
             <img
-              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
+              src="https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg"
               className="g_image"
               alt="img1"
             />
@@ -103,96 +105,25 @@ function Profile() {
             </div>
           </div>
           <PostViewer open={openViewer} onClose={() => setOpenViewer(false)} />
-
-          <div className="g_item">
-            <img
-              src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop"
-              className="g_image"
-              alt="img2"
-            />
-            <div className="g_item_info">
-              <ul>
-                <li className="g_item_likes">
-                  <FontAwesomeIcon icon={faHeart} /> 31.5만
-                </li>
-                <li className="g_item_comments">
-                  <FontAwesomeIcon icon={faComment} /> 5만
-                </li>
-              </ul>
+          {galleryItems.map((item, index) => (
+            <div
+              className="g_item"
+              key={index}
+              onClick={() => setSelectedGalleryItem(item)}
+            >
+              <img src={item.url} className="g_image" alt={`img${index}`} />
+              <div className="g_item_info">
+                <ul>
+                  <li className="g_item_likes">
+                    <FontAwesomeIcon icon={faHeart} /> {item.likes}
+                  </li>
+                  <li className="g_item_comments">
+                    <FontAwesomeIcon icon={faComment} /> {item.comments}
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-
-          <div className="g_item">
-            <img
-              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
-              className="g_image"
-              alt="img3"
-            />
-            <div className="g_item_info">
-              <ul>
-                <li className="g_item_likes">
-                  <FontAwesomeIcon icon={faHeart} /> 20.3만
-                </li>
-                <li className="g_item_comments">
-                  <FontAwesomeIcon icon={faComment} /> 4만
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="g_item">
-            <img
-              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
-              className="g_image"
-              alt="img4"
-            />
-            <div className="g_item_info">
-              <ul>
-                <li className="g_item_likes">
-                  <FontAwesomeIcon icon={faHeart} /> 56.8만
-                </li>
-                <li className="g_item_comments">
-                  <FontAwesomeIcon icon={faComment} /> 6만
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="g_item">
-            <img
-              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
-              className="g_image"
-              alt="img5"
-            />
-            <div className="g_item_info">
-              <ul>
-                <li className="g_item_likes">
-                  <FontAwesomeIcon icon={faHeart} /> 56.9만
-                </li>
-                <li className="g_item_comments">
-                  <FontAwesomeIcon icon={faComment} /> 2만
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="g_item">
-            <img
-              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
-              className="g_image"
-              alt="img6"
-            />
-            <div className="g_item_info">
-              <ul>
-                <li className="g_item_likes">
-                  <FontAwesomeIcon icon={faHeart} /> 59만
-                </li>
-                <li className="g_item_comments">
-                  <FontAwesomeIcon icon={faComment} /> 2만
-                </li>
-              </ul>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

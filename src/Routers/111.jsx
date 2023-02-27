@@ -128,7 +128,7 @@ function Profile() {
               <p className="p_explain">
                 Apple CEO Auburn 🏀 🏈 Duke 🏀 National Parks 🏞️ “Life's most
                 persistent and urgent question is, 'What are you doing for
-                others?'” - MLK.{' '}
+                others?'” - MLK.
               </p>
             </div>
           </div>
