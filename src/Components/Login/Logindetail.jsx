@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import logo from "../Login/loginimg/Teamstagramlogo.png"
@@ -25,6 +26,23 @@ function Logindetail(props) {
     const handleSubmit = (event) => {
     event.preventDefault();
       // send login request to server and handle response
+          // Send a POST request
+axios({
+    method: 'post',
+    url: 'http://localhost:3000/user/login',
+    data: {
+    email: email,
+    password: password,
+    }
+}).then(function (response) {
+    if (response.status===500){
+        alert("서버에서 에러가 발생 하였습니다.")
+    } else if (response.status===200) {
+        alert("이미 가입된 이메일이 있습니다")
+    } else if (response.status===201) {
+        navigate("/main")
+    }
+});
     };
 return (
     <div className="user">
