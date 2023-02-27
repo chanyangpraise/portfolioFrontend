@@ -51,7 +51,9 @@ const ChangePassword = () => {
           <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password"/>
           </div>
           </div>
+          <div className='changepwbtn'>
           <button className="login-button" type="submit">Change Password</button>
+      </div>
       </form>
     </div>
     </div>

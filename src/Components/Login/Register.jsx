@@ -32,7 +32,9 @@ return (
         <input type="password" value={password} onChange={handlePasswordChange} name="password" placeholder="Password" />
     </div>
     </div>
+    <div className='registerbtn'>
     <button className="login-button" type="submit">Register</button>
+    </div>
     </form>
     </div>
     </div>

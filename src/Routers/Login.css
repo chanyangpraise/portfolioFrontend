@@ -172,29 +172,40 @@ background-color: #fafafa;
 
 .changepwinput {
   position: relative;
-  right: 96px;
+  right: 89px;
+  width: 95%;
 }
 
 .forgotpwinput {
   position: relative;
-  right: 130px;
+  right:160px;
 }
 
 .forgotpwinputcontainer input{
-width: 235px;
+width:300px;
 }
 
 .resetpwbtn {
 position: relative;
 right: 71px;
-top: 20px;
+top: 8px;
 }
 
 .registerinput {
 position: relative;
-right: 97px;
+right: 88px;
+width: 95%;
 }
 
+.changepwbtn {
+  position: relative;
+  top: 8px;
+}
+
+.registerbtn {
+  position: relative;
+  top: 8px;
+}
 @media(max-width: 785px){
 
   .phones{
