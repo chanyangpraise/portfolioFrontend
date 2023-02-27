@@ -1,59 +1,88 @@
 import React, { useState } from 'react';
 import logo from "../asset/loginimg/Teamstagramlogo.png"
-const ChangePassword = () => {
-  const [currentPassword, setCurrentPassword] = useState('');
+
+function ForgetPassword() {
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [isValid, setIsValid] = useState(false);
   const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Check if email and phone number match with the user data
+    // and set isValid to true or false accordingly
+    // ...
+    setIsValid(true); // for demo purposes
+  }
 
-    // Check if new password and confirm new password match
-    if (newPassword !== confirmNewPassword) {
-      console.log("New password and confirm new password don't match");
-      return;
-    }
-
-    // Call API to change password
-    fetch('/api/changePassword', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ currentPassword, newPassword })
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Password changed successfully');
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmNewPassword('');
-      } else {
-        console.log('Failed to change password');
-      }
-    })
-    .catch(error => console.error(error));
-  };
+  const handleChangePassword = () => {
+    // Send a request to the server to update the user password
+    // with the new password
+    // ...
+    alert('Password changed successfully');
+    setNewPassword('');
+    setConfirmPassword('');
+  }
 
   return (
     <div className="user">
-              <div className="login-container">
-        <div className="instagram-logo-box">
-        <img className="instagram-logo" src={logo} />
-    </div>
-      <form onSubmit={handleSubmit}>
+         <div className="login-container">
+< div className="instagram-logo-box">
+<img className="instagram-logo" src={logo} />
+
+    <form onSubmit={handleSubmit}>
+    <div className="inputs-container">
+        <input
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+placeholder='Email'
+        />
+      </div>
       <div className="inputs-container">
-          <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="Current Password:"/>
+        <input
+          type="tel"
+          value={phoneNumber}
+          onChange={(event) => setPhoneNumber(event.target.value)}
+          required
+          placeholder='Phone Number'
+        />
+      </div>
+      <button className="login-button" type="submit">Reset Password</button>
+      {isValid && (
+        <div>
+                <div className="inputs-container">
+          <label>
+            New Password:
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(event) => setNewPassword(event.target.value)}
+              required
+            />
+          </label>
           </div>
           <div className="inputs-container">
-          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="New Password:"/>
+          <label>
+            Confirm Password:
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              required
+            />
+          </label>
           </div>
-          <div className="inputs-container">
-          <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password:"/>
-          </div>
-          <button className="login-button" type="submit">Change Password</button>
-      </form>
+        <button type="button" onClick={handleChangePassword}>Change Password</button>
+        </div>
+      )}
+    </form>
+    </div>
     </div>
     </div>
   );
-};
+}
 
-export default ChangePassword;
+export default ForgetPassword;

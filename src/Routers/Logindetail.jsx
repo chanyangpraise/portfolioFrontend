@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-
 import { Link } from "react-router-dom";
 import logo from "../asset/loginimg/Teamstagramlogo.png"
 
@@ -8,6 +7,9 @@ function Logindetail(props) {
     const navigate = useNavigate();
     const movetoregister = () => {
         navigate("/register");
+    }
+    const movetochangepw = () => {
+        navigate("/changepw");
     }
     const movetoforgotpw = () => {
         navigate("/forgotpw");
@@ -45,8 +47,10 @@ return (
     <Link to="/main">
     <button className="login-button" type="submit">Log In</button></Link>
     </form>
-    {/*Password recovery*/}
-    <a className="password-forgot" onClick={movetoforgotpw}>Forgot password?</a>
+    {/*Change Password */}
+    <a className="password-forgot" onClick={movetochangepw}>Change Password?</a>
+    {/* Forgot Password */}
+    <a className="password-forgot" onClick={movetoforgotpw}>Forgot Password?</a>
 </div>
 {/*Sign up*/}
 <div className="signup-container">

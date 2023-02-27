@@ -6,6 +6,7 @@ import RightMain from "./Routers/RightMain";
 import Login from "./Routers/Login";
 import Logindetail from "./Routers/Logindetail";
 import Register from "./Routers/Register";
+import ChangePassword from "./Routers/ChangePassword";
 import ForgotPassword from "./Routers/ForgotPassword";
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <Route path="/" element={<Login />} >
           <Route index element={<Logindetail />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/forgotpw" element={<ForgotPassword />} />
+          <Route path="/changepw" element={<ChangePassword />} />
+          <Route path="/forgotpw" element={<ForgotPassword/>} />
         </Route>
         <Route element={<SideBar />}>
           <Route path="/main" element={<RightMain />} />
