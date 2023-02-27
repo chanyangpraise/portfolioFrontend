@@ -1,3 +1,9 @@
+.login_wrap {
+  background-color: #fafafa;
+  width: 100vw;
+  height: 100vh;
+}
+
 .loginpage {
   --main-color: #0095f6;
   --text-color: #262626;

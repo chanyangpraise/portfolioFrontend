@@ -21,27 +21,15 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-<<<<<<< HEAD
       // send login request to server and handle response
     };
 return (
-    <div className='wholepage'>
+  <div className="login_wrap">
     <div className="loginpage">
     <div id="content-container">
             {/*Phone's pictures section*/}
 <div className="phones">
 <img src={phones} alt="pictures on phone" className="phone-image" />
-=======
-    // send login request to server and handle response
-  };
-  return (
-    <div className="login_wrap">
-      <div className="loginpage">
-        <div id="content-container">
-          {/*Phone's pictures section*/}
-          <div className="phones">
-            <img src={phones} alt="pictures on phone" className="phone-image" />
->>>>>>> d8fa224fa58e61269545734a8b2c42b3591e3d0d
             <div className="display-phone">
               <img className="picture" src={picture1} alt="#" />
               <img className="picture" src={picture2} alt="#" />
@@ -52,16 +40,9 @@ return (
           {/*User's log in section*/}
           <Outlet />
         </div>
-<<<<<<< HEAD
         </div>
         </div>
     );
     }
-=======
-      </div>
-    </div>
-  );
-}
->>>>>>> d8fa224fa58e61269545734a8b2c42b3591e3d0d
 
 export default Login;
