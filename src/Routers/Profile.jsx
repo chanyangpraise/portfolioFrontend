@@ -1,57 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Profile.css';
-import './Modal.css';
+import '../Components/Profile/css/Modal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faGear, faHeart } from '@fortawesome/free-solid-svg-icons';
-import Modal from './Modal';
-import axios from 'axios';
+import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
+import Modal from '../Components/Profile/Modal';
+import PostViewer from '../Components/Profile/PostViewer';
 
 function Profile() {
   const [openModal, setOpenModal] = useState(false);
   const [avatar, setAvatar] = useState(null);
-  const [page, setPage] = useState(1); // 페이지 수를 저장하는 state
-  const [galleryItems, setGalleryItems] = useState([]); // 받아온 정보를 저장하는 state
+  const [openViewer, setOpenViewer] = useState(false);
 
   const handleAvatarChange = (e) => {
     setAvatar(e.target.files[0]);
   };
-
-  // 스크롤 이벤트 처리
-  const handleScroll = () => {
-    const scrollHeight = document.documentElement.scrollHeight;
-    const scrollTop = document.documentElement.scrollTop;
-    const clientHeight = document.documentElement.clientHeight;
-
-    if (
-      scrollTop + clientHeight >= scrollHeight &&
-      galleryItems.length >= page * 6
-    ) {
-      // galleryItems 배열의 길이가 현재 페이지 수 * 6보다 크거나 같은 경우에만 다음 페이지를 가져오도록 함
-      setPage(page + 1);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll); // 스크롤 이벤트 등록
-    return () => {
-      window.removeEventListener('scroll', handleScroll); // 스크롤 이벤트 제거
-    };
-  });
-
-  useEffect(() => {
-    // 백엔드 서버에게 요청을 보내는 함수
-    const fetchGalleryItems = async () => {
-      const res = await axios.get('/get/main', {
-        params: {
-          page: page, // 현재 페이지 수 전달
-          count: 6, //6개 요청
-        },
-      });
-      setGalleryItems([...galleryItems, ...res.data]); // 기존 정보와 새로 받은 정보를 합쳐서  state 변수에 저장
-    };
-    fetchGalleryItems();
-  }, [page]); // 페이지 수가 변경될 때마다 요청 보냄
-
   // ------------------ //
 
   return (
@@ -94,7 +56,6 @@ function Profile() {
               >
                 계정 설정
               </button>
-              {/* <FontAwesomeIcon icon={faGear} size="10x" /> */}
               <Modal open={openModal} onClose={() => setOpenModal(false)} />
             </div>
 
@@ -115,7 +76,7 @@ function Profile() {
               <p className="p_explain">
                 Apple CEO Auburn 🏀 🏈 Duke 🏀 National Parks 🏞️ “Life's most
                 persistent and urgent question is, 'What are you doing for
-                others?'” - MLK. p.s. You know what? I'm gay.
+                others?'” - MLK.
               </p>
             </div>
           </div>
@@ -124,22 +85,114 @@ function Profile() {
 
       <div className="g_container">
         <div className="gallery">
-          {/* 상태 변수에 저장된 정보를 map으로 순회하며 갤러리 아이템 생성 */}
-          {galleryItems.map((item, index) => (
-            <div className="g_item" key={index}>
-              <img src={item.url} className="g_image" alt={`img${index}`} />
-              <div className="g_item_info">
-                <ul>
-                  <li className="g_item_likes">
-                    <FontAwesomeIcon icon={faHeart} /> {item.likes}
-                  </li>
-                  <li className="g_item_comments">
-                    <FontAwesomeIcon icon={faComment} /> {item.comments}
-                  </li>
-                </ul>
-              </div>
+          <div className="g_item" onClick={() => setOpenViewer(true)}>
+            <img
+              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
+              className="g_image"
+              alt="img1"
+            />
+            <div className="g_item_info">
+              <ul>
+                <li className="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 70만
+                </li>
+                <li className="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 1.9만
+                </li>
+              </ul>
             </div>
-          ))}
+          </div>
+          <PostViewer open={openViewer} onClose={() => setOpenViewer(false)} />
+
+          <div className="g_item">
+            <img
+              src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop"
+              className="g_image"
+              alt="img2"
+            />
+            <div className="g_item_info">
+              <ul>
+                <li className="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 31.5만
+                </li>
+                <li className="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 5만
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="g_item">
+            <img
+              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
+              className="g_image"
+              alt="img3"
+            />
+            <div className="g_item_info">
+              <ul>
+                <li className="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 20.3만
+                </li>
+                <li className="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 4만
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="g_item">
+            <img
+              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
+              className="g_image"
+              alt="img4"
+            />
+            <div className="g_item_info">
+              <ul>
+                <li className="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 56.8만
+                </li>
+                <li className="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 6만
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="g_item">
+            <img
+              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
+              className="g_image"
+              alt="img5"
+            />
+            <div className="g_item_info">
+              <ul>
+                <li className="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 56.9만
+                </li>
+                <li className="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 2만
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="g_item">
+            <img
+              src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
+              className="g_image"
+              alt="img6"
+            />
+            <div className="g_item_info">
+              <ul>
+                <li className="g_item_likes">
+                  <FontAwesomeIcon icon={faHeart} /> 59만
+                </li>
+                <li className="g_item_comments">
+                  <FontAwesomeIcon icon={faComment} /> 2만
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
