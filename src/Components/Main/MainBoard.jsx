@@ -2,13 +2,18 @@ import React, { useRef } from "react";
 import "./MainBoard.css";
 import imgButton from "../../asset/image-regular.svg";
 
-function MainBoard({ img, text, setImg, setText, setTexts, setImgs }) {
+function MainBoard({ img, text, setImg, setText, setPost }) {
   const textarea = useRef();
   const imgbutton = useRef();
   const sendButton = useRef();
   const imgAlert = useRef();
 
   const onSubmit = (event) => {
+    const data = {
+      text: text,
+      img: img,
+      comment: [],
+    };
     // onSubmit 새로고침 안되게
     event.preventDefault();
     if (imgbutton.current.value === "") {
@@ -24,8 +29,10 @@ function MainBoard({ img, text, setImg, setText, setTexts, setImgs }) {
         return;
       }
       // 배열에 담기
-      setTexts((current) => [text, ...current]);
-      setImgs((current) => [img, ...current]);
+      // setTexts((current) => [text, ...current]);
+      // setImgs((current) => [img, ...current]);
+      setPost((current) => [data, ...current]);
+
       imgbutton.current.value = "";
     }
   };
