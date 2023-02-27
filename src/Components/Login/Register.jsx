@@ -24,13 +24,17 @@ return (
         <img className="instagram-logo" src={logo} />
     </div>
     <form onSubmit={handleSubmit}>
+        <div className="registerinput">
     <div className="inputs-container">
         <input type="email" value={email} onChange={handleEmailChange} placeholder= "Email"/>
         </div>
         <div className="inputs-container">
         <input type="password" value={password} onChange={handlePasswordChange} name="password" placeholder="Password" />
     </div>
+    </div>
+    <div className='registerbtn'>
     <button className="login-button" type="submit">Register</button>
+    </div>
     </form>
     </div>
     </div>

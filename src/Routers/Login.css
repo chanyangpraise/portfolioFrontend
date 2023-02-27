@@ -5,7 +5,6 @@
 }
 
 .loginpage {
-  background-color: #fafafa;
   --main-color: #0095f6;
   --text-color: #262626;
   --background-color: rgb(250, 250, 250);
@@ -15,7 +14,7 @@
   text-decoration: none;
   font-size: 14px;
   border: none;
-  background-color: #fafafa;
+background-color: #fafafa;
   position: fixed;
   top: 42%;
   left: 50%;
@@ -23,23 +22,23 @@
   transform: translate(-50%, -50%);
 }
 
-#content-container {
+#content-container{
   display: flex;
   align-items: center;
   margin: 64px auto 0;
   padding-bottom: 64px;
 }
 
-.phones,
-.display-phone {
+.phones, 
+.display-phone{
   margin: 0 20px;
 }
 
-.display-phone {
+.display-phone{
   position: relative;
 }
 
-.picture {
+.picture{
   position: absolute;
   top: -513px;
   left: 98px;
@@ -49,23 +48,24 @@
   animation-iteration-count: infinite;
 }
 
-.user {
+.user{
   margin: 12px 0 0;
   justify-content: center;
-  top: 0.45em;
+  top: .45em;
 }
 
-.login-container {
+.login-container{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
 }
 
-.login-container,
-.signup-container {
+.login-container, 
+.signup-container{
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgba(var(--border-color), 1);
+  border: 1px solid rgba(var(--border-color),1);
   margin-bottom: 10px;
   padding: 50px 0;
 }
@@ -74,12 +74,12 @@
   padding: 10px;
 }
 
-.instagram-logo-box {
+.instagram-logo-box{
   width: 175px;
   margin: 22px 86.5px 0;
 }
 
-.instagram-logo {
+.instagram-logo{
   height: 51px;
   position: relative;
   left: 50%;
@@ -87,7 +87,7 @@
   bottom: 20px;
 }
 
-#login-post {
+#login-post{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,21 +95,21 @@
   margin-top: 24px;
 }
 
-.inputs-container {
+.inputs-container{
   margin: 0 30px 6px 97px;
   width: 100%;
 }
 
-.inputs-container input {
+.inputs-container input{
   background: var(--background-color);
   width: 100%;
   padding: 10px 0px 10px 5px;
-  border: 1px solid rgba(var(--border-color), 1);
+  border: 1px solid rgba(var(--border-color),1);
   border-radius: 2px;
   outline: none;
 }
 
-.inputs-container input:focus {
+.inputs-container input:focus{
   border-color: rgb(180, 180, 180);
 }
 
@@ -118,10 +118,10 @@
   right: 30%;
 }
 
-.login-button {
+.login-button{
   font-family: sans-serif;
-  background-color: rgb(178, 223, 252);
-  color: rgb(255, 255, 255);
+  background-color:rgb(178,223,252);
+  color: rgb(255,255,255);
   font-weight: bold;
   padding: 8px;
   border: 1px solid transparent;
@@ -133,13 +133,15 @@
   cursor: pointer;
   margin: auto;
   width: 300px;
+  position: relative;
+  top: 15px;
 }
 
-.login-button:hover {
+.login-button:hover{
   background-color: #3897f0;
 }
 
-.password-forgot {
+.password-forgot{
   color: var(--footer-text-color);
   font-family: sans-serif;
   text-align: center;
@@ -151,50 +153,87 @@
   cursor: pointer;
 }
 
-.signup-container p,
-.get-container p {
+.signup-container p, 
+.get-container p{
   color: var(--text-color);
 }
 
-.signup-container p {
+.signup-container p{
   margin: 15px;
   text-align: center;
   font-family: sans-serif;
 }
 
-.signup {
+.signup{
   color: var(--main-color);
   font-weight: 600;
   cursor: pointer;
 }
 
-@media (max-width: 785px) {
-  .phones {
+.changepwinput {
+  position: relative;
+  right: 89px;
+  width: 95%;
+}
+
+.forgotpwinput {
+  position: relative;
+  right:160px;
+}
+
+.forgotpwinputcontainer input{
+width:300px;
+}
+
+.resetpwbtn {
+position: relative;
+right: 71px;
+top: 8px;
+}
+
+.registerinput {
+position: relative;
+right: 88px;
+width: 95%;
+}
+
+.changepwbtn {
+  position: relative;
+  top: 8px;
+}
+
+.registerbtn {
+  position: relative;
+  top: 8px;
+}
+@media(max-width: 785px){
+
+  .phones{
     display: none;
   }
 }
 
-@keyframes animation {
-  25% {
+@keyframes animation{
+  25%{
     opacity: 1;
   }
-  50% {
+  50%{
     opacity: 0;
   }
 }
 
-.picture:nth-child(1) {
+.picture:nth-child(1){
   animation-delay: 5s;
 }
-.picture:nth-child(2) {
+.picture:nth-child(2){
   animation-delay: 10s;
 }
-.picture:nth-child(3) {
+.picture:nth-child(3){
   animation-delay: 15s;
 }
-.picture:nth-child(4) {
+.picture:nth-child(4){
   animation-delay: 20s;
 }
-.picture:nth-child(5) {
+.picture:nth-child(5){
   animation-delay: 25s;
 }

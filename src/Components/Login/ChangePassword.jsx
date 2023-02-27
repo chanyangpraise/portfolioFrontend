@@ -40,6 +40,7 @@ const ChangePassword = () => {
         <img className="instagram-logo" src={logo} />
     </div>
       <form onSubmit={handleSubmit}>
+        <div className='changepwinput'>
       <div className="inputs-container">
           <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="Current Password"/>
           </div>
@@ -49,7 +50,10 @@ const ChangePassword = () => {
           <div className="inputs-container">
           <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password"/>
           </div>
+          </div>
+          <div className='changepwbtn'>
           <button className="login-button" type="submit">Change Password</button>
+      </div>
       </form>
     </div>
     </div>
