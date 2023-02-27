@@ -1,0 +1,8 @@
+.main_post_heart_check {
+  display: flex;
+  align-items: center;
+}
+.main_post_heart_img {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}

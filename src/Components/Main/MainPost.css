@@ -43,14 +43,6 @@
   margin-bottom: 2rem;
   padding-bottom: 1rem;
 }
-.main_post_heart_check {
-  display: flex;
-  align-items: center;
-}
-.main_post_heart_img {
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
 
 .main_post_bottom_menu {
   font-size: 0.8rem;

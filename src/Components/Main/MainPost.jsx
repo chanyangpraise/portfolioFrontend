@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import SideProfile from "../Side/SideProfile";
 import "./MainPost.css";
-import HeartImg from "../../asset/heart-regular.svg";
 import MainComment from "./MainComment";
+import MainLike from "./MainLike";
 
 function MainPost({ v, i, imgs, setCmtModal, setCommentIndex, setEditing }) {
   const Post = useRef();
   const Comment = useRef();
-  console.log(Post);
+  const [like, setLike] = useState(null);
 
   function removeView() {
     if (window.confirm("게시물을 삭제하시겠습니까?")) {
@@ -30,10 +30,7 @@ function MainPost({ v, i, imgs, setCmtModal, setCommentIndex, setEditing }) {
         <img className="main_post_img" src={imgs} alt="#"></img>
       </div>
       <div className="main_post_bottom">
-        <div className="main_post_heart_check">
-          <img src={HeartImg} alt="heart_check" className="main_post_heart_img" />
-          <span>1</span>
-        </div>
+        <MainLike like={like} setLike={setLike} />
         <div className="main_post_bottom_menu">
           <span
             onClick={() => {
