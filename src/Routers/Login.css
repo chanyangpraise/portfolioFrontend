@@ -1,19 +1,23 @@
+body {
+  background-color: #fafafa
+}
+
 .loginpage {
   --main-color: #0095f6;
   --text-color: #262626;
   --background-color: rgb(250, 250, 250);
   --border-color: 219, 219, 219;
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
   text-decoration: none;
   font-size: 14px;
   border: none;
-  background-color: #fafafa;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+background-color: #fafafa;
+  position: fixed;
+  top: 42%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
 
 #content-container{
@@ -53,6 +57,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
 }
 
 .login-container, 
@@ -60,7 +65,11 @@
   background-color: rgb(255, 255, 255);
   border: 1px solid rgba(var(--border-color),1);
   margin-bottom: 10px;
-  padding: 10px 0;
+  padding: 50px 0;
+}
+
+.signup-container {
+  padding: 10px;
 }
 
 .instagram-logo-box{
@@ -73,6 +82,7 @@
   position: relative;
   left: 50%;
   transform: translate(-50%);
+  bottom: 20px;
 }
 
 #login-post{
@@ -84,14 +94,14 @@
 }
 
 .inputs-container{
-  margin: 0 40px 6px;
+  margin: 0 30px 6px 97px;
   width: 100%;
 }
 
 .inputs-container input{
   background: var(--background-color);
   width: 100%;
-  padding: 9px 0 7px 8px;
+  padding: 10px 0px 10px 5px;
   border: 1px solid rgba(var(--border-color),1);
   border-radius: 2px;
   outline: none;
@@ -99,6 +109,11 @@
 
 .inputs-container input:focus{
   border-color: rgb(180, 180, 180);
+}
+
+.emailpw {
+  position: relative;
+  right: 30%;
 }
 
 .login-button{
@@ -129,6 +144,8 @@
   font-size: 12px;
   margin-top: 15px;
   margin-bottom: 10px;
+  position: relative;
+  top: 25px;
   cursor: pointer;
 }
 

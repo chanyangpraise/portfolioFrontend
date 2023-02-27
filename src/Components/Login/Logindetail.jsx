@@ -35,11 +35,13 @@ return (
     </div>
     {/*Form Login*/}
     <form onSubmit={handleSubmit} id="login-post" method="POST">
+    <div className="emailpw">
     <div className="inputs-container">
         <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder= "Email" />
     </div>
     <div className="inputs-container">
         <input type="password" value={password} onChange={handlePasswordChange} name="password" placeholder="Password" />
+    </div>
     </div>
     <Link to="/main">
     <button className="login-button" type="submit">Log In</button></Link>
