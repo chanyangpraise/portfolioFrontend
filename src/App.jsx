@@ -4,10 +4,10 @@ import SideBar from "./Routers/SideBar";
 import Profile from "./Routers/Profile";
 import RightMain from "./Routers/RightMain";
 import Login from "./Routers/Login";
-import Logindetail from "./Routers/Logindetail";
-import Register from "./Routers/Register";
-import ChangePassword from "./Routers/ChangePassword";
-import ForgotPassword from "./Routers/ForgotPassword";
+import Logindetail from "./Components/Login/Logindetail";
+import Register from "./Components/Login/Register";
+import ChangePassword from "./Components/Login/ChangePassword";
+import ForgotPassword from "./Components/Login/ForgotPassword";
 
 function App() {
   return (

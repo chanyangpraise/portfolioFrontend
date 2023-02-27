@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import "./Login.css";
 import { Link, Outlet } from "react-router-dom";
-import phones from "../asset/loginimg/phones.png"
-import picture1 from "../asset/loginimg/photo-1.png"
-import picture2 from "../asset/loginimg/photo-2.png"
-import picture3 from "../asset/loginimg/photo-3.png"
-import picture4 from "../asset/loginimg/photo-4.png"
-import logo from "../asset/loginimg/Teamstagramlogo.png"
+import phones from "../Components/Login/loginimg/phones.png"
+import picture1 from "../Components/Login/loginimg/photo-1.png"
+import picture2 from "../Components/Login/loginimg/photo-2.png"
+import picture3 from "../Components/Login/loginimg/photo-3.png"
+import picture4 from "../Components/Login/loginimg/photo-4.png"
 
 function Login() {
     const [email, setEmail] = useState('');
