@@ -20,14 +20,7 @@ function RightMain() {
       <MainBoard setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
       <div className="main_post_out_wrap">
         {post.map((v, i) => (
-          <MainPost
-            setCommentIndex={setCommentIndex}
-            imgs={v.img}
-            v={v}
-            i={i}
-            setCmtModal={setCmtModal}
-            setEditing={setEditing}
-          />
+          <MainPost setCommentIndex={setCommentIndex} imgs={v.img} v={v} i={i} setCmtModal={setCmtModal} />
         ))}
       </div>
       {cmtModal && (
