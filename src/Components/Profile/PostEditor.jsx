@@ -29,6 +29,15 @@ const PostEditor = ({ open, onClose }) => {
     }
   };
 
+  const handleDeleteImg = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.delete('/profile-image/:userId')
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!open) return null;
   return (
     <div className="modalOverlay">
@@ -58,9 +67,7 @@ const PostEditor = ({ open, onClose }) => {
                 </button>
               </form>
             ) : (
-              <button
-                onClick={() => setShowImageForm(true)}
-              >
+              <button onClick={() => setShowImageForm(true)}>
                 이미지 수정
               </button>
             )}

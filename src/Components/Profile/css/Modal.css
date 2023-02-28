@@ -7,7 +7,6 @@ content - deleted
 btnContainer - same
 
 이메일 변경 - changeEmail
-설명 변경 - changeBio
 로그아웃 - logout
 */
 
@@ -65,7 +64,6 @@ btnContainer - same
 }
 
 .modalLogout,
-.changeBio,
 .changeEmail {
   font-weight: bold;
   font-size: 16px;
@@ -125,11 +123,45 @@ btnContainer - same
 }
 
 /*
-  PostViewer.jsx 
+  PostViewer.css
 */
 
+/* 
+- 구조 - 
+  overlay
+    container
+      settings
+        left
+        right
+      settings
+    container
+  overlay
+*/
+
+
+.modalVSettings {
+  display: flex;
+  overflow: hidden;
+}
+
+.modalVLeft {
+  border-top: 5em solid #000;
+  border-bottom: 5em solid #000;
+  flex: 1;
+}
+
+.modalVRight {
+  flex: 1;
+}
+
+.view_img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .modalVContainer {
-  max-width: 1000px;
+  max-width: 75em;
   width: 100%;
   position: fixed;
   top: 50%;
@@ -142,27 +174,47 @@ btnContainer - same
   overflow: auto;
 }
 
-.modalVLeft,
-.modalVRight {
+
+@media (max-width: 768px) {
+  .modalVContainer {
+    width: 60em;
+  }
+}
+
+/* modalVRight */
+
+.modalUsername {
   display: inline-block;
-  margin: auto;
-  width: 50%;
-  height: 100%;
+  height: 10%;
+  line-height: 200%;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  text-align: center;
 }
 
-.modalVRight {
-  height: 100%;
+.modalProfile {
+  display: inline-block;
 }
 
-.view_img {
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  border-right: 2px solid #262626;
+.modalPImg {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
 }
 
-.modal_u_name {}
-
-.modal_u_content {
-  font-size: large;
+.modalContent {
+  height: 19.2em;
+  font-size: 1.7rem;
+  border-bottom: 5px solid #d5d5d5;
 }
+
+.modalLike {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+
+.modalComments {
+  display: inline-block;
+}
+
+/*  */
