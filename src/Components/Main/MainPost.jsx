@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import SideProfile from "../Side/SideProfile";
 import "./MainPost.css";
 import MainComment from "./MainComment";
@@ -7,13 +7,17 @@ import MainLike from "./MainLike";
 function MainPost({ v, i, imgs, setCmtModal, setCommentIndex, setEditing }) {
   const Post = useRef();
   const Comment = useRef();
-  const [like, setLike] = useState(null);
+  const [like, setLike] = useState(true);
 
   function removeView() {
     if (window.confirm("게시물을 삭제하시겠습니까?")) {
       console.log("삭제완료");
     }
   }
+
+  const toggleLike = () => {
+    setLike(!like);
+  };
 
   return (
     <div ref={Post} className="main_post_in_wrap" key={i}>
@@ -30,7 +34,7 @@ function MainPost({ v, i, imgs, setCmtModal, setCommentIndex, setEditing }) {
         <img className="main_post_img" src={imgs} alt="#"></img>
       </div>
       <div className="main_post_bottom">
-        <MainLike like={like} setLike={setLike} />
+        <MainLike like={like} toggleLike={toggleLike} />
         <div className="main_post_bottom_menu">
           <span
             onClick={() => {

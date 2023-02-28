@@ -3,11 +3,16 @@ import "./MainLike.css";
 import emptyHeart from "../../asset/emptyHeart.png";
 import fullHeart from "../../asset/fullHeart.png";
 
-function MainLike() {
+function MainLike({ like, toggleLike }) {
+  console.log(toggleLike);
   return (
     <div className="main_post_heart_check">
-      <img onClick={() => {}} src={HeartImg} alt="heart_check" className="main_post_heart_img" />
-      <span>{}</span>
+      <img
+        src={like ? emptyHeart : fullHeart}
+        onClick={toggleLike}
+        alt="HeartIcon"
+        style={{ width: "7%", cursor: "pointer" }}
+      />
     </div>
   );
 }
