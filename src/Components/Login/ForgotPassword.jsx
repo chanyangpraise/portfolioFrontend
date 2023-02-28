@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import logo from "../Login/loginimg/Teamstagramlogo.png"
 
-function ForgetPassword() {
+
+function ForgotPassword() {
+    const navigate = useNavigate();
+    const movetochangepw = () => {
+        navigate("/changepw");
+    }
 const [email, setEmail] = useState('');
 const [phoneNumber, setPhoneNumber] = useState('');
-const [isValid, setIsValid] = useState(false);
-const [newPassword, setNewPassword] = useState('');
-const [confirmPassword, setConfirmPassword] = useState('');
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,15 +17,6 @@ const handleSubmit = (event) => {
     // and set isValid to true or false accordingly
     // ...
     setIsValid(true); // for demo purposes
-}
-
-const handleChangePassword = () => {
-    // Send a request to the server to update the user password
-    // with the new password
-    // ...
-    alert('Password changed successfully');
-    setNewPassword('');
-    setConfirmPassword('');
 }
 
 return (
@@ -59,35 +53,8 @@ placeholder='Email'
     </div>
     </div>
     <div className='resetpwbtn'>
-    <button className="login-button" type="submit">Reset Password</button>
+    <button className="login-button" type="submit" onClick={movetochangepw}>Reset Password</button>
     </div>
-    {isValid && (
-        <div>
-                <div className="inputs-container">
-        <label>
-            New Password:
-            <input
-            type="password"
-            value={newPassword}
-            onChange={(event) => setNewPassword(event.target.value)}
-            required
-            />
-        </label>
-        </div>
-        <div className="inputs-container">
-        <label>
-            Confirm Password:
-            <input
-            type="password"
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            required
-            />
-        </label>
-        </div>
-        <button type="button" onClick={handleChangePassword}>Change Password</button>
-        </div>
-    )}
     </form>
     </div>
     </div>
@@ -95,4 +62,4 @@ placeholder='Email'
 );
 }
 
-export default ForgetPassword;
+export default ForgotPassword;

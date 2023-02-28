@@ -8,6 +8,7 @@ import Logindetail from "./Components/Login/Logindetail";
 import Register from "./Components/Login/Register";
 import ChangePassword from "./Components/Login/ChangePassword";
 import ForgotPassword from "./Components/Login/ForgotPassword";
+import VerifyEmail from "./Components/Login/VerifyEmail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/changepw" element={<ChangePassword />} />
           <Route path="/forgotpw" element={<ForgotPassword/>} />
+          <Route path="/verifyemail" element={<VerifyEmail/>} />"
         </Route>
         <Route element={<SideBar />}>
           <Route path="/main" element={<RightMain />} />

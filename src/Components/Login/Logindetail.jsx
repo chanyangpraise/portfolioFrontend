@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import logo from "../Login/loginimg/Teamstagramlogo.png"
 
-function Logindetail(props) {
+function Logindetail() {
     const navigate = useNavigate();
     const movetoregister = () => {
         navigate("/register");
@@ -14,6 +14,9 @@ function Logindetail(props) {
     }
     const movetoforgotpw = () => {
         navigate("/forgotpw");
+    }
+    const movetoverifyemail = () => {
+        navigate("/verifyemail");
     }
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -64,19 +67,17 @@ return (
     <Link to="/main">
     <button className="login-button" type="submit">Log In</button></Link>
     </form>
-    {/*Change Password */}
-    <a className="password-forgot" onClick={movetochangepw}>Change Password?</a>
     {/* Forgot Password */}
     <a className="password-forgot" onClick={movetoforgotpw}>Forgot Password?</a>
 </div>
 {/*Sign up*/}
 <div className="signup-container">
-    <p>Don't have an account? <span className="signup" onClick={movetoregister}>Sign up</span></p>
+    <p>Don't have an account? <span className="signup" onClick={movetoverifyemail}>Sign up</span></p>
 </div>
 </div>
 )
 }
 
-export default Logindetail
+export default Logindetail;
 
 
