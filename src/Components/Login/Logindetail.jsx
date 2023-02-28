@@ -6,12 +6,6 @@ import logo from "../Login/loginimg/Teamstagramlogo.png"
 
 function Logindetail() {
     const navigate = useNavigate();
-    const movetoregister = () => {
-        navigate("/register");
-    }
-    const movetochangepw = () => {
-        navigate("/changepw");
-    }
     const movetoforgotpw = () => {
         navigate("/forgotpw");
     }
@@ -29,7 +23,7 @@ function Logindetail() {
     const handleSubmit = (event) => {
     event.preventDefault();
       // send login request to server and handle response
-          // Send a POST request
+        // Send a POST request
 axios({
     method: 'post',
     url: 'http://localhost:3000/user/login',

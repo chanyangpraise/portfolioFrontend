@@ -15,22 +15,21 @@ const ChangePassword = () => {
     }
 
     // Call API to change password
-    fetch('/api/changePassword', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ currentPassword, newPassword })
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Password changed successfully');
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmNewPassword('');
-      } else {
-        console.log('Failed to change password');
+    axios({
+      method: 'post',
+      url: 'http://13.125.96.165:3000/users/auth_mail',
+      data: {
+      email: email,
       }
-    })
-    .catch(error => console.error(error));
+  }).then(function (response) {
+      if (response.status===500){
+          alert("서버에서 에러가 발생 했습니다.")
+      } else if (response.status===200) {
+          alert("성공되었습니다.")
+      } else if (response.status===201) {
+          setCodeSent(true);
+      }
+  });
   };
 
   return (
