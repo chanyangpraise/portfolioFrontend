@@ -1,0 +1,15 @@
+.main_comment_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main_comment_menu {
+  display: flex;
+  font-size: 0.8rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.main_comment_menu span {
+  cursor: pointer;
+}
