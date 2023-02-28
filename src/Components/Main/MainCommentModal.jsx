@@ -32,7 +32,9 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
       <div className="main_comment_modal_wrap">
         <form onSubmit={cmtSubmit}>
           <div className="main_comment_modal_in_wrap">
-            <span className="main_comment_close_button">x</span>
+            <span className="main_comment_close_button" onClick={() => setCmtModal(false)}>
+              x
+            </span>
             <textarea
               ref={commentTextArea}
               onChange={cmtTextAdd}
