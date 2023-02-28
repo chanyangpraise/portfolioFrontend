@@ -8,6 +8,7 @@ const [password, setPassword] = useState('');
 const [confirmPassword, setConfirmPassword] = useState('');
 const [phone, setPhone] = useState('');
 
+
 const handlePasswordChange = (event) => {
     setPassword(event.target.value);
 };
@@ -25,22 +26,27 @@ const handleSubmit = (event) => {
     event.preventDefault();
     // send registration request to server and handle response
     // Send a POST request
-axios({
-    method: 'post',
-    url: 'http://localhost:3000/user/register',
-    data: {
-    password: password,
-    phone: phone, 
-    }
-}).then(function (response) {
-    if (response.status===500){
-        alert("서버에서 에러가 발생했습니다")
-    } else if (response.status===200) {
-        alert("이미 가입된 이메일이 있습니다")
-    } else if (response.status===201) {
-        navigate("/")
-    }
-});
+    if (password === confirmPassword) {
+        axios({
+            method: 'post',
+            url: 'http://localhost:3000/users/register',
+            data: {
+            email: email,
+            password: password,
+            phone: phone, 
+            }
+        }).then(function (response) {
+            if (response.status===500){
+                alert("서버에서 에러가 발생했습니다")
+            } else if (response.status===200) {
+                alert("이미 가입된 이메일이 있습니다")
+            } else if (response.status===201) {
+                navigate("/")
+            }
+        });  
+    } else (
+        alert("비밀번호가 같지 않습니다.")
+    )
 };
 
 return (

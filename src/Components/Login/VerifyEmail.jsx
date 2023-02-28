@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import logo from "../Login/loginimg/Teamstagramlogo.png"
 
 function VerifyEmail() {
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
     const movetoregister = () => {
         navigate("/register");
     }
-const [email, setEmail] = useState('');
 const [codeSent, setCodeSent] = useState(false);
 const [verificationCode, setVerificationCode] = useState('');
 
@@ -22,19 +22,39 @@ function handleVerificationCodeChange(event) {
 
 function handleSendCodeClick() {
     // This is where you would actually send the verification code to the user's email.
-    // For this example, we'll just generate a random 6-digit code and log it to the console.
-    const code = Math.floor(100000 + Math.random() * 900000);
-    console.log(`Verification code: ${code}`);
-
-    setCodeSent(true);
+    axios({
+        method: 'post',
+        url: 'http://13.125.96.165:3000/users/auth_mail',
+        data: {
+        email: email,
+        }
+    }).then(function (response) {
+        if (response.status===500){
+            alert("서버에서 에러가 발생 했습니다.")
+        } else if (response.status===201) {
+            
+        }
+    });
 }
 
 function handleSubmit(event) {
     event.preventDefault();
     // This is where you would actually verify the user's email and verification code.
-    // For this example, we'll just log the values to the console.
-    console.log(`Email: ${email}`);
-    console.log(`Verification code: ${verificationCode}`);
+// Make the POST request to the server to generate the authentication code and send it via email
+axios({
+    method: 'post',
+    url: 'http://13.125.96.165:3000/users/auth_valid',
+    data: {
+    email: email,
+    digit: verificationCode,
+    }
+}).then(function (response) {
+    if (response.status===500){
+        alert("서버에서 에러가 발생 했습니다.")
+    } else if (response.status===200) {
+        navigate("/register")
+    }
+});
 }
 
 return (

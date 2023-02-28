@@ -9,14 +9,11 @@ function ForgotPassword() {
         navigate("/changepw");
     }
 const [email, setEmail] = useState('');
-const [phoneNumber, setPhoneNumber] = useState('');
 
 const handleSubmit = (event) => {
     event.preventDefault();
     // Check if email and phone number match with the user data
     // and set isValid to true or false accordingly
-    // ...
-    setIsValid(true); // for demo purposes
 }
 
 return (
@@ -24,7 +21,6 @@ return (
 <div className="login-container">
 < div className="instagram-logo-box">
 <img className="instagram-logo" src={logo} />
-
     <form onSubmit={handleSubmit}>
         <div className='forgotpwinput'>
             <div className='forgotpwinputcontainer'>
@@ -42,12 +38,15 @@ placeholder='Email'
     <div className='forgotpwinput'>
     <div className='forgotpwinputcontainer'>
     <div className="inputs-container">
-        <input
-        type="tel"
-        value={phoneNumber}
-        onChange={(event) => setPhoneNumber(event.target.value)}
-        required
-        placeholder='Phone Number'
+    <input
+            type="number"
+            id="verification-code"
+            value={verificationCode}
+            onChange={handleVerificationCodeChange}
+            minLength={6}
+            maxLength={6}
+            required
+            placeholder='Verification Code'
         />
             </div>
     </div>
