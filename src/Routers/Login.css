@@ -206,6 +206,22 @@ width: 95%;
   position: relative;
   top: 8px;
 }
+
+.verifyemailinput {
+  position: relative;
+  right: 88px;
+  width: 95%;
+}
+
+.emailverifybtn {
+  padding: 10px;
+}
+
+.verifycodeinput {
+  position: relative;
+  right: 88px;
+  width: 95%;
+}
 @media(max-width: 785px){
 
   .phones{

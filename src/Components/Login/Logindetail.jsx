@@ -15,6 +15,9 @@ function Logindetail(props) {
     const movetoforgotpw = () => {
         navigate("/forgotpw");
     }
+    const movetoverifyemail = () => {
+        navigate("/verifyemail");
+    }
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleEmailChange = (event) => {
@@ -71,12 +74,12 @@ return (
 </div>
 {/*Sign up*/}
 <div className="signup-container">
-    <p>Don't have an account? <span className="signup" onClick={movetoregister}>Sign up</span></p>
+    <p>Don't have an account? <span className="signup" onClick={movetoverifyemail}>Sign up</span></p>
 </div>
 </div>
 )
 }
 
-export default Logindetail
+export default Logindetail;
 
 

@@ -4,15 +4,20 @@ import { useNavigate } from "react-router-dom";
 import logo from "../Login/loginimg/Teamstagramlogo.png"
 function Register() {
 const navigate = useNavigate();
-const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
-
-const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-};
+const [confirmPassword, setConfirmPassword] = useState('');
+const [phone, setPhone] = useState('');
 
 const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+};
+
+const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+}
+
+const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
 };
 
 const handleSubmit = (event) => {
@@ -24,8 +29,8 @@ axios({
     method: 'post',
     url: 'http://localhost:3000/user/register',
     data: {
-    email: email,
     password: password,
+    phone: phone, 
     }
 }).then(function (response) {
     if (response.status===500){
@@ -46,11 +51,17 @@ return (
     </div>
     <form onSubmit={handleSubmit}>
         <div className="registerinput">
-    <div className="inputs-container">
-        <input type="email" value={email} onChange={handleEmailChange} placeholder= "Email"/>
-        </div>
         <div className="inputs-container">
-        <input type="password" value={password} onChange={handlePasswordChange} name="password" placeholder="Password" />
+        <input type="password" id="password" value={password} onChange={handlePasswordChange} name="password" placeholder="Password" />
+    </div>
+    <div className="inputs-container">
+        <input type="password"
+        id="confirm-password"
+        value={confirmPassword}
+        onChange={handleConfirmPasswordChange} placeholder="Confirm Password" />
+    </div>
+    <div className="inputs-container">
+        <input type="phone" value={phone} onChange={handlePhoneChange} name="phone" placeholder="Phone" />
     </div>
     </div>
     <div className='registerbtn'>
