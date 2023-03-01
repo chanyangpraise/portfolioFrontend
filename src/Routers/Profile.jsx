@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Profile.css';
 import '../Components/Profile/css/Modal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,89 +20,50 @@ function Profile() {
   const [followers, setFollowers] = useState(0);
   const [following, setFollowing] = useState(0);
 
-  // //갤러리 게시글 6개씩 받아오기
-  // useEffect(() => {
-  //   axios
-  //     .get('http://13.125.96.165:3000/board/get/main')
-  //     .then((res) => {
-  //       setGalleryItems(res.data.content);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // });
+  const [file, setFile] = useState(null);
+  const userId = '1'; //임의의 시용자 아이디
 
-  const url = 'http://localhost:3000/get/main';
-  const page = 1;
-  const count = 6;
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
-  axios
-    .get(url, {
-      params: {
-        nextPage: page,
-        nextCount: count,
-      },
-    })
+  
+  //프로필 이미지 업로드
+  const handleUpload = () => {
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('userId', userId);
+    
+    axios
+    .post('/upload', formData)
     .then((res) => {
-      console.log(res.data);
+      console.log(res.data.message);
     })
     .catch((err) => {
       console.error(err);
     });
-
-  //프로필 이미지 수정
-  const handleAvatarUpload = async (e) => {
-    if (e.target.files.length === 0) {
-      return;
-    }
-
-    const formData = new FormData();
-    formData.set('image', e.target.files[0]);
-
-    // post 요청 보내기
-    try {
-      const userId = 1;
-      const response = await axios.post(
-        `http://13.125.96.165:3000/users/upload`,
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.error(err);
-    }
   };
-
-  // 프로필 이미지 삭제 버튼 onClick 함수
-  const handleClick = () => {
-    const userId = 1;
-    const user = {
-      u_img: 'somewhere.....?', // TODO: u_img 키 값인데 어케 받지?
+  
+  // 프로필 이미지 삭제
+    const handleDelete = () => {
+      axios
+        .delete(`http://13.125.96.165:3000/profile-image/${userId}`)
+        .then((res) => {
+          console.log(res.data.message);
+          alert("업로드가 완료되었습니다. 새로고침 하세요.")
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("서버에 에러가 발생했습니다. 잠시 후 다시 시도하세요.")
+        });
     };
-
-    // delete 요청 보내기
-    axios
-      .delete(`http://13.125.96.165:3000/users/profile-image/${userId}`, {
-        data: user,
-      })
-      .then((res) => {
-        console.log(res.data);
-        alert('프로필 이미지가 정상적으로 삭제되었습니다.');
-      })
-      .catch((err) => {
-        console.error(err);
-        alert('서버에서 에러가 발생했습니다.');
-      });
-  };
-
+    
   // ------------------ //
-
+  
   useEffect(() => {
     //게시글 카운트
     axios
-      .get('http://13.125.96.165:3000/board/get/count/:uid')
+      .get('http://13.125.96.165:3000/board/get/count/1')
       .then((res) => {
         setPosts(res.data.count);
       })
@@ -158,19 +119,22 @@ function Profile() {
               <input
                 className="p_avatarInput"
                 type="file"
-                id="avatar"
-                name="avatar"
+                id="image"
+                name="image"
                 accept="image/*"
-                onChange={handleAvatarUpload}
+                onChange={handleFileChange}
               />
-              <label htmlFor="avatar">프로필 사진 변경</label>
+              <label onClick={handleUpload} htmlFor="image">
+                프로필 사진 업로드
+              </label>
 
               <button
                 className="p_btn p_edit_btn modalBtn"
-                onClick={handleClick}
+                onClick={handleDelete}
               >
                 프로필 사진 삭제
               </button>
+
               <button
                 className="p_btn p_edit_btn modalBtn"
                 onClick={() => setOpenModal(true)}
