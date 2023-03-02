@@ -9,7 +9,6 @@ function VerifyEmail() {
     const movetoregister = () => {
         navigate("/register");
     }
-const [codeSent, setCodeSent] = useState(false);
 const [verificationCode, setVerificationCode] = useState('');
 
 function handleEmailChange(event) {
@@ -32,7 +31,7 @@ function handleSendCodeClick() {
         if (response.status===500){
             alert("서버에서 에러가 발생 했습니다.")
         } else if (response.status===201) {
-            
+            alert("코드가 전송되었습니다.")
         }
     });
 }
@@ -69,7 +68,6 @@ return (
     <input type="email" id="email" value={email} onChange={handleEmailChange} placeholder= "Email" />
     </div>
 </div>
-    {codeSent ? (
         <>
         <div className='verifycodeinput'>
             <div className="inputs-container">
@@ -86,13 +84,12 @@ return (
         </div>
         </div>
         </>
-    ) : (
         <div className='emailverifybtn'>
         <button type="button" className="login-button" onClick={handleSendCodeClick}>
         Send Verification Code
         </button>
         </div>
-    )}
+    
 <div className='emailverifybtn'>
     <button type="submit" className="login-button" onClick={movetoregister}>Submit</button>
     </div>
