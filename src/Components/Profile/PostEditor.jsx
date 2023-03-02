@@ -2,37 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const PostEditor = ({ open, onClose }) => {
-  const [showImageForm, setShowImageForm] = useState(false);
   const [showContentForm, setShowContentForm] = useState(false);
-  const [image, setImage] = useState('');
   const [content, setContent] = useState('');
-
-  const handleSubmitImage = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:5173/change-image', { image });
-      setShowImageForm(false);
-      setImage('');
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleSubmitContent = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5173/change-content', { content });
+      await axios.post(`http://localhost:5173/update/${bid}`, { content });
       setShowContentForm(false);
       setContent('');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDeleteImg = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.delete('/profile-image/:userId')
     } catch (error) {
       console.log(error);
     }
@@ -47,31 +25,6 @@ const PostEditor = ({ open, onClose }) => {
             X
           </p>
           <div className="btnContainer">
-            {showImageForm ? (
-              <form className="modalForm" onSubmit={handleSubmitImage}>
-                <input
-                  className="modalInput"
-                  type="file"
-                  placeholder="새로운 이미지를 업로드 하세요"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                />
-                <button className="formBtn" type="submit">
-                  변경
-                </button>
-                <button
-                  className="formBtn"
-                  onClick={() => setShowImageForm(false)}
-                >
-                  취소
-                </button>
-              </form>
-            ) : (
-              <button onClick={() => setShowImageForm(true)}>
-                이미지 수정
-              </button>
-            )}
-
             {showContentForm ? (
               <form className="modalForm" onSubmit={handleSubmitContent}>
                 <textarea

@@ -10,9 +10,9 @@ btnContainer - same
 로그아웃 - logout
 */
 
-.modalBtn {
+/* .modalBtn {
   z-index: -1;
-}
+} */
 
 .modalOverlay {
   z-index: 1;

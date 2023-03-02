@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
+import PostEditor from './PostEditor';
+
 
 const PostViewer = ({ open, onClose }) => {
   if (!open) return null;
-
+  
+  const [openEditor, setOpenEditor] = useState(false);
   const userName = 'tcook@apple.com';
   const modalProfile = 'https://i.ibb.co/G54dpvC/tim-cook-image.png';
-  const content = 'I think React is really Cool!';
+  const content = 'I think React is really Cool !';
   const [comment, setComment] = useState('');
 
   const handleChange = (e) => {
@@ -20,14 +23,14 @@ const PostViewer = ({ open, onClose }) => {
     const bid = 1;
     // POST 요청
     axios
-      .post('/write', {
+      .post('http://13.125.96.165:3000/write', {
         userId,
         content: comment,
         bid,
       })
       .then((res) => {
         console.log(res.data);
-        alert('댓글이 작성되었습니다.');
+        alert('댓글이 성공적으로 작성되었습니다.');
         setComment('');
       })
       .catch((err) => {
@@ -35,6 +38,8 @@ const PostViewer = ({ open, onClose }) => {
         alert('서버에서 에러가 발생했습니다.');
       });
   };
+
+  // const handleDelete
 
   return (
     <div className="modalOverlay">
@@ -51,6 +56,11 @@ const PostViewer = ({ open, onClose }) => {
             />
           </div>
           <div className="modalVRight">
+            <button className="postEditbtn" onClick={() => setOpenEditor(true)}>
+              게시물 수정하기
+            </button>
+            <PostEditor open={openEditor} onClose={() => setOpenEditor(false)} />
+            
             <div className="modalProfile">
               <div className="modalUsername">
                 <img src={modalProfile} alt="" className="modalPImg" />

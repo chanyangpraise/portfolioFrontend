@@ -38,7 +38,7 @@ const Modal = ({ open, onClose }) => {
             X
           </p>
           <div className="btnContainer">
-            {showEmailForm ? (
+            {/* {showEmailForm ? (
               <form className="modalForm" onSubmit={handleSubmitEmail}>
                 <input
                   className="modalInput"
@@ -64,7 +64,7 @@ const Modal = ({ open, onClose }) => {
               >
                 이메일 변경
               </button>
-            )}
+            )} */}
             <button className="modalLogout">로그아웃</button>
           </div>
         </div>

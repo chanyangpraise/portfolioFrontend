@@ -9,40 +9,34 @@ import Modal from '../Components/Profile/Modal';
 import axios from 'axios';
 
 function Profile() {
+  // axios.defaults.baseURL  = 'http://13.125.96.165:3000';
+
+  const containerRef = useRef(null);
+
   //모달
   const [openModal, setOpenModal] = useState(false);
   const [openViewer, setOpenViewer] = useState(false);
 
-  const [posts, setPosts] = useState(0); // 게시물 카운팅
+  const [countPosts, setCountPosts] = useState(0); // 게시물 카운팅
   const [followers, setFollowers] = useState(0); //팔로워 카운팅
   const [following, setFollowing] = useState(0); //팔로우 카운팅
 
-  const [post, setPost] = useState([]); // 갤러리 게시물 state
-  const [page, setPage] = useState(0); // 페이지 번호 state
-  const [loading, setLoading] = useState(false); // 로딩 state
+  const [posts, setPosts] = useState([]);
+  const [postComments, setPostComments] = useState(0); // 게시물 `댓글`갯수 카운트 TODO: 각 게시물에 맞는 좋아요/댓글 수를 받아와야 하는데... 나는 map으로 순회하고.. 어케하노
+  const [postLikes, setPostLikes] = useState(0); // 게시물 `좋아요` 갯수 카운트 TODO:
+  // const [loading, setLoading] = useState(true); // 로딩 state ... 어려워서 나주엥
 
-  const [avatar, setAvatar] = useState(null); // FIXME: Avatar
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
-  const userId = '3'; //임의의 시용자 아이디
+  const userId = '3'; //임의의 사용자 아이디
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    handleUpload();
   };
 
-  const fetchPosts = async () => {
-    setLoading(true); // 로딩 시작
-    try {
-      const res = await axios.get('/get/main', { params: { page } }); // 백엔드에 GET 요청 보내기
-      if (res.data.status === 'success') {
-        setPost((prev) => [...prev, ...res.data.content]); // 기존 게시물과 새로운 게시물 합치기
-        setPage((prev) => prev + 1); // 페이지 번호 증가시키기
-      }
-    } catch (err) {
-      console.error(err);
-    }
-    setLoading(false); // 로딩 끝
-  };
+  //스크롤 핸들러 ? 집에서 구현
 
   // 파일 업로드 버튼 클릭 시 서버에 요청
   const handleUpload = async () => {
@@ -52,65 +46,86 @@ function Profile() {
     console.log(file);
     console.log(userId);
     try {
-      const res = await axios.post(
-        'http://13.125.96.165:3000/users/upload',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      const res = await axios.post('http://13.125.96.165:3000/users/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log(res.data.message);
     } catch (err) {
       console.error(err.response.data.message);
     }
   };
 
-  const handleScroll = () => {
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement; // 문서의 스크롤 위치 / 높이 정보 가져오기
-    if (scrollTop + clientHeight >= scrollHeight - 20 && !loading) {
-      // 스크롤이 맨 밑까지 내려왔고 로딩 중이 아니라면 ?
-      fetchPosts();
-      // 백엔드로부터 게시물 가져오기
-    }
+  // 프로필 사진 수정
+  const handleFileModified = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    axios
+      .put(`/profile-image/${userId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        console.log("프로필 수정 성공: ");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("프로필 수정 오류: ")
+        console.error(error);
+      });
   };
 
   // 프로필 이미지 삭제
   const handleDelete = () => {
     axios
-      .delete(`http://13.125.96.165:3000/users/profile-image/${userId}`)
+      .delete(`/users/profile-image/${userId}`)
       .then((res) => {
+        console.log("프로필 이미지 삭제 성공: ");
         console.log(res.data.message);
-        alert('업로드가 완료되었습니다. 새로고침 하세요.');
+        alert('삭제가 완료되었습니다. 새로고침 하세요.');
       })
       .catch((err) => {
+        console.log("프로필 이미지 삭제 오류 발생: ")
         console.error(err);
         alert('서버에 에러가 발생했습니다. 잠시 후 다시 시도하세요.');
       });
   };
 
-  // ------------------ //
+  // ------------------------------------------------------ //
 
-  //스크롤 이벤트
+  //서버에서 프로필 이미지 받아오는 useEffect
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll); // 스크롤 이벤트 리스너
-    return () => {
-      window.removeEventListener('scroll', handleScroll); // 컴포넌트 언마운트 시 리스너 해제
-    };
+    axios
+      .get(`profile/get/${userId}?getId=${userId}`)
+      .then((response) => {
+        setImageUrl(response.data.info.uimg);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('서버에서 프로필을 받아오지 못했습니다.');
+      });
   }, []);
 
   useEffect(() => {
-    // 페이지 번호가 변경될 때마다 실행되도록 page 상태 전달
-    fetchPosts(); // 백엔드로부터 게시물 가져오기
-  }, [page]);
+    const fetchData = async () => {
+      const result = await axios('/board/get/main?page=0');
+      setPosts(result.data.content);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     //게시글 카운트
     axios
-      .get('http://13.125.96.165:3000/board/get/3')
+      .get('/board/get/3')
       .then((res) => {
-        setPosts(res.data.count);
+        setCountPosts(res.data.count);
       })
       .catch((err) => {
         console.error(err);
@@ -118,7 +133,7 @@ function Profile() {
 
     //팔로워 카운트
     axios
-      .get('http://13.125.96.165:3000/profile/follower/3')
+      .get('/profile/follower/3')
       .then((res) => {
         setFollowers(res.data.count);
       })
@@ -128,7 +143,7 @@ function Profile() {
 
     //팔로우 카운트
     axios
-      .get('http://13.125.96.165:3000/profile/following/3')
+      .get('/profile/following/3')
       .then((res) => {
         setFollowing(res.data.count);
       })
@@ -143,19 +158,7 @@ function Profile() {
         <div className="page_container p_container">
           <div className="profile">
             <div className="p_image">
-              {avatar ? (
-                <img
-                  src={URL.createObjectURL(avatar)}
-                  alt="프로필"
-                  className="p_img"
-                />
-              ) : (
-                <img
-                  src="https://i.ibb.co/G54dpvC/tim-cook-image.png"
-                  alt="프로필"
-                  className="p_img"
-                />
-              )}
+              <img src={avatarUrl} alt="profile_image" className="p_img" />
             </div>
 
             <div className="p_user_settings">
@@ -169,8 +172,17 @@ function Profile() {
                 accept="image/*"
                 onChange={handleFileChange}
               />
-              <label htmlFor="image">프로필 사진 선택</label>
-              <button onClick={handleUpload}>업로드</button>
+              <label htmlFor="image">프로필 사진 업로드</label>
+
+              <input
+                className="p_avatarInput"
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                onClick={handleFileModified}
+              />
+              <label htmlFor="image">프로필 사진 수정</label>
 
               <button
                 className="p_btn p_edit_btn modalBtn"
@@ -191,7 +203,7 @@ function Profile() {
             <div className="p_stats">
               <ul>
                 <li>
-                  게시물 <span className="p_stat">{posts}</span>
+                  게시물 <span className="p_stat">{countPosts}</span>
                 </li>
                 <li>
                   팔로워 <span className="p_stat">{followers}</span>
@@ -214,7 +226,7 @@ function Profile() {
 
       <div className="g_container">
         <div className="gallery">
-          {/* 모달 테스트 */}
+          {/*  모달 / 게시물 수정 테스트  */}
           <div className="g_item" onClick={() => setOpenViewer(true)}>
             <img
               src="https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg"
@@ -224,32 +236,36 @@ function Profile() {
             <div className="g_item_info">
               <ul>
                 <li className="g_item_likes">
-                  <FontAwesomeIcon icon={faHeart} /> 70만
+                  <FontAwesomeIcon icon={faHeart} />
+                  {postLikes}
                 </li>
                 <li className="g_item_comments">
-                  <FontAwesomeIcon icon={faComment} /> 1.9만
+                  <FontAwesomeIcon icon={faComment} />
+                  {postComments}
                 </li>
               </ul>
             </div>
           </div>
           <PostViewer open={openViewer} onClose={() => setOpenViewer(false)} />
 
-          {post.map((item, index) => (
-            <div
-              className="g_item"
-              key={index}
-              onClick={() => setOpenViewer(true)}
-            >
-              <img src={item.btimg} className="g_image" alt={`img${index}`} />
-              <div className="g_item_info">
-                <ul>
-                  <li className="g_item_likes">
-                    <FontAwesomeIcon icon={faHeart} />
-                  </li>
-                  <li className="g_item_comments">
-                    <FontAwesomeIcon icon={faComment} />
-                  </li>
-                </ul>
+          {posts.map((post, index) => (
+            <div ref={containerRef} className="scroll-container">
+              <div
+                className="g_item"
+                key={index}
+                onClick={() => setOpenViewer(true)}
+              >
+                <img src={post.bimg} className="g_image" alt={`img${index}`} />
+                <div className="g_item_info">
+                  <ul>
+                    <li className="g_item_likes">
+                      <FontAwesomeIcon icon={faHeart} /> {postLikes}
+                    </li>
+                    <li className="g_item_comments">
+                      <FontAwesomeIcon icon={faComment} /> {postComments}
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           ))}

@@ -97,7 +97,7 @@
 
 .p_avatarInput:focus+label {
   outline: 1px dotted #000;
-	outline: -webkit-focus-ring-color auto 5px;
+  outline: -webkit-focus-ring-color auto 5px;
 }
 
 .p_avatarInput:focus+label,
@@ -230,6 +230,11 @@
   object-fit: cover;
 }
 
+.scroll-container {
+  height: 100%;
+  overflow-y: scroll;
+}
+
 /* 미디어 쿼리 - root 크기 의 * 40rem 이하일 경우 */
 
 @media screen and (max-width: 735px) {
@@ -316,6 +321,10 @@
   }
 }
 
+.p_user_settings label {
+  text-align: center;
+}
+
 @media screen and (max-width: 1600px) {
   .p_explain {
     padding: 0;
@@ -373,7 +382,8 @@
 
     .p_edit_btn,
     .p_stats,
-    .p_bio {
+    .p_bio,
+    .p_user_settings label {
       grid-column: 1 / -1;
     }
   }
