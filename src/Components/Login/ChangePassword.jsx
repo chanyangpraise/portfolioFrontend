@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import email from "./ForgotPassword"
 import logo from "../Login/loginimg/Teamstagramlogo.png"
 const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -10,16 +12,17 @@ const ChangePassword = () => {
 
     // Check if new password and confirm new password match
     if (newPassword !== confirmNewPassword) {
-      console.log("New password and confirm new password don't match");
+      alert="기존 비밀번호와 일치 합니다.";
       return;
     }
 
     // Call API to change password
     axios({
       method: 'post',
-      url: 'http://13.125.96.165:3000/users/auth_mail',
+      url: 'http://13.125.96.165:3000/users/changePwd',
       data: {
       email: email,
+      pwd: newPassword,
       }
   }).then(function (response) {
       if (response.status===500){

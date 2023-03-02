@@ -223,6 +223,12 @@ width: 95%;
   width: 95%;
 }
 
+.sendcodebtn {
+  position: relative;
+  right: 71px;
+}
+
+
 @media(max-width: 785px){
 
   .phones{
