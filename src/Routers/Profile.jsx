@@ -36,6 +36,18 @@ function Profile() {
     handleUpload();
   };
 
+  // 서버에서 사용자 프로필 이미지 가져오기 (현재 404)
+  useEffect(() => {
+    axios
+      .get(`/profile/get/${userId}`)
+      .then((res) => {
+        if (res.data.status === 'success') {
+          setAvatarUrl(res.data.info.uimg);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   //스크롤 핸들러 ? 집에서 구현
 
   // 파일 업로드 버튼 클릭 시 서버에 요청
@@ -46,11 +58,15 @@ function Profile() {
     console.log(file);
     console.log(userId);
     try {
-      const res = await axios.post('http://13.125.96.165:3000/users/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const res = await axios.post(
+        'http://13.125.96.165:3000/users/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
       console.log(res.data.message);
     } catch (err) {
       console.error(err.response.data.message);
@@ -72,11 +88,11 @@ function Profile() {
         },
       })
       .then((response) => {
-        console.log("프로필 수정 성공: ");
+        console.log('프로필 수정 성공: ');
         console.log(response.data);
       })
       .catch((error) => {
-        console.log("프로필 수정 오류: ")
+        console.log('프로필 수정 오류: ');
         console.error(error);
       });
   };
@@ -86,12 +102,12 @@ function Profile() {
     axios
       .delete(`/users/profile-image/${userId}`)
       .then((res) => {
-        console.log("프로필 이미지 삭제 성공: ");
+        console.log('프로필 이미지 삭제 성공: ');
         console.log(res.data.message);
         alert('삭제가 완료되었습니다. 새로고침 하세요.');
       })
       .catch((err) => {
-        console.log("프로필 이미지 삭제 오류 발생: ")
+        console.log('프로필 이미지 삭제 오류 발생: ');
         console.error(err);
         alert('서버에 에러가 발생했습니다. 잠시 후 다시 시도하세요.');
       });
