@@ -46,4 +46,5 @@
 
 .main_post_bottom_menu {
   font-size: 0.8rem;
+  display: flex;
 }

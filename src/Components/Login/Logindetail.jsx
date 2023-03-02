@@ -22,21 +22,27 @@ function Logindetail() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (email === "") {
+      return alert("이메일과 비밀번호를 입력해주세요.");
+    }
     // send login request to server and handle response
     // Send a POST request
     axios({
       method: "post",
-      url: "http://localhost:3000/user/login",
+      url: "http://13.125.96.165:3000/users/login",
       data: {
         email: email,
-        password: password,
+        pwd: password,
       },
     }).then(function (response) {
       if (response.status === 500) {
         alert("서버에서 에러가 발생 하였습니다.");
-      } else if (response.status === 200) {
-        alert("이미 가입된 이메일이 있습니다");
-      } else if (response.status === 201) {
+      } else if (response.data.message === "비밀번호를 찾을 수 없습니다.") {
+        alert("비밀번호가 틀렸습니다.");
+      } else if (response.data.message === "이메일을 찾을 수 없습니다.") {
+        alert("이메일을 찾을 수 없습니다.");
+      } else if (response.data.message === "로그인 성공") {
+        alert("웰컴");
         navigate("/main");
       }
     });

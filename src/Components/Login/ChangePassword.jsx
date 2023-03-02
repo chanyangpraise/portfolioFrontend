@@ -1,60 +1,75 @@
-import React, { useState } from 'react';
-import logo from "../Login/loginimg/Teamstagramlogo.png"
+import axios from "axios";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import logo from "../Login/loginimg/Teamstagramlogo.png";
 const ChangePassword = () => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
-
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const navigate = useNavigate();
+  const email = useSelector((store) => {
+    console.log(store.loginState.email);
+    return store.loginState.email;
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check if new password and confirm new password match
     if (newPassword !== confirmNewPassword) {
-      console.log("New password and confirm new password don't match");
+      alert("새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.");
       return;
     }
 
     // Call API to change password
-    axios({
-      method: 'post',
-      url: 'http://13.125.96.165:3000/users/auth_mail',
-      data: {
-      email: email,
-      }
-  }).then(function (response) {
-      if (response.status===500){
-          alert("서버에서 에러가 발생 했습니다.")
-      } else if (response.status===200) {
-          alert("성공되었습니다.")
-      } else if (response.status===201) {
-          setCodeSent(true);
-      }
-  });
+    axios
+      .put("http://13.125.96.165:3000/users/changePwd", {
+        email: email,
+        pwd: newPassword,
+      })
+      .then((res) => {
+        if (res.data.message === "이메일을 찾을 수 없습니다.") {
+          alert("이메일을 찾을 수 없습니다.");
+        } else if (res.data.message === "기존 비밀번호와 일치 합니다.") {
+          alert("기존 비밀번호와 일치 합니다. 다른 비밀번호를 입력해주세요.");
+        } else if (res.data.message === "성공적으로 바뀌었습니다.") {
+          alert("성공적으로 바뀌었습니다. 로그인하세요.");
+          navigate("/");
+        }
+      });
   };
 
   return (
     <div className="user">
-              <div className="login-container">
+      <div className="login-container">
         <div className="instagram-logo-box">
-        <img className="instagram-logo" src={logo} />
-    </div>
-      <form onSubmit={handleSubmit}>
-        <div className='changepwinput'>
-      <div className="inputs-container">
-          <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="Current Password"/>
+          <img className="instagram-logo" src={logo} />
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="changepwinput">
+            <div className="inputs-container">
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="New Password"
+              />
+            </div>
+            <div className="inputs-container">
+              <input
+                type="password"
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                placeholder="Confirm New Password"
+              />
+            </div>
           </div>
-          <div className="inputs-container">
-          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="New Password"/>
+          <div className="changepwbtn">
+            <button className="login-button" type="submit">
+              Change Password
+            </button>
           </div>
-          <div className="inputs-container">
-          <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password"/>
-          </div>
-          </div>
-          <div className='changepwbtn'>
-          <button className="login-button" type="submit">Change Password</button>
+        </form>
       </div>
-      </form>
-    </div>
     </div>
   );
 };

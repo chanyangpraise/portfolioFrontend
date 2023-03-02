@@ -54,6 +54,13 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
         )
         .then((res) => {
           console.log(res);
+          if (res.data.status === "success") {
+            alert("게시글작성완료");
+          } else if (res.status === 500) {
+            alert("서버에서 에러가 발생 하였습니다.");
+          } else {
+            alert("클라이언트에서 에리거 발생 하였습니다.");
+          }
         })
         .catch((err) => {
           console.log(err);
