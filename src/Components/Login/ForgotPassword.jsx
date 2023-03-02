@@ -9,6 +9,11 @@ function ForgotPassword() {
         navigate("/changepw");
     }
 const [email, setEmail] = useState('');
+const [verificationCode, setVerificationCode] = useState('');
+
+function handleVerificationCodeChange(event) {
+    setVerificationCode(event.target.value);
+}
 
 const handleSubmit = (event) => {
     event.preventDefault();
