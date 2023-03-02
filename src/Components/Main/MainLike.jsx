@@ -4,7 +4,6 @@ import emptyHeart from "../../asset/emptyHeart.png";
 import fullHeart from "../../asset/fullHeart.png";
 
 function MainLike({ like, toggleLike }) {
-  console.log(toggleLike);
   return (
     <div className="main_post_heart_check">
       <img

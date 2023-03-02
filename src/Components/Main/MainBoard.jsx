@@ -1,8 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./MainBoard.css";
 import imgButton from "../../asset/image-regular.svg";
+import axios from "axios";
 
 function MainBoard({ img, text, setImg, setText, setPost }) {
+  const [originImg, setOriginImg] = useState();
+
   const textarea = useRef();
   const imgbutton = useRef();
   const sendButton = useRef();
@@ -34,8 +37,30 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
       setPost((current) => [data, ...current]);
 
       imgbutton.current.value = "";
+
+      axios
+        .post(
+          "http://13.125.96.165:3000/board/write",
+          {
+            image: originImg,
+            uid: 3,
+            content: text,
+          },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
+
   const textAdd = (event) => {
     // 버튼 활성화 비활성화
     if (textarea.current.value === "") {
@@ -59,9 +84,11 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
 
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
+    setOriginImg(e.target.files[0]);
     reader.onloadend = () => {
       setImg(reader.result);
     };
+    console.log(reader.result);
   };
 
   const imgInputClick = () => {
