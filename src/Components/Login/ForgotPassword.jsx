@@ -25,16 +25,19 @@ function ForgotPassword() {
     event.preventDefault();
     // Check if email and phone number match with the user data
     // and set isValid to true or false accordingly
-    axios.get(`http://13.125.96.165:3000/users/auth_valid?email=${email}&digit=${verificationCode}`).then((res) => {
-      if (res.status === 500) {
-        alert("서버에서 에러가 발생 하였습니다.");
-      } else if (res.data.message === "일치하지 않습니다.") {
-        alert("인증 번호가 틀립니다.");
-      } else if (res.data.message === "일치합니다.") {
-        alert("인증 번호가 맞습니다. 새로운 비밀번호 입력해주세요.");
-        navigate("/changepw");
-      }
-    });
+    axios
+      .get(`http://13.125.96.165:3000/users/auth_valid?email=${email}&digit=${verificationCode}`)
+      .then((res) => {
+        if (res.status === 500) {
+          alert("서버에서 에러가 발생 하였습니다.");
+        } else if (res.data.message === "일치하지 않습니다.") {
+          alert("인증 번호가 틀립니다.");
+        } else if (res.data.message === "일치합니다.") {
+          alert("인증 번호가 맞습니다. 새로운 비밀번호 입력해주세요.");
+          navigate("/changepw");
+        }
+      })
+      .catch((err) => alert("err"));
   };
 
   const onClick = (event) => {
@@ -57,7 +60,7 @@ function ForgotPassword() {
             resetBtn.current.style.display = "block";
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
     }
   };
   return (

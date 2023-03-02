@@ -41,18 +41,20 @@ function VerifyEmail() {
         data: {
           email: email,
         },
-      }).then(function (response) {
-        console.log(response);
-        if (response.status === 500) {
-          alert("서버에서 에러가 발생 했습니다.");
-        } else if (response.status === 201) {
-          dispatch(login({ email: email }));
-        }
-      });
-      alert("이메일 인증코드가 발송되었습니다. 확인 후 입력해주세요.");
-      emailInput.current.style.display = "none";
-      submitBtn.current.style.display = "block";
-      setCodeSent(true);
+      })
+        .then(function (response) {
+          console.log(response);
+          if (response.status === 500) {
+            alert("서버에서 에러가 발생 했습니다.");
+          } else if (response.status === 201) {
+            dispatch(login({ email: email }));
+            alert("이메일 인증코드가 발송되었습니다. 확인 후 입력해주세요.");
+            emailInput.current.style.display = "none";
+            submitBtn.current.style.display = "block";
+            setCodeSent(true);
+          }
+        })
+        .catch((err) => alert(err));
     }
   }
 

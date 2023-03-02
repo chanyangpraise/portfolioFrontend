@@ -35,7 +35,8 @@ const ChangePassword = () => {
           alert("성공적으로 바뀌었습니다. 로그인하세요.");
           navigate("/");
         }
-      });
+      })
+      .catch((err) => alert(err));
   };
 
   return (

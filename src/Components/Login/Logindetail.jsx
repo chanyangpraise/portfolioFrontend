@@ -34,18 +34,20 @@ function Logindetail() {
         email: email,
         pwd: password,
       },
-    }).then(function (response) {
-      if (response.status === 500) {
-        alert("서버에서 에러가 발생 하였습니다.");
-      } else if (response.data.message === "비밀번호를 찾을 수 없습니다.") {
-        alert("비밀번호가 틀렸습니다.");
-      } else if (response.data.message === "이메일을 찾을 수 없습니다.") {
-        alert("이메일을 찾을 수 없습니다.");
-      } else if (response.data.message === "로그인 성공") {
-        alert("웰컴");
-        navigate("/main");
-      }
-    });
+    })
+      .then(function (response) {
+        if (response.status === 500) {
+          alert("서버에서 에러가 발생 하였습니다.");
+        } else if (response.data.message === "비밀번호를 찾을 수 없습니다.") {
+          alert("비밀번호가 틀렸습니다.");
+        } else if (response.data.message === "이메일을 찾을 수 없습니다.") {
+          alert("이메일을 찾을 수 없습니다.");
+        } else if (response.data.message === "로그인 성공") {
+          alert("웰컴");
+          navigate("/main");
+        }
+      })
+      .catch((err) => alert(err));
   };
   return (
     <div className="user">

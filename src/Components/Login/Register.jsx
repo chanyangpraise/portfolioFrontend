@@ -40,18 +40,20 @@ function Register() {
           password: password,
           phone: phone,
         },
-      }).then(function (response) {
-        if (response.status === 500) {
-          alert("서버에서 에러가 발생했습니다");
-        } else if (response.status === 200) {
-          alert("이미 가입된 이메일이 있습니다. 비밀번호를 찾거나 로그인해주세요.");
-          navigate("/");
-        } else if (response.status === 201) {
-          alert("회원가입 완료하였습니다. 로그인해주세요.");
-          navigate("/");
-        }
-      });
-    } else alert("비밀번호가 같지 않습니다.");
+      })
+        .then(function (response) {
+          if (response.status === 500) {
+            alert("서버에서 에러가 발생했습니다");
+          } else if (response.status === 200) {
+            alert("이미 가입된 이메일이 있습니다. 비밀번호를 찾거나 로그인해주세요.");
+            navigate("/");
+          } else if (response.status === 201) {
+            alert("회원가입 완료하였습니다. 로그인해주세요.");
+            navigate("/");
+          } else alert("비밀번호가 같지 않습니다.");
+        })
+        .catch((err) => alert(err));
+    }
   };
 
   return (
