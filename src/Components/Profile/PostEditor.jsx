@@ -14,6 +14,7 @@ const PostEditor = ({ open, onClose }) => {
       await axios.put(`http://13.125.96.165:3000/board/update/${bid}`, { content, uid });
       setShowContentForm(false);
       setContent('');
+      alert("성공적으로 수정이 완료되었습니다. 새로고침 하세요.")
     } catch (error) {
       console.log(error);
     }
