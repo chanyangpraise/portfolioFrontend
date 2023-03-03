@@ -3,7 +3,6 @@ import './Profile.css';
 import '../Components/Profile/css/Modal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
-import PostEditor from '../Components/Profile/PostEditor';
 import PostViewer from '../Components/Profile/PostViewer';
 import Modal from '../Components/Profile/Modal';
 import axios from 'axios';
@@ -27,8 +26,11 @@ function Profile() {
   // const [loading, setLoading] = useState(true); // 로딩 state ... 어려워서 나주엥
 
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
 
-  const userId = '3'; //임의의 사용자 아이디
+  const userId = '8'; //임의의 사용자 아이디
+  const getId = '3'; // 임의값: 프로필 사진 불러오기용
+
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -36,16 +38,35 @@ function Profile() {
     handleUpload();
   };
 
-  // 서버에서 사용자 프로필 이미지 가져오기 (현재 404)
+  // 서버에서 사용자 프로필 이미지 가져오기
   useEffect(() => {
     axios
-      .get(`/profile/get/${userId}`)
+      .get(`http://13.125.96.165:3000/profile/get/${userId}?getId=${getId}`)
       .then((res) => {
-        if (res.data.status === 'success') {
+        if (res.data.status === 'success' && res.data.info.uimg) {
           setAvatarUrl(res.data.info.uimg);
+        } else {
+          setAvatarUrl('/src/asset/defaultProfile.png');
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setAvatarUrl('/src/asset/defaultProfile.png');
+      });
+  }, []);
+
+  // 서버에서 사용자 이메일 가져오기
+  useEffect(() => {
+    axios
+      .get(`http://13.125.96.165:3000/profile/get/${userId}?getId=${getId}`)
+      .then((res) => {
+        if (res.data.status === 'success' && res.data.info.email) {
+          setUserEmail(res.data.info.email);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   //스크롤 핸들러 ? 집에서 구현
@@ -82,7 +103,7 @@ function Profile() {
     formData.append('image', file);
 
     axios
-      .put(`/profile-image/${userId}`, formData, {
+      .put(`http://13.125.96.165:3000/profile-image/${userId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -100,7 +121,7 @@ function Profile() {
   // 프로필 이미지 삭제
   const handleDelete = () => {
     axios
-      .delete(`/users/profile-image/${userId}`)
+      .delete(`http://13.125.96.165:3000/users/profile-image/${userId}`)
       .then((res) => {
         console.log('프로필 이미지 삭제 성공: ');
         console.log(res.data.message);
@@ -115,22 +136,12 @@ function Profile() {
 
   // ------------------------------------------------------ //
 
-  //서버에서 프로필 이미지 받아오는 useEffect
-  useEffect(() => {
-    axios
-      .get(`profile/get/${userId}?getId=${userId}`)
-      .then((response) => {
-        setImageUrl(response.data.info.uimg);
-      })
-      .catch((err) => {
-        console.error(err);
-        alert('서버에서 프로필을 받아오지 못했습니다.');
-      });
-  }, []);
-
+  //최신 게시물 fetch
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('/board/get/main?page=0');
+      const result = await axios(
+        'http://13.125.96.165:3000/board/get/main?page=0'
+      );
       setPosts(result.data.content);
     };
     fetchData();
@@ -139,7 +150,7 @@ function Profile() {
   useEffect(() => {
     //게시글 카운트
     axios
-      .get('/board/get/3')
+      .get('http://13.125.96.165:3000/board/get/3')
       .then((res) => {
         setCountPosts(res.data.count);
       })
@@ -149,7 +160,7 @@ function Profile() {
 
     //팔로워 카운트
     axios
-      .get('/profile/follower/3')
+      .get('http://13.125.96.165:3000/profile/follower/3')
       .then((res) => {
         setFollowers(res.data.count);
       })
@@ -159,7 +170,7 @@ function Profile() {
 
     //팔로우 카운트
     axios
-      .get('/profile/following/3')
+      .get('http://13.125.96.165:3000/profile/following/3')
       .then((res) => {
         setFollowing(res.data.count);
       })
@@ -178,7 +189,7 @@ function Profile() {
             </div>
 
             <div className="p_user_settings">
-              <h1 className="p_user_name">tcook@apple.com</h1>
+              <h1 className="p_user_name">{userEmail}</h1>
 
               <input
                 className="p_avatarInput"
@@ -229,13 +240,13 @@ function Profile() {
                 </li>
               </ul>
             </div>
-            <div className="p_bio">
+            {/* <div className="p_bio">
               <p className="p_explain">
                 Apple CEO Auburn 🏀 Duke 🏀 National Parks 🏞️ “Life's most
                 persistent and urgent question is, 'What are you doing for
                 others?'” - MLK.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>

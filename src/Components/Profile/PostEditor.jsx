@@ -4,11 +4,14 @@ import axios from 'axios';
 const PostEditor = ({ open, onClose }) => {
   const [showContentForm, setShowContentForm] = useState(false);
   const [content, setContent] = useState('');
+  const bid = 57;
+  const uid = 8;
 
+  //FIXME: 게시글 수정(not found - 아마도 백엔드쪽 문제일듯)
   const handleSubmitContent = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:5173/update/${bid}`, { content });
+      await axios.put(`http://localhost:5173/board/update/${bid}`, { content, uid });
       setShowContentForm(false);
       setContent('');
     } catch (error) {

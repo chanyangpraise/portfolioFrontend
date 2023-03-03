@@ -1,29 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import PostEditor from './PostEditor';
 
-
 const PostViewer = ({ open, onClose }) => {
   if (!open) return null;
-  
+
   const [openEditor, setOpenEditor] = useState(false);
-  const userName = 'tcook@apple.com';
-  const modalProfile = 'https://i.ibb.co/G54dpvC/tim-cook-image.png';
-  const content = 'I think React is really Cool !';
+  const [userName, setUserName] = useState(null)
+  const [avatar, setAvatar] = useState(null);
+  const [content, setContent] = useState('');
   const [comment, setComment] = useState('');
+
+  const userId = 8;
+  const getId = 3;
+
+  useEffect(() => {
+    axios
+      .get(`http://13.125.96.165:3000/profile/get/${userId}?getId=${getId}`)
+      .then((res) => {
+        if (res.data.status === 'success' && res.data.info.uimg) {
+          setAvatar(res.data.info.uimg);
+        } else {
+          setAvatar('/src/asset/defaultProfile.png');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setAvatar('/src/asset/defaultProfile.png');
+      });
+  }, []);
+
+    // 서버에서 사용자 이메일 가져오기
+    useEffect(() => {
+      axios
+        .get(`http://13.125.96.165:3000/profile/get/${userId}?getId=${getId}`)
+        .then((res) => {
+          if (res.data.status === 'success' && res.data.info.email) {
+            setUserName(res.data.info.email);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }, []);
 
   const handleChange = (e) => {
     setComment(e.target.value);
   };
 
   const handleSubmit = () => {
-    const userId = 1;
-    const bid = 1;
+    const userId = 3;
+    const bid = 55;
     // POST 요청
     axios
-      .post('http://13.125.96.165:3000/write', {
+      .post('http://13.125.96.165:3000/comment/write', {
         userId,
         content: comment,
         bid,
@@ -57,14 +89,17 @@ const PostViewer = ({ open, onClose }) => {
           </div>
           <div className="modalVRight">
             <button className="postEditbtn" onClick={() => setOpenEditor(true)}>
-              게시물 수정하기
+              게시글 수정하기
             </button>
-            <PostEditor open={openEditor} onClose={() => setOpenEditor(false)} />
-            
+            <PostEditor
+              open={openEditor}
+              onClose={() => setOpenEditor(false)}
+            />
+
             <div className="modalProfile">
-              <div className="modalUsername">
-                <img src={modalProfile} alt="" className="modalPImg" />
-                {userName}
+              <div className="modalUser">
+                <img src={avatar} alt="" className="modalPImg" />
+                <div className='modalUsername'>{userName}</div>
               </div>
             </div>
             <div className="modalContent">{content}</div>

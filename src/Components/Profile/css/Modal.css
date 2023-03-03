@@ -183,13 +183,18 @@ btnContainer - same
 
 /* modalVRight */
 
-.modalUsername {
+.modalUser {
   display: inline-block;
   height: 10%;
-  line-height: 200%;
-  font-size: 1.5rem;
   margin-left: 1rem;
-  text-align: center;
+}
+
+.modalUsername {
+  display: inline-block;
+  line-height: 200%;
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-left: 1em;
 }
 
 .modalProfile {
@@ -218,3 +223,39 @@ btnContainer - same
 }
 
 /*  */
+
+.postEditbtn {
+  font-weight: 600;
+  display: inline-block;
+  width: 90%;
+  height: 2em;
+  color: white;
+  background-color: #2f93f5;
+  border-radius: 0.3rem;
+  padding: 0 1em;
+  margin: 10px 10px;
+  cursor: pointer;
+}
+
+.changeBio {
+  display: flex;
+  margin: 25% auto;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.8;
+  background-color: #efefef;
+  border-radius: 0.3rem;
+  padding: 0 2.4rem;
+  cursor: pointer;
+}
+
+.changeBio:hover {
+  background-color: #dbdbdb;
+}
+
+
+.modalTxtarea {
+  width: 20em;
+  height: 20em;
+  font-size: 1rem;
+}
