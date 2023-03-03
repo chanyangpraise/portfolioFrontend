@@ -20,15 +20,14 @@ function Profile() {
   const [followers, setFollowers] = useState(0); //팔로워 카운팅
   const [following, setFollowing] = useState(0); //팔로우 카운팅
 
-  const [posts, setPosts] = useState([]);
-  const [postComments, setPostComments] = useState(0); // 게시물 `댓글`갯수 카운트 TODO: 각 게시물에 맞는 좋아요/댓글 수를 받아와야 하는데... 나는 map으로 순회하고.. 어케하노
-  const [postLikes, setPostLikes] = useState(0); // 게시물 `좋아요` 갯수 카운트 TODO:
+  const [postComments, setPostComments] = useState(0); // 게시물 `댓글`갯수 받아오기 TODO: 각 게시물에 맞는 좋아요/댓글 수를 받아와야 하는데... 나는 map으로 순회하고.. 어케하노
+  const [postLikes, setPostLikes] = useState(0); // 게시물 `좋아요` 갯수 받아오기 TODO:
   // const [loading, setLoading] = useState(true); // 로딩 state ... 어려워서 나주엥
 
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
 
-  const userId = '8'; //임의의 사용자 아이디
+  const userId = '8'; //임의의 사용자 아이디  FIXME:나중에 사용자 로그인하면 그값을 props로 넘겨주면 될듯
   const getId = '3'; // 임의값: 프로필 사진 불러오기용
 
   const [file, setFile] = useState(null);
@@ -37,6 +36,35 @@ function Profile() {
     setFile(e.target.files[0]);
     handleUpload();
   };
+
+  // 최신게시물 6개 불러오기
+  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(0);
+  const count = 6;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+      axios
+        .get(
+          `http://13.125.96.165:3000/board/get/main?page=${page}&count=${count}`
+        )
+        .then((res) => {
+          if (res.data.status === 'success') {
+            setPosts((prevPosts) => [...prevPosts, ...res.data.content]);
+            setPage(res.data.nextPage);
+          }
+        })
+        .catch((err) => console.error(err));
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [page]);
 
   // 서버에서 사용자 프로필 이미지 가져오기
   useEffect(() => {
@@ -68,8 +96,6 @@ function Profile() {
         console.error(err);
       });
   }, []);
-
-  //스크롤 핸들러 ? 집에서 구현
 
   // 파일 업로드 버튼 클릭 시 서버에 요청
   const handleUpload = async () => {
@@ -135,17 +161,6 @@ function Profile() {
   };
 
   // ------------------------------------------------------ //
-
-  //최신 게시물 fetch
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        'http://13.125.96.165:3000/board/get/main?page=0'
-      );
-      setPosts(result.data.content);
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     //게시글 카운트
