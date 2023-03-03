@@ -75,7 +75,7 @@ function Profile() {
   const handleUpload = async () => {
     const formData = new FormData();
     formData.append('image', file);
-    formData.append('userId', 3);
+    formData.append('userId', 8);
     console.log(file);
     console.log(userId);
     try {

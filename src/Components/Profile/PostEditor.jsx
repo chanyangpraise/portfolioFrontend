@@ -5,13 +5,13 @@ const PostEditor = ({ open, onClose }) => {
   const [showContentForm, setShowContentForm] = useState(false);
   const [content, setContent] = useState('');
   const bid = 57;
-  const uid = 8;
+  const uid = 3;
 
-  //FIXME: 게시글 수정(not found - 아마도 백엔드쪽 문제일듯)
+  // 게시글 수정(완)
   const handleSubmitContent = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5173/board/update/${bid}`, { content, uid });
+      await axios.put(`http://13.125.96.165:3000/board/update/${bid}`, { content, uid });
       setShowContentForm(false);
       setContent('');
     } catch (error) {

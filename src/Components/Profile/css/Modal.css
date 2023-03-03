@@ -208,7 +208,7 @@ btnContainer - same
 }
 
 .modalContent {
-  height: 19.2em;
+  height: 19em;
   font-size: 1.7rem;
   border-bottom: 5px solid #d5d5d5;
 }
@@ -258,4 +258,30 @@ btnContainer - same
   width: 20em;
   height: 20em;
   font-size: 1rem;
+}
+
+/* PostViewer - comments */
+
+.commentBox {
+  border: 2px solid #262626;
+  border-radius: 12px;
+  padding: 0.3em 0.3em;
+  margin-top: 0.5em;
+}
+
+.commentEmail {
+  background-color: #ff4343;
+  border-radius: 12px;
+  color: black;
+}
+
+.commentContent {
+  padding-top: 0.4em;
+  padding-bottom: 0.2em;
+}
+
+/* PostViewer - modalWriteComment */
+
+.modalWriteComment {
+  height: 4.5em;
 }
