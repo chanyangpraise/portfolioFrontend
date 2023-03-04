@@ -4,7 +4,7 @@ import "./SideProfile.css";
 
 function SideProfile() {
   const userId = useSelector((store) => {
-    console.log(store.loginState.userId);
+    // console.log(store.loginState.userId);
     return store.loginState.userId;
   });
   return (

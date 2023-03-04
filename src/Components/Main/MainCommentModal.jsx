@@ -3,8 +3,9 @@ import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import "./MainCommentModal.css";
 
-function MainCommentModal({ bid, comment, setComment, setCmtModal, commentIndex, post, setPost }) {
+function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post, setPost }) {
   const commentTextArea = useRef();
+
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const userId = useSelector((store) => {
     console.log(store.loginState.userId);
@@ -12,6 +13,7 @@ function MainCommentModal({ bid, comment, setComment, setCmtModal, commentIndex,
   });
 
   console.log(post);
+
   const cmtTextAdd = (e) => {
     setComment(e.target.value);
     // textarea ResizeHeight //
@@ -26,7 +28,7 @@ function MainCommentModal({ bid, comment, setComment, setCmtModal, commentIndex,
       .post("http://13.125.96.165:3000/comment/write", {
         userId: userId,
         content: comment,
-        bid: bid,
+        bid: commentIndex,
       })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

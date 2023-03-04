@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./RightMain.css";
 import MainCommentModal from "../Components/Main/MainCommentModal";
 import MainBoard from "../Components/Main/MainBoard";
-import MainPost from "../Components/Main/MainPost";
 import axios from "axios";
 import MainFeed from "../Components/Main/MainFeed";
 
@@ -33,22 +32,18 @@ function RightMain() {
     <>
       <MainBoard setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
       <div className="main_post_out_wrap">
-        {post.map((v, i) => (
-          <MainPost
-            comment={comment}
-            setPost={setPost}
-            cmtModal={cmtModal}
-            setCommentIndex={setCommentIndex}
-            key={i}
-            imgs={v.img}
-            v={v}
-            bid={v.bid}
-            setCmtModal={setCmtModal}
-            commentIndex={commentIndex}
-            post={post}
-            setComment={setComment}
-          />
-        ))}
+        <div>
+          {cmtModal && (
+            <MainCommentModal
+              setComment={setComment}
+              comment={comment}
+              setCmtModal={setCmtModal}
+              commentIndex={commentIndex}
+              post={post}
+              setPost={setPost}
+            />
+          )}
+        </div>
         {feed.map((v, i) => (
           <MainFeed
             uid={v.uid}
@@ -60,6 +55,7 @@ function RightMain() {
             i={i}
             setCmtModal={setCmtModal}
             bid={v.bid}
+            commentIndex={commentIndex}
           />
         ))}
       </div>

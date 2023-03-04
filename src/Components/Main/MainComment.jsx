@@ -1,14 +1,14 @@
 import SideProfile from "../Side/SideProfile";
 import "./MainComment.css";
 
-function MainComment({ content, i }) {
+function MainComment({ commentIndex, content }) {
   function removeView() {
     if (window.confirm("댓글을 삭제하시겠습니까?")) {
       console.log("삭제완료");
     }
   }
   return (
-    <div className="main_comment_wrap" key={i} style={{ borderTop: "1px solid rgb(194, 194, 194)" }}>
+    <div className="main_comment_wrap" key={commentIndex} style={{ borderTop: "1px solid rgb(194, 194, 194)" }}>
       <div>
         <SideProfile />
         <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line", marginBottom: "2rem" }}>{content}</pre>

@@ -1,13 +1,28 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SideProfile from "../Side/SideProfile";
-import "./MainPost.css";
+import "./MainFeed.css";
 import MainComment from "./MainComment";
 import MainLike from "./MainLike";
+import MainCommentModal from "./MainCommentModal";
+import axios from "axios";
 
-function MainFeed({ v, i, setCmtModal, setCommentIndex, setEditing, uid, content, date, img, bid }) {
+function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, content, date, img, bid }) {
   const Post = useRef();
   const Comment = useRef();
   const [like, setLike] = useState(true);
+  const [cmt, setCmt] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://13.125.96.165:3000/comment/get/${bid}`)
+      .then((res) => {
+        console.log(res);
+        setCmt(res.data.content);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function removeView() {
     if (window.confirm("게시물을 삭제하시겠습니까?")) {
@@ -20,39 +35,41 @@ function MainFeed({ v, i, setCmtModal, setCommentIndex, setEditing, uid, content
   };
 
   return (
-    <div ref={Post} className="main_post_in_wrap" bid={bid} key={uid}>
-      <div className="main_post_profile">
-        <div>
-          <SideProfile />
+    <>
+      <div ref={Post} className="main_post_in_wrap" key={bid}>
+        <div className="main_post_profile">
+          <div>
+            <SideProfile />
+          </div>
+          <div>
+            <button className="main_follow_button">Follow</button>
+          </div>
         </div>
-        <div>
-          <button className="main_follow_button">Follow</button>
+        <div className="main_post_imgText">
+          <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}>{content}</pre>
+          <span>{date}</span>
+          <img className="main_post_img" src={img} alt="#"></img>
         </div>
-      </div>
-      <div className="main_post_imgText">
-        <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}>{content}</pre>
-        <span>{date}</span>
-        <img className="main_post_img" src={img} alt="#"></img>
-      </div>
-      <div className="main_post_bottom">
-        <MainLike like={like} toggleLike={toggleLike} />
-        <div className="main_post_bottom_menu">
-          <span
-            onClick={() => {
-              setCmtModal(true);
-              setCommentIndex(bid);
-            }}
-          >
-            댓글
-          </span>
-          <span onClick={() => setEditing(true)}>수정</span>
-          <span onClick={() => removeView()}>삭제</span>
+        <div className="main_post_bottom">
+          <MainLike like={like} toggleLike={toggleLike} />
+          <div className="main_post_bottom_menu">
+            <span
+              onClick={() => {
+                setCmtModal(true);
+                setCommentIndex(bid);
+              }}
+            >
+              댓글
+            </span>
+            <span onClick={() => setEditing(true)}>수정</span>
+            <span onClick={() => removeView()}>삭제</span>
+          </div>
         </div>
+        {cmt.map((v) => (
+          <MainComment commentIndex={commentIndex} ref={Comment} content={v.content} />
+        ))}
       </div>
-      {/* {v.content.map((v, i) => (
-        <MainComment ref={Comment} v={v} id={i} />
-      ))} */}
-    </div>
+    </>
   );
 }
 
