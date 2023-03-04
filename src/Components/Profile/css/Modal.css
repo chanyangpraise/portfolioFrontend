@@ -219,7 +219,9 @@ btnContainer - same
 }
 
 .modalComments {
+  height: 90%;
   display: inline-block;
+  overflow: auto;
 }
 
 /*  */
@@ -270,8 +272,8 @@ btnContainer - same
 }
 
 .commentEmail {
-  background-color: #ff4343;
-  border-radius: 12px;
+  margin-left: 0.7em;
+  display: inline-block;
   color: black;
 }
 
@@ -280,8 +282,18 @@ btnContainer - same
   padding-bottom: 0.2em;
 }
 
+.commentUimg {
+  display: inline-block;
+  width: 10%;
+}
+
+.commentUser {
+  display: inline-block;
+}
 /* PostViewer - modalWriteComment */
 
 .modalWriteComment {
+  padding-top: 0.5em;
+  display: flex;
   height: 4.5em;
 }

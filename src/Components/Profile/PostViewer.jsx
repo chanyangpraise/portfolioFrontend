@@ -5,7 +5,7 @@ import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import PostEditor from './PostEditor';
 
-const PostViewer = ({ open, onClose }) => {
+const PostViewer = ({ open, onClose, bid, bimg }) => {
   if (!open) return null;
 
   const [openEditor, setOpenEditor] = useState(false);
@@ -18,9 +18,8 @@ const PostViewer = ({ open, onClose }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
-  const bid = 57;
   const userId = 8;
-  const getId = 3;
+  const getId = 3; //임의의 값
 
   //서버에서 특정 게시물의 '게시글'(b_content) 가져오기
   useEffect(() => {
@@ -39,11 +38,11 @@ const PostViewer = ({ open, onClose }) => {
   useEffect(() => {
     axios
       .get(`http://13.125.96.165:3000/comment/get/${bid}`)
-      .then((response) => {
-        setComments(response.data.content);
+      .then((res) => {
+        setComments(res.data.content);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   }, [bid]);
 
@@ -51,10 +50,8 @@ const PostViewer = ({ open, onClose }) => {
   useEffect(() => {
     axios
       .get(`http://13.125.96.165:3000/board/like/count?bid=${bid}`)
-      .then((response) => {
-        setLikeCount(response.data.count);
-        console.log('SetLikeCount 지났음.');
-        console.log(likeCount);
+      .then((res) => {
+        setLikeCount(res.data.count);
       });
   }, []);
 
@@ -125,8 +122,8 @@ const PostViewer = ({ open, onClose }) => {
           uid: userId,
           bid: bid,
         })
-        .then((response) => {
-          alert(response.data.message);
+        .then((res) => {
+          alert(res.data.message);
           setIsLiked(true);
         });
     }
@@ -137,8 +134,6 @@ const PostViewer = ({ open, onClose }) => {
   };
 
   const handleSubmit = () => {
-    const userId = 8;
-    const bid = 57; // userId가 57번 게시물에 댓글이 적어지고 userId가 3이면 55번 게시물에 적어짐. 이거 뭐임?
     // POST 요청
     axios
       .post('http://13.125.96.165:3000/comment/write', {
@@ -167,11 +162,7 @@ const PostViewer = ({ open, onClose }) => {
             X
           </p>
           <div className="modalVLeft">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/8/88/Height_demonstration_diagram.png"
-              alt="img1"
-              className="view_img"
-            />
+            <img src={bimg} alt="img1" className="view_img" />
           </div>
           <div className="modalVRight">
             <button className="postEditbtn" onClick={() => setOpenEditor(true)}>
@@ -189,12 +180,87 @@ const PostViewer = ({ open, onClose }) => {
               </div>
             </div>
             <div className="modalContent">
-              {content}
+              <div className="modalContentDetail">{content}</div>
               <div className="modalComments">
                 {comments.map((comment) => (
                   <div className="commentBox" key={comment.cid}>
-                    <div className="commentEmail">{comment.email}</div>
+                    <div className="commentUser">
+                      <img
+                        className="commentUimg"
+                        src={comment.uimg || '/src/asset/defaultProfile.png'}
+                        alt="user profile"
+                      />
+                      <div className="commentEmail">{comment.email}{console.log(comment.email)}</div>
+                    </div>
                     <div className="commentContent">{comment.content}</div>
+                    {userId === comment.uid && (
+                      <>
+                        <button
+                          onClick={() => {
+                            const newContent =
+                              prompt('수정할 내용을 입력하세요');
+                            if (newContent) {
+                              axios
+                                .put(
+                                  `http://13.125.96.165:3000/comment/fix/${comment.cid}`,
+                                  {
+                                    userId,
+                                    content: newContent,
+                                  }
+                                )
+                                .then((res) => {
+                                  alert(res.data.message);
+                                  // 댓글 목록 새로고침
+                                  axios
+                                    .get(
+                                      `http://13.125.96.165:3000/comment/get/${bid}`
+                                    )
+                                    .then((res) => {
+                                      setComments(res.data.content);
+                                    })
+                                    .catch((err) => {
+                                      console.log(err);
+                                    });
+                                })
+                                .catch((err) => {
+                                  console.log(err);
+                                });
+                            }
+                          }}
+                        >
+                          수정하기
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (confirm('정말로 삭제하시겠습니까?')) {
+                              axios
+                                .delete(
+                                  `http://13.125.96.165:3000/comment/delete/${comment.cid}?uid=${userId}`
+                                )
+                                .then((res) => {
+                                  alert(res.data.message);
+                                  // 댓글 목록 새로고침
+                                  axios
+                                    .get(
+                                      `http://13.125.96.165:3000/comment/get/${bid}`
+                                    )
+                                    .then((res) => {
+                                      setComments(res.data.content);
+                                    })
+                                    .catch((err) => {
+                                      console.log(err);
+                                    });
+                                })
+                                .catch((err) => {
+                                  console.log(err);
+                                });
+                            }
+                          }}
+                        >
+                          삭제하기
+                        </button>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
