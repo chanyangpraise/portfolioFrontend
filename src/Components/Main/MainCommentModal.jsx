@@ -30,7 +30,10 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
         content: comment,
         bid: commentIndex,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        setCmtModal(false);
+      })
       .catch((err) => console.log(err));
 
     setComment("");
@@ -44,7 +47,6 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
     setPost([...post]);
     console.log(post);
     // 배열에 담기
-    setCmtModal(false);
   };
   return (
     <>

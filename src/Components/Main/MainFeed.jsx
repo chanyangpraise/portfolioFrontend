@@ -22,7 +22,7 @@ function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, cont
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [cmt]);
 
   function removeView() {
     if (window.confirm("게시물을 삭제하시겠습니까?")) {
@@ -47,11 +47,13 @@ function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, cont
         </div>
         <div className="main_post_imgText">
           <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line" }}>{content}</pre>
-          <span>{date}</span>
+
           <img className="main_post_img" src={img} alt="#"></img>
         </div>
         <div className="main_post_bottom">
-          <MainLike like={like} toggleLike={toggleLike} />
+          <div>
+            <MainLike like={like} toggleLike={toggleLike} />
+          </div>
           <div className="main_post_bottom_menu">
             <span
               onClick={() => {
@@ -65,8 +67,9 @@ function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, cont
             <span onClick={() => removeView()}>삭제</span>
           </div>
         </div>
+        <span className="main_post_date">게시물 작성일 : {date}</span>
         {cmt.map((v) => (
-          <MainComment commentIndex={commentIndex} ref={Comment} content={v.content} />
+          <MainComment commentIndex={commentIndex} date={v.date} ref={Comment} content={v.content} />
         ))}
       </div>
     </>

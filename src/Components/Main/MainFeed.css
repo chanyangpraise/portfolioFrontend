@@ -43,8 +43,14 @@
   margin-bottom: 2rem;
   padding-bottom: 1rem;
 }
-
 .main_post_bottom_menu {
-  font-size: 0.8rem;
   display: flex;
+}
+.main_post_bottom_menu span {
+  font-size: 0.7rem;
+}
+
+.main_post_date {
+  color: gray;
+  font-size: 0.5rem;
 }

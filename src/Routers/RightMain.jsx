@@ -26,7 +26,7 @@ function RightMain() {
       .catch((err) => {
         alert(err);
       });
-  }, []);
+  }, [feed]);
 
   return (
     <>

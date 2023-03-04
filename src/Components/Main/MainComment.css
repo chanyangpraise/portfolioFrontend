@@ -1,6 +1,7 @@
 .main_comment_wrap {
   display: flex;
   justify-content: space-between;
+  margin-top: 0.5rem;
 }
 
 .main_comment_menu {
