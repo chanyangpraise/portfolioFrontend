@@ -2,14 +2,16 @@ import React, { useRef, useState } from "react";
 import "./MainBoard.css";
 import imgButton from "../../asset/image-regular.svg";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function MainBoard({ img, text, setImg, setText, setPost }) {
   const [originImg, setOriginImg] = useState();
-
   const textarea = useRef();
   const imgbutton = useRef();
   const sendButton = useRef();
   const imgAlert = useRef();
+
+  //redux store 로그인시 userId저장했고 그 값을 받아옴
 
   const onSubmit = (event) => {
     const data = {
@@ -53,7 +55,6 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
           }
         )
         .then((res) => {
-          console.log(res);
           if (res.data.status === "success") {
             alert("게시글작성완료");
           } else if (res.status === 500) {

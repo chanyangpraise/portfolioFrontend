@@ -7,10 +7,12 @@ const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const navigate = useNavigate();
+
   const email = useSelector((store) => {
     console.log(store.loginState.email);
     return store.loginState.email;
   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
 

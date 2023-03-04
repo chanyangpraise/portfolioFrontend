@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import logo from "../Login/loginimg/Teamstagramlogo.png";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/slice/loginSlice";
 
 function Logindetail() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const movetoforgotpw = () => {
     navigate("/forgotpw");
   };
@@ -43,8 +45,11 @@ function Logindetail() {
         } else if (response.data.message === "이메일을 찾을 수 없습니다.") {
           alert("이메일을 찾을 수 없습니다.");
         } else if (response.data.message === "로그인 성공") {
-          alert("웰컴");
           navigate("/main");
+          console.log(response.data);
+          //Login 시 userId를 redux store에 저장하여 전역으로 관리할수있게 만드는 코드
+          const user = { userId: response.data.info.id };
+          dispatch(login(user));
         }
       })
       .catch((err) => alert(err));
