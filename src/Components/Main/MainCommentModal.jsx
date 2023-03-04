@@ -1,8 +1,15 @@
+import axios from "axios";
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 import "./MainCommentModal.css";
 
-function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post, setPost }) {
+function MainCommentModal({ bid, comment, setComment, setCmtModal, commentIndex, post, setPost }) {
   const commentTextArea = useRef();
+  //redux store 로그인시 userId저장했고 그 값을 받아옴
+  const userId = useSelector((store) => {
+    console.log(store.loginState.userId);
+    return store.loginState.userId;
+  });
 
   console.log(post);
   const cmtTextAdd = (e) => {
@@ -14,6 +21,16 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
 
   const cmtSubmit = (e) => {
     e.preventDefault();
+
+    axios
+      .post("http://13.125.96.165:3000/comment/write", {
+        userId: userId,
+        content: comment,
+        bid: bid,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
     setComment("");
     // Submit 했을때 textarea height 초기화
     commentTextArea.current.style.height = "auto";

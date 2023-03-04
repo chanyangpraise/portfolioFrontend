@@ -12,7 +12,10 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
   const imgAlert = useRef();
 
   //redux store 로그인시 userId저장했고 그 값을 받아옴
-
+  const userId = useSelector((store) => {
+    console.log(store.loginState.userId);
+    return store.loginState.userId;
+  });
   const onSubmit = (event) => {
     const data = {
       text: text,
@@ -45,7 +48,7 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
           "http://13.125.96.165:3000/board/write",
           {
             image: originImg,
-            uid: 3,
+            uid: userId,
             content: text,
           },
           {

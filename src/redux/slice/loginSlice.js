@@ -13,10 +13,10 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.isLogin = action.payload.isLogin;
-      state.userId = action.payload.userId;
-      state.nick = action.payload.nick;
-      state.email = action.payload.email;
+      state.isLogin = action.payload.isLogin || state.isLogin;
+      state.userId = action.payload.userId || state.userId;
+      state.nick = action.payload.nick || state.nick;
+      state.email = action.payload.email || state.email;
     },
   },
 });

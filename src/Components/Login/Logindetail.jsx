@@ -27,6 +27,9 @@ function Logindetail() {
     if (email === "") {
       return alert("이메일과 비밀번호를 입력해주세요.");
     }
+    if (password === "") {
+      return alert("비밀번호를 입력해주세요.");
+    }
     // send login request to server and handle response
     // Send a POST request
     axios({
