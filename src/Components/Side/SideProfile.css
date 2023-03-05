@@ -13,6 +13,6 @@
 
 .sidebar_profile_user_name {
   font-weight: bold;
-  display: flex;
+  display: inline-block;
   align-items: center;
 }

@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const PostEditor = ({ open, onClose }) => {
   const [showContentForm, setShowContentForm] = useState(false);
   const [content, setContent] = useState('');
-  const bid = 57;
-  const uid = 3;
+  const uid = useSelector((store) => {
+    return store.loginState.userId;
+  });
+
+  const editorBid = useSelector((state) => state.editorState.editorBid);
 
   // 게시글 수정(완)
   const handleSubmitContent = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://13.125.96.165:3000/board/update/${bid}`, { content, uid });
+      await axios.put(`http://13.125.96.165:3000/board/update/${editorBid}`, {
+        content,
+        uid,
+      });
       setShowContentForm(false);
       setContent('');
-      alert("성공적으로 수정이 완료되었습니다. 새로고침 하세요.")
+      console.log(editorBid);
+      alert('성공적으로 수정이 완료되었습니다. 새로고침 하세요.');
     } catch (error) {
       console.log(error);
     }

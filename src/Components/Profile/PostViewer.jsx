@@ -4,6 +4,8 @@ import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import PostEditor from './PostEditor';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEditorBid } from '/src/redux/store/store.js';
 
 const PostViewer = ({ open, onClose, bid, bimg }) => {
   if (!open) return null;
@@ -18,8 +20,19 @@ const PostViewer = ({ open, onClose, bid, bimg }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
-  const userId = 8;
+  const userId = useSelector((store) => {
+    return store.loginState.userId;
+  });
+
+  const dispatch = useDispatch();
+  const editorBid = bid;
+  dispatch(setEditorBid(editorBid));
+
   const getId = 3; //임의의 값
+
+  const handleClick = () => {
+    dispatch({ type: 'SET_EDITOR_BID', payload: editorBid });
+  };
 
   //서버에서 특정 게시물의 '게시글'(b_content) 가져오기
   useEffect(() => {
@@ -52,6 +65,7 @@ const PostViewer = ({ open, onClose, bid, bimg }) => {
       .get(`http://13.125.96.165:3000/board/like/count?bid=${bid}`)
       .then((res) => {
         setLikeCount(res.data.count);
+        console.log(res.data.count);
       });
   }, []);
 
@@ -99,11 +113,6 @@ const PostViewer = ({ open, onClose, bid, bimg }) => {
         setIsLiked(res.data.isLiked);
       });
   }, []);
-
-  //좋아요 얼마나 있어?
-  const howManyLikes = () => {
-    return likeCount;
-  };
 
   //좋아요 POST/DELETE 함수!!
   const handleLiked = () => {
@@ -165,7 +174,13 @@ const PostViewer = ({ open, onClose, bid, bimg }) => {
             <img src={bimg} alt="img1" className="view_img" />
           </div>
           <div className="modalVRight">
-            <button className="postEditbtn" onClick={() => setOpenEditor(true)}>
+            <button
+              className="postEditbtn"
+              onClick={() => {
+                setOpenEditor(true);
+                handleClick();
+              }}
+            >
               게시글 수정하기
             </button>
             <PostEditor
@@ -190,7 +205,10 @@ const PostViewer = ({ open, onClose, bid, bimg }) => {
                         src={comment.uimg || '/src/asset/defaultProfile.png'}
                         alt="user profile"
                       />
-                      <div className="commentEmail">{comment.email}{console.log(comment.email)}</div>
+                      <div className="commentEmail">
+                        {comment.email}
+                        {console.log(comment.email)}
+                      </div>
                     </div>
                     <div className="commentContent">{comment.content}</div>
                     {userId === comment.uid && (
@@ -285,7 +303,7 @@ const PostViewer = ({ open, onClose, bid, bimg }) => {
                   />
                 )}
               </div>
-              <div className="howmanyLike">{howManyLikes}</div>
+              <div className="howmanyLikes">{likeCount}개</div>
               <div className="modalComments">
                 <input type="text" value={comment} onChange={handleChange} />
                 <button className="modalComments" onClick={handleSubmit}>

@@ -144,6 +144,10 @@ a:visited {
   text-decoration: none;
 }
 
+body {
+  min-height: 101vh;
+}
+
 /* history_my_resetcode 
 html {
   scroll-behavior: smooth;

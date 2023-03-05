@@ -224,15 +224,25 @@ btnContainer - same
   overflow: auto;
 }
 
+
+.howmanyLikes {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 2rem;
+  margin-right: 1em;
+}
+
 /*  */
 
 .postEditbtn {
+  font-size: 1rem;
   font-weight: 600;
   display: inline-block;
-  width: 90%;
-  height: 2em;
-  color: white;
-  background-color: #2f93f5;
+  width: 50%;
+  height: 1.7em;
+  color: #262626;
+  background-color: #efefef;
   border-radius: 0.3rem;
   padding: 0 1em;
   margin: 10px 10px;
@@ -290,6 +300,7 @@ btnContainer - same
 .commentUser {
   display: inline-block;
 }
+
 /* PostViewer - modalWriteComment */
 
 .modalWriteComment {
