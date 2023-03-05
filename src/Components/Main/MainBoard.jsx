@@ -43,6 +43,7 @@ function MainBoard({ setFeed, img, text, setImg, setText, setPost }) {
 
       imgbutton.current.value = "";
 
+      //게시글 작성
       axios
         .post(
           "http://13.125.96.165:3000/board/write",

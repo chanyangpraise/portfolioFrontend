@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import SideProfile from "../Side/SideProfile";
 import "./MainComment.css";
 
-function MainComment({ cid, commentIndex, content, date }) {
+function MainComment({ setCmt, cid, commentIndex, content, date, bid }) {
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const userId = useSelector((store) => {
     console.log(store.loginState.userId);
@@ -19,6 +19,15 @@ function MainComment({ cid, commentIndex, content, date }) {
         .then((res) => {
           console.log(res);
           if (res.data.status === "success") {
+            axios
+              .get(`http://13.125.96.165:3000/comment/get/${bid}`)
+              .then((res) => {
+                console.log(res);
+                setCmt(res.data.content);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
             alert("삭제완료");
           }
         })

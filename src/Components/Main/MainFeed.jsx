@@ -128,7 +128,15 @@ function MainFeed({ setFeed, commentIndex, setCmtModal, setCommentIndex, setEdit
         </div>
         <span className="main_post_date">게시물 작성일 : {date}</span>
         {cmt.map((v) => (
-          <MainComment cid={v.cid} commentIndex={commentIndex} date={v.date} ref={Comment} content={v.content} />
+          <MainComment
+            bid={bid}
+            setCmt={setCmt}
+            cid={v.cid}
+            commentIndex={commentIndex}
+            date={v.date}
+            ref={Comment}
+            content={v.content}
+          />
         ))}
       </div>
     </>
