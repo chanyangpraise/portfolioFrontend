@@ -4,7 +4,7 @@ import imgButton from "../../asset/image-regular.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-function MainBoard({ img, text, setImg, setText, setPost }) {
+function MainBoard({ setFeed, img, text, setImg, setText, setPost }) {
   const [originImg, setOriginImg] = useState();
   const textarea = useRef();
   const imgbutton = useRef();
@@ -59,7 +59,16 @@ function MainBoard({ img, text, setImg, setText, setPost }) {
         )
         .then((res) => {
           if (res.data.status === "success") {
-            alert("게시글작성완료");
+            console.log("게시글 작성완료");
+            // 게시글 작성에 성공하면 최근 게시물 6개를 다시 불러옴
+            axios
+              .get("http://13.125.96.165:3000/board/get/main")
+              .then((res) => {
+                setFeed(res.data.content);
+              })
+              .catch((err) => {
+                alert(err);
+              });
           } else if (res.status === 500) {
             alert("서버에서 에러가 발생 하였습니다.");
           } else {

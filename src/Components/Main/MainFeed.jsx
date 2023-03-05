@@ -5,13 +5,22 @@ import MainComment from "./MainComment";
 import MainLike from "./MainLike";
 import MainCommentModal from "./MainCommentModal";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, content, date, img, bid }) {
+function MainFeed({ setFeed, commentIndex, setCmtModal, setCommentIndex, setEditing, content, date, img, bid }) {
   const Post = useRef();
   const Comment = useRef();
-  const [like, setLike] = useState(true);
+  const [like, setLike] = useState(false);
   const [cmt, setCmt] = useState([]);
+  const [post, setPost] = useState([]);
 
+  //redux store 로그인시 userId저장했고 그 값을 받아옴
+  const uid = useSelector((store) => {
+    console.log(store.loginState.userId);
+    return store.loginState.userId;
+  });
+
+  // 댓글 목록 조회
   useEffect(() => {
     axios
       .get(`http://13.125.96.165:3000/comment/get/${bid}`)
@@ -22,17 +31,67 @@ function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, cont
       .catch((err) => {
         console.log(err);
       });
-  }, [cmt]);
+  }, []);
 
+  //게시물 삭제요청
   function removeView() {
     if (window.confirm("게시물을 삭제하시겠습니까?")) {
-      console.log("삭제완료");
+      removePost(bid);
+      axios
+        .delete(`http://13.125.96.165:3000/board/delete/${bid}?uid=${uid}`)
+        .then((res) => {
+          console.log(res);
+          alert("삭제완료");
+          axios
+            .get("http://13.125.96.165:3000/board/get/main")
+            .then((res) => {
+              console.log(res);
+              setFeed(res.data.content);
+            })
+            .catch((err) => {
+              alert(err);
+            });
+        })
+        .catch((err) => console.log(err));
     }
   }
 
+  //좋아요 등록 및 취소
   const toggleLike = () => {
-    setLike(!like);
+    //취소
+    if (like) {
+      setLike(false);
+      axios
+        .delete(`http://13.125.96.165:3000/board/like/${bid}/${uid}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      //등록
+      setLike(true);
+      axios
+        .post("http://13.125.96.165:3000/board/like", {
+          uid: uid,
+          bid: bid,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
+
+  function removePost(bid) {
+    const newPost = post.filter((v) => {
+      return v.bid !== bid;
+    });
+    setPost(newPost);
+  }
 
   return (
     <>
@@ -52,7 +111,7 @@ function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, cont
         </div>
         <div className="main_post_bottom">
           <div>
-            <MainLike like={like} toggleLike={toggleLike} />
+            <MainLike bid={bid} like={like} toggleLike={toggleLike} />
           </div>
           <div className="main_post_bottom_menu">
             <span
@@ -69,7 +128,7 @@ function MainFeed({ commentIndex, setCmtModal, setCommentIndex, setEditing, cont
         </div>
         <span className="main_post_date">게시물 작성일 : {date}</span>
         {cmt.map((v) => (
-          <MainComment commentIndex={commentIndex} date={v.date} ref={Comment} content={v.content} />
+          <MainComment cid={v.cid} commentIndex={commentIndex} date={v.date} ref={Comment} content={v.content} />
         ))}
       </div>
     </>

@@ -16,6 +16,8 @@ function RightMain() {
   //MainComment,MainCommentModal
   const [cmtModal, setCmtModal] = useState(false);
   const [comment, setComment] = useState("");
+
+  // 최근 게시물 6개 가져오기
   useEffect(() => {
     axios
       .get("http://13.125.96.165:3000/board/get/main")
@@ -26,11 +28,11 @@ function RightMain() {
       .catch((err) => {
         alert(err);
       });
-  }, [feed]);
+  }, [post]);
 
   return (
     <>
-      <MainBoard setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
+      <MainBoard setFeed={setFeed} setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
       <div className="main_post_out_wrap">
         <div>
           {cmtModal && (
@@ -46,6 +48,7 @@ function RightMain() {
         </div>
         {feed.map((v, i) => (
           <MainFeed
+            setFeed={setFeed}
             uid={v.uid}
             content={v.content}
             date={v.date}

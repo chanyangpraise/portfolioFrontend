@@ -23,7 +23,7 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
 
   const cmtSubmit = (e) => {
     e.preventDefault();
-
+    // 댓글 작성
     axios
       .post("http://13.125.96.165:3000/comment/write", {
         userId: userId,
