@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./RightMain.css";
+import "./Main.css";
 import MainCommentModal from "../Components/Main/MainCommentModal";
 import MainBoard from "../Components/Main/MainBoard";
 import axios from "axios";
 import MainFeed from "../Components/Main/MainFeed";
 
-function RightMain() {
+function Main() {
   //MainBoard,MainPost
   const [text, setText] = useState();
   const [img, setImg] = useState();
@@ -66,4 +66,4 @@ function RightMain() {
   );
 }
 
-export default RightMain;
+export default Main;

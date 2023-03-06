@@ -2,7 +2,6 @@ import "./reset.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideBar from "./Routers/SideBar";
 import Profile from "./Routers/Profile";
-import RightMain from "./Routers/RightMain";
 import Login from "./Routers/Login";
 import Logindetail from "./Components/Login/Logindetail";
 import Register from "./Components/Login/Register";
@@ -12,6 +11,7 @@ import VerifyEmail from "./Components/Login/VerifyEmail";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./redux/store/store";
+import Main from "./Routers/Main";
 function App() {
   return (
     <Provider store={store}>
@@ -26,7 +26,7 @@ function App() {
               <Route path="/verifyemail" element={<VerifyEmail />} />"
             </Route>
             <Route element={<SideBar />}>
-              <Route path="/main" element={<RightMain />} />
+              <Route path="/main" element={<Main />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
           </Routes>
