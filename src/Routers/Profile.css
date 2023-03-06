@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.g_item {
+  overflow: hidden;
+}
+
+.g_item img {
+  transition: transform 0.3s;
+}
+
+.g_item:hover img {
+  transform: scale(1.15);
+}
+
 .profile_main {
   font-size: 10px;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -208,21 +220,10 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .g_item_info {
   display: none;
-}
-
-.g_item_info li {
-  display: inline-block;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.g_item_likes {
-  margin-right: 2.2rem;
 }
 
 .g_image {

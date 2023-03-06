@@ -23,9 +23,6 @@ function Profile() {
   const [followers, setFollowers] = useState(0); //팔로워 카운팅
   const [following, setFollowing] = useState(0); //팔로우 카운팅
 
-  const [postComments, setPostComments] = useState(0); // 게시물 `댓글`갯수 받아오기 TODO:
-  const [postLikes, setPostLikes] = useState(0); // 게시물 `좋아요` 갯수 받아오기
-
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
 
@@ -341,14 +338,6 @@ function Profile() {
               >
                 <img src={post.bimg} className="g_image" alt={`img${index}`} />
                 <div className="g_item_info">
-                  <ul>
-                    <li className="g_item_likes">
-                      <FontAwesomeIcon icon={faHeart} /> {postLikes}
-                    </li>
-                    <li className="g_item_comments">
-                      <FontAwesomeIcon icon={faComment} /> {postComments}
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>

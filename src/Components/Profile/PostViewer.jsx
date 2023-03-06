@@ -59,7 +59,7 @@ const PostViewer = ({ open, onClose, bid, bimg }) => {
       });
   }, [bid]);
 
-  //서버에서 좋아요 가져오기 (작동안함)
+  //서버에서 좋아요 가져오기
   useEffect(() => {
     axios
       .get(`http://13.125.96.165:3000/board/like/count?bid=${bid}`)
