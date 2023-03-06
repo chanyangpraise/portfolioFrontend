@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Profile.css';
 import '../Components/Profile/css/Modal.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 import PostViewer from '../Components/Profile/PostViewer';
 import Modal from '../Components/Profile/Modal';
 import axios from 'axios';
@@ -11,8 +9,6 @@ import { setProfileUserEmail } from '../redux/store/store';
 import { setUserProfileImg } from '../redux/store/store';
 
 function Profile() {
-  // axios.defaults.baseURL  = 'http://13.125.96.165:3000';
-
   //모달
   const [openModal, setOpenModal] = useState(false); // 열고닫음전달 state
   const [openViewer, setOpenViewer] = useState(false); // 열고닫음전달 state
@@ -284,40 +280,12 @@ function Profile() {
                 </li>
               </ul>
             </div>
-            {/* <div className="p_bio">
-              <p className="p_explain">
-                Apple CEO Auburn 🏀 Duke 🏀 National Parks 🏞️ “Life's most
-                persistent and urgent question is, 'What are you doing for
-                others?'” - MLK.
-              </p>
-            </div> */}
           </div>
         </div>
       </header>
 
       <div className="g_container">
         <div className="gallery">
-          {/* 모달 / 게시물 수정 테스트 
-          <div className="g_item" onClick={() => setOpenViewer(true)}>
-            <img
-              src="https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg"
-              className="g_image"
-              alt="img1"
-            />
-            <div className="g_item_info">
-              <ul>
-                <li className="g_item_likes">
-                  <FontAwesomeIcon icon={faHeart} />
-                  {postLikes}
-                </li>
-                <li className="g_item_comments">
-                  <FontAwesomeIcon icon={faComment} />
-                  {postComments}
-                </li>
-              </ul>
-            </div>
-          </div> */}
-
           <PostViewer
             open={openViewer}
             onClose={() => setOpenViewer(false)}
@@ -337,8 +305,7 @@ function Profile() {
                 }}
               >
                 <img src={post.bimg} className="g_image" alt={`img${index}`} />
-                <div className="g_item_info">
-                </div>
+                <div className="g_item_info"></div>
               </div>
             </div>
           ))}
