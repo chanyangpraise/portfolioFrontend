@@ -4,6 +4,7 @@ import MainCommentModal from "../Components/Main/MainCommentModal";
 import MainBoard from "../Components/Main/MainBoard";
 import axios from "axios";
 import MainFeed from "../Components/Main/MainFeed";
+import upBtn from "../asset/upBtn.svg";
 
 function Main() {
   const [text, setText] = useState();
@@ -12,12 +13,13 @@ function Main() {
   const [commentIndex, setCommentIndex] = useState();
   const [feed, setFeed] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   //MainComment,MainCommentModal
   const [cmtModal, setCmtModal] = useState(false);
   const [comment, setComment] = useState("");
   const observer = useRef();
+  const upImg = useRef();
 
   const lastPostRef = useCallback(
     (node) => {
@@ -52,6 +54,11 @@ function Main() {
         setLoading(false);
       });
   }, [page]);
+
+  //업버튼 클릭 핸들러
+  const TopBtnClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -114,6 +121,9 @@ function Main() {
         })}
         {loading && <div>Loading...</div>}
         {!hasMore && <div>No more posts</div>}
+        <span onClick={TopBtnClick} className="upImg">
+          <img style={{ width: "3vw" }} src={upBtn} alt=""></img>
+        </span>
       </div>
     </>
   );
