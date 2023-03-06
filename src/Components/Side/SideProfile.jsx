@@ -3,14 +3,13 @@ import { useSelector } from "react-redux";
 import "./SideProfile.css";
 
 function SideProfile() {
-  const userProfileImg = useSelector((state) => state.profileState.userProfileImg);
-
-  const ProfileUserEmail = useSelector((state) => state.profileState.ProfileUserEmail);
+  const email = useSelector((store) => store.loginState.email);
+  const uimg = useSelector((store) => store.loginState.uimg);
 
   return (
     <div className="sidebar_profile">
-      <img className="sidebar_profile_img" src={userProfileImg} alt="profile"></img>
-      <span className="sidebar_profile_user_name">{ProfileUserEmail}</span>
+      <img className="sidebar_profile_img" src={uimg} alt="profile"></img>
+      <span className="sidebar_profile_user_name">{email}</span>
     </div>
   );
 }

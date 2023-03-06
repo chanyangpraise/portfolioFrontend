@@ -51,7 +51,7 @@ function Logindetail() {
           navigate("/main");
           console.log(response.data);
           //Login 시 userId를 redux store에 저장하여 전역으로 관리할수있게 만드는 코드
-          const user = { userId: response.data.info.id };
+          const user = { userId: response.data.info.id, uimg: response.data.info.uimg, email: email };
           dispatch(login(user));
         }
       })

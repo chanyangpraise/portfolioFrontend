@@ -48,6 +48,7 @@ function Main() {
         </div>
         {feed.map((v, i) => (
           <MainFeed
+            uimg={v.uimg}
             uuid={v.uid}
             setFeed={setFeed}
             email={v.email}

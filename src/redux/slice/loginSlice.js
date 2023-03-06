@@ -17,6 +17,7 @@ const loginSlice = createSlice({
       state.userId = action.payload.userId || state.userId;
       state.nick = action.payload.nick || state.nick;
       state.email = action.payload.email || state.email;
+      state.uimg = action.payload.uimg || state.uimg;
     },
   },
 });

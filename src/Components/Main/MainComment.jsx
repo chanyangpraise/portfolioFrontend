@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import CmtProfile from "../Side/CmtProfile";
 import "./MainComment.css";
 
-function MainComment({ email, setCmt, cid, commentIndex, content, date, bid }) {
+function MainComment({ uimg, email, setCmt, cid, commentIndex, content, date, bid }) {
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const userId = useSelector((store) => {
     console.log(store.loginState.userId);
@@ -40,7 +40,7 @@ function MainComment({ email, setCmt, cid, commentIndex, content, date, bid }) {
     <>
       <div className="main_comment_wrap" key={commentIndex} style={{ borderTop: "1px solid rgb(194, 194, 194)" }}>
         <div>
-          <CmtProfile email={email} />
+          <CmtProfile uimg={uimg} email={email} />
           <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line", marginBottom: "2rem" }}>{content}</pre>
         </div>
         <div className="main_comment_menu">
