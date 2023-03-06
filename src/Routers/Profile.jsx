@@ -88,7 +88,8 @@ function Profile() {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    handleUpload();
+    console.log(e.target.files[0]);
+    handleUpload(e.target.files[0]);
   };
 
   // 서버에서 사용자 프로필 이미지 가져오기
@@ -123,23 +124,25 @@ function Profile() {
   }, []);
 
   // 파일 업로드 버튼 클릭 시 서버에 요청
-  const handleUpload = async () => {
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('userId', userId);
-    console.log(file);
-    console.log(userId);
+  const handleUpload = async (files) => {
     try {
+      console.log('111');
+      console.log(files)
       const res = await axios.post(
         'http://13.125.96.165:3000/users/upload',
-        formData,
+        {
+          image: files,
+          userId
+        },
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
+      console.log(res)
       console.log(res.data.message);
+      console.log("성공적으로 업로드 되었습니다.")
     } catch (err) {
       console.error(err.response.data.message);
     }
