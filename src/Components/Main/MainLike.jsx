@@ -6,20 +6,6 @@ import axios from "axios";
 
 function MainLike({ like, toggleLike, bid }) {
   const [count, setCount] = useState(0);
-
-  //좋아요 카운트 받아오기
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://13.125.96.165:3000/board/like/count?bid=${bid}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setCount(res.data.count);
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // }, [bid, like]);
-
   //좋아요 카운트 받아오기
   const handleToggleLike = () => {
     toggleLike();

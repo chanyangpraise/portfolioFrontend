@@ -6,12 +6,13 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import BoardProfile from "../Side/BoardProfile";
 
-function MainFeed({ email, setFeed, commentIndex, setCmtModal, setCommentIndex, content, date, img, bid }) {
+function MainFeed({ uuid, email, setFeed, commentIndex, setCmtModal, setCommentIndex, content, date, img, bid }) {
   const Post = useRef();
   const Comment = useRef();
   const [like, setLike] = useState(false);
   const [cmt, setCmt] = useState([]);
   const [post, setPost] = useState([]);
+  const [following, setFollowing] = useState(false);
 
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const uid = useSelector((store) => {
@@ -58,7 +59,7 @@ function MainFeed({ email, setFeed, commentIndex, setCmtModal, setCommentIndex, 
   //좋아요 등록 및 취소
   const toggleLike = () => {
     //취소
-    if (like) {
+    if (!like) {
       setLike(false);
       axios
         .delete(`http://13.125.96.165:3000/board/like/${bid}/${uid}`)
@@ -85,12 +86,49 @@ function MainFeed({ email, setFeed, commentIndex, setCmtModal, setCommentIndex, 
     }
   };
 
+  //redux store 로그인시 userId저장했고 그 값을 받아옴
+  const userId = useSelector((store) => {
+    return store.loginState.userId;
+  });
+
   function removePost(bid) {
     const newPost = post.filter((v) => {
       return v.bid !== bid;
     });
     setPost(newPost);
   }
+
+  //팔로우 하기 , 팔로우 취소
+  const followClick = () => {
+    if (following) {
+      setFollowing(!following);
+      axios
+        .delete(`http://13.125.96.165:3000/profile/unfollow?follower=${uuid}&following=${userId}`)
+        .then((res) => {
+          if (res.data.message === "성공되었습니다.") {
+            alert("팔로우 취소");
+          }
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setFollowing(!following);
+      axios
+        .post("http://13.125.96.165:3000/profile/follow", {
+          following: userId,
+          follower: uuid,
+        })
+        .then((res) => {
+          if (res.data.message === "성공되었습니다.") {
+            alert("팔로우 성공");
+          }
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <>
@@ -100,7 +138,9 @@ function MainFeed({ email, setFeed, commentIndex, setCmtModal, setCommentIndex, 
             <BoardProfile email={email} />
           </div>
           <div>
-            <button className="main_follow_button">Follow</button>
+            <button onClick={followClick} className="main_follow_button">
+              {following ? "Following" : "Follow"}
+            </button>
           </div>
         </div>
         <div className="main_post_imgText">
