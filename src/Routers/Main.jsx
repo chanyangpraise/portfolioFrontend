@@ -49,7 +49,7 @@ function Main() {
         {feed.map((v, i) => (
           <MainFeed
             setFeed={setFeed}
-            uid={v.uid}
+            email={v.email}
             content={v.content}
             date={v.date}
             img={v.bimg}

@@ -1,18 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "./SideProfile.css";
+import "./BoardProfile.css";
 
-function SideProfile() {
+function BoardProfile({ email }) {
   const userProfileImg = useSelector((state) => state.profileState.userProfileImg);
-
-  const ProfileUserEmail = useSelector((state) => state.profileState.ProfileUserEmail);
 
   return (
     <div className="sidebar_profile">
       <img className="sidebar_profile_img" src={userProfileImg} alt="profile"></img>
-      <span className="sidebar_profile_user_name">{ProfileUserEmail}</span>
+      <span className="sidebar_profile_user_name">{email}</span>
     </div>
   );
 }
 
-export default SideProfile;
+export default BoardProfile;
