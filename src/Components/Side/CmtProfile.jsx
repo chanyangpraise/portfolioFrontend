@@ -1,5 +1,5 @@
 import React from "react";
-import "./SideProfile.css";
+import "./SideMainProfile.css";
 
 function CmtProfile({ uimg, email }) {
   return (

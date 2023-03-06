@@ -136,7 +136,7 @@ function MainFeed({ uimg, uuid, email, setFeed, commentIndex, setCmtModal, setCo
         <span className="main_post_date">게시물 작성일 : {date}</span>
         {cmt.map((v) => (
           <MainComment
-            uimg={uimg}
+            uimg={v.uimg}
             bid={bid}
             setCmt={setCmt}
             cid={v.cid}

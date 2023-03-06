@@ -5,6 +5,7 @@ const initialState = {
   userId: "",
   nick: "",
   email: "",
+  uimg: null,
   isLogin: false,
 };
 
