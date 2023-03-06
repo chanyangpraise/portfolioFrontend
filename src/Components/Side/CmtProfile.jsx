@@ -1,6 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import "./CmtProfile.css";
+import "./SideProfile.css";
 
 function CmtProfile({ uimg, email }) {
   return (

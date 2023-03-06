@@ -1,6 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import "./BoardProfile.css";
+import "./SideProfile.css";
 
 function BoardProfile({ uimg, email }) {
   return (
