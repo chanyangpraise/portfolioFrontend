@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import SideProfile from "../Side/SideProfile";
+import CmtProfile from "../Side/CmtProfile";
 import "./MainComment.css";
 
-function MainComment({ setCmt, cid, commentIndex, content, date, bid }) {
+function MainComment({ email, setCmt, cid, commentIndex, content, date, bid }) {
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const userId = useSelector((store) => {
     console.log(store.loginState.userId);
@@ -41,11 +40,10 @@ function MainComment({ setCmt, cid, commentIndex, content, date, bid }) {
     <>
       <div className="main_comment_wrap" key={commentIndex} style={{ borderTop: "1px solid rgb(194, 194, 194)" }}>
         <div>
-          <SideProfile />
+          <CmtProfile email={email} />
           <pre style={{ wordBreak: "break-word", whiteSpace: "pre-line", marginBottom: "2rem" }}>{content}</pre>
         </div>
         <div className="main_comment_menu">
-          <span style={{ marginRight: "1rem" }}>수정</span>
           <span onClick={() => removeView()}>삭제</span>
         </div>
       </div>

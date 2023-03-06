@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import SideProfile from "../Side/SideProfile";
 import "./MainFeed.css";
 import MainComment from "./MainComment";
 import MainLike from "./MainLike";
-import MainCommentModal from "./MainCommentModal";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import BoardProfile from "../Side/BoardProfile";
 
-function MainFeed({ setFeed, commentIndex, setCmtModal, setCommentIndex, setEditing, content, date, img, bid }) {
+function MainFeed({ email, setFeed, commentIndex, setCmtModal, setCommentIndex, content, date, img, bid }) {
   const Post = useRef();
   const Comment = useRef();
   const [like, setLike] = useState(false);
@@ -98,7 +97,7 @@ function MainFeed({ setFeed, commentIndex, setCmtModal, setCommentIndex, setEdit
       <div ref={Post} className="main_post_in_wrap" key={bid}>
         <div className="main_post_profile">
           <div>
-            <SideProfile />
+            <BoardProfile email={email} />
           </div>
           <div>
             <button className="main_follow_button">Follow</button>
@@ -122,7 +121,6 @@ function MainFeed({ setFeed, commentIndex, setCmtModal, setCommentIndex, setEdit
             >
               댓글
             </span>
-            <span onClick={() => setEditing(true)}>수정</span>
             <span onClick={() => removeView()}>삭제</span>
           </div>
         </div>
@@ -132,6 +130,7 @@ function MainFeed({ setFeed, commentIndex, setCmtModal, setCommentIndex, setEdit
             bid={bid}
             setCmt={setCmt}
             cid={v.cid}
+            email={v.email}
             commentIndex={commentIndex}
             date={v.date}
             ref={Comment}

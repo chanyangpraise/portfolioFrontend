@@ -16,6 +16,7 @@ function MainBoard({ setFeed, img, text, setImg, setText, setPost }) {
     console.log(store.loginState.userId);
     return store.loginState.userId;
   });
+
   const onSubmit = (event) => {
     const data = {
       text: text,
