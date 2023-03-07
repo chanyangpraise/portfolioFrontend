@@ -10,7 +10,6 @@ function MainLike({ bid }) {
   const [like, setLike] = useState(false); // 좋아요 상태를 useState로 관리
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const uid = useSelector((store) => {
-    console.log(store.loginState.userId);
     return store.loginState.userId;
   });
 
@@ -19,7 +18,6 @@ function MainLike({ bid }) {
     axios
       .get(`http://13.125.96.165:3000/board/like/count?bid=${bid}`)
       .then((res) => {
-        console.log(res);
         setCount(res.data.count);
       })
       .catch((err) => {
@@ -30,7 +28,6 @@ function MainLike({ bid }) {
       .get(`http://13.125.96.165:3000/board/like/check?bid=${bid}&uid=${uid}`)
       .then((res) => {
         setLike(res.data.isLiked);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +37,6 @@ function MainLike({ bid }) {
   const toggleLike = () => {
     //취소
     if (like) {
-      // setLike(false);
       axios
         .delete(`http://13.125.96.165:3000/board/like/${bid}/${uid}`)
         .then((res) => {

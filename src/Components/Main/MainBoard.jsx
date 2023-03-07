@@ -13,7 +13,6 @@ function MainBoard({ setFeed, img, text, setImg, setText, setPost }) {
 
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const userId = useSelector((store) => {
-    console.log(store.loginState.userId);
     return store.loginState.userId;
   });
 

@@ -5,6 +5,7 @@ import MainBoard from "../Components/Main/MainBoard";
 import axios from "axios";
 import MainFeed from "../Components/Main/MainFeed";
 import upBtn from "../asset/upBtn.svg";
+import { useSelector } from "react-redux";
 
 function Main() {
   const [text, setText] = useState();
@@ -19,7 +20,10 @@ function Main() {
   const [cmtModal, setCmtModal] = useState(false);
   const [comment, setComment] = useState("");
   const observer = useRef();
-  const upImg = useRef();
+  //redux store 로그인시 userId저장했고 그 값을 받아옴
+  const userId = useSelector((store) => {
+    return store.loginState.userId;
+  });
 
   const lastPostRef = useCallback(
     (node) => {
@@ -39,9 +43,8 @@ function Main() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://13.125.96.165:3000/board/get/main?page=${page}&count=6`)
+      .get(`http://13.125.96.165:3000/board/get/main?page=${page}&count=6&userId=${userId}`)
       .then((res) => {
-        console.log(res);
         if (res.data.content.length > 0) {
           setFeed((prevFeed) => [...prevFeed, ...res.data.content]);
         } else {
@@ -60,6 +63,25 @@ function Main() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const addCmt = (cmtList, bIdx) => {
+    const newFeed = feed.map((v) => {
+      if (v.bid === bIdx) {
+        v.cmt = cmtList;
+      }
+      return v;
+    });
+    setFeed(newFeed);
+  };
+
+  const setCmt = (comment, bIdx) => {
+    const newFeed = feed.map((v) => {
+      if (v.bid === bIdx) {
+        v.cmt.unshift(comment);
+      }
+      return v;
+    });
+    setFeed(newFeed);
+  };
   return (
     <>
       <MainBoard setFeed={setFeed} setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
@@ -73,14 +95,18 @@ function Main() {
               commentIndex={commentIndex}
               post={post}
               setPost={setPost}
+              setCmt={setCmt}
             />
           )}
         </div>
+        {console.log(feed)}
         {feed.map((v, i) => {
           if (i === feed.length - 1) {
             return (
               <div ref={lastPostRef} key={v.bid}>
                 <MainFeed
+                  addCmt={addCmt}
+                  follow={v.following}
                   uimg={v.uimg}
                   uuid={v.uid}
                   setFeed={setFeed}
@@ -94,6 +120,7 @@ function Main() {
                   setCmtModal={setCmtModal}
                   bid={v.bid}
                   commentIndex={commentIndex}
+                  cmtList={v.cmt}
                 />
               </div>
             );
@@ -101,6 +128,7 @@ function Main() {
             return (
               <div key={v.bid}>
                 <MainFeed
+                  follow={v.following}
                   uimg={v.uimg}
                   uuid={v.uid}
                   setFeed={setFeed}
@@ -114,6 +142,8 @@ function Main() {
                   setCmtModal={setCmtModal}
                   bid={v.bid}
                   commentIndex={commentIndex}
+                  cmtList={v.cmt}
+                  addCmt={addCmt}
                 />
               </div>
             );

@@ -3,15 +3,13 @@ import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import "./MainCommentModal.css";
 
-function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post, setPost }) {
+function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post, setPost, setCmt }) {
   const commentTextArea = useRef();
 
   //redux store 로그인시 userId저장했고 그 값을 받아옴
-  const userId = useSelector((store) => {
-    return store.loginState.userId;
+  const { userId, email, uimg } = useSelector((store) => {
+    return store.loginState;
   });
-
-  console.log(post);
 
   const cmtTextAdd = (e) => {
     setComment(e.target.value);
@@ -30,8 +28,19 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
         bid: commentIndex,
       })
       .then((res) => {
-        console.log(res);
+        const date = new Date();
         setCmtModal(false);
+        setCmt(
+          {
+            cid: res.data.cid,
+            content: comment,
+            date: date.toString(),
+            email: email,
+            uid: userId,
+            uimg: uimg,
+          },
+          commentIndex
+        );
       })
       .catch((err) => console.log(err));
 

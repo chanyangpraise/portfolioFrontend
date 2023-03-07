@@ -6,17 +6,31 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import BoardProfile from "../Side/BoardProfile";
 
-function MainFeed({ uimg, uuid, email, setFeed, commentIndex, setCmtModal, setCommentIndex, content, date, img, bid }) {
+function MainFeed({
+  follow,
+  uimg,
+  uuid,
+  email,
+  setFeed,
+  commentIndex,
+  setCmtModal,
+  setCommentIndex,
+  content,
+  date,
+  img,
+  bid,
+  addCmt,
+  cmtList,
+}) {
   const Post = useRef();
   const Comment = useRef();
   const [like, setLike] = useState(false);
-  const [cmt, setCmt] = useState([]);
+  const [cmt, setCmt] = useState(cmtList || []);
   const [post, setPost] = useState([]);
-  const [following, setFollowing] = useState(false);
+  const [following, setFollowing] = useState(!!Number(follow));
 
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const uid = useSelector((store) => {
-    console.log(store.loginState.userId);
     return store.loginState.userId;
   });
 
@@ -25,8 +39,9 @@ function MainFeed({ uimg, uuid, email, setFeed, commentIndex, setCmtModal, setCo
     axios
       .get(`http://13.125.96.165:3000/comment/get/${bid}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.content);
         setCmt(res.data.content);
+        addCmt(res.data.content, bid);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +55,6 @@ function MainFeed({ uimg, uuid, email, setFeed, commentIndex, setCmtModal, setCo
       axios
         .delete(`http://13.125.96.165:3000/board/delete/${bid}?uid=${uid}`)
         .then((res) => {
-          console.log(res);
           alert("삭제완료");
           axios
             .get("http://13.125.96.165:3000/board/get/main")
@@ -71,18 +85,17 @@ function MainFeed({ uimg, uuid, email, setFeed, commentIndex, setCmtModal, setCo
   //팔로우 하기 , 팔로우 취소
   const followClick = () => {
     if (following) {
-      setFollowing(!following);
       axios
         .delete(`http://13.125.96.165:3000/profile/unfollow?follower=${uuid}&following=${userId}`)
         .then((res) => {
           if (res.data.message === "성공되었습니다.") {
             alert("팔로우 취소");
+            setFollowing(!following);
           }
           console.log(res);
         })
         .catch((err) => console.log(err));
     } else {
-      setFollowing(!following);
       axios
         .post("http://13.125.96.165:3000/profile/follow", {
           following: userId,
@@ -90,6 +103,7 @@ function MainFeed({ uimg, uuid, email, setFeed, commentIndex, setCmtModal, setCo
         })
         .then((res) => {
           if (res.data.message === "성공되었습니다.") {
+            setFollowing(!following);
             alert("팔로우 성공");
           }
           console.log(res);
