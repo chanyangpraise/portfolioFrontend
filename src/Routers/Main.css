@@ -20,7 +20,7 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  animation: upDown 3s infinite;
+  animation: upDown 2.5s infinite;
   filter: invert(32%) sepia(6%) saturate(1903%) hue-rotate(157deg) brightness(95%) contrast(83%);
 }
 
