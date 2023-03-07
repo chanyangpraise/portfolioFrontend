@@ -11,6 +11,7 @@ function VerifyEmail() {
   const dispatch = useDispatch();
   const [codeSent, setCodeSent] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
 
   const emailInput = useRef();
   const submitBtn = useRef();
@@ -31,6 +32,7 @@ function VerifyEmail() {
     // This is where you would actually send the verification code to the user's email.
 
     event.preventDefault();
+    setIsClicked(true);
     console.log(event);
     if (!email || !validEmailCheck(email)) {
       alert("이메일을 입력해주세요.");
@@ -46,6 +48,7 @@ function VerifyEmail() {
           console.log(response);
           if (response.status === 500) {
             alert("서버에서 에러가 발생 했습니다.");
+            setIsClicked(false);
           } else if (response.status === 201) {
             dispatch(login({ email: email }));
             alert("이메일 인증코드가 발송되었습니다. 확인 후 입력해주세요.");
@@ -117,7 +120,7 @@ function VerifyEmail() {
             </>
           ) : (
             <div className="emailverifybtn">
-              <button type="button" className="login-button" onClick={handleSendCodeClick}>
+              <button disabled={isClicked} type="button" className="login-button" onClick={handleSendCodeClick}>
                 Send Verification Code
               </button>
             </div>

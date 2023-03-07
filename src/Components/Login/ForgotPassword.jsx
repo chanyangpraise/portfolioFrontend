@@ -8,6 +8,7 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const navigate = useNavigate();
+  const [isClicked, setIsClicked] = useState(false);
 
   const sendVerBtn = useRef();
   const verInput = useRef();
@@ -42,6 +43,7 @@ function ForgotPassword() {
 
   const onClick = (event) => {
     event.preventDefault();
+    setIsClicked(true);
     if (!email || !validEmailCheck(email)) {
       alert("이메일을 입력해주세요.");
     } else {
@@ -52,6 +54,7 @@ function ForgotPassword() {
         .then((res) => {
           if (res.status === 500) {
             alert("서버에서 에러가 발생 하였습니다.");
+            setIsClicked(false);
           } else if (res.data.message === "성공되었습니다.") {
             alert("이메일 인증코드가 발송되었습니다.");
             sendVerBtn.current.style.display = "none";
@@ -102,7 +105,13 @@ function ForgotPassword() {
               </div>
             </div>
             <div className="resetpwbtn">
-              <button ref={sendVerBtn} className="login-button" style={{ marginBottom: "1rem" }} onClick={onClick}>
+              <button
+                ref={sendVerBtn}
+                disabled={isClicked}
+                className="login-button"
+                style={{ marginBottom: "1rem" }}
+                onClick={onClick}
+              >
                 Send Verification Code
               </button>
               <button ref={resetBtn} style={{ display: "none" }} className="login-button" type="submit">

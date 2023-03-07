@@ -32,7 +32,7 @@ const ChangePassword = () => {
         if (res.data.message === "이메일을 찾을 수 없습니다.") {
           alert("이메일을 찾을 수 없습니다.");
         } else if (res.data.message === "기존 비밀번호와 일치 합니다.") {
-          alert("기존 비밀번호와 일치 합니다. 다른 비밀번호를 입력해주세요.");
+          alert("기존 비밀번호와 일치 합니다.");
         } else if (res.data.message === "성공적으로 바뀌었습니다.") {
           alert("성공적으로 바뀌었습니다. 로그인하세요.");
           navigate("/");
