@@ -7,11 +7,12 @@ import { useSelector } from "react-redux";
 import BoardProfile from "../Side/BoardProfile";
 
 function MainFeed({
+  changeLike,
+  deleteFeed,
   follow,
   uimg,
   uuid,
   email,
-  setFeed,
   commentIndex,
   setCmtModal,
   setCommentIndex,
@@ -55,16 +56,9 @@ function MainFeed({
       axios
         .delete(`http://13.125.96.165:3000/board/delete/${bid}?uid=${uid}`)
         .then((res) => {
+          console.log(res);
           alert("삭제완료");
-          axios
-            .get("http://13.125.96.165:3000/board/get/main")
-            .then((res) => {
-              console.log(res);
-              setFeed(res.data.content);
-            })
-            .catch((err) => {
-              alert(err);
-            });
+          deleteFeed(bid);
         })
         .catch((err) => console.log(err));
     }

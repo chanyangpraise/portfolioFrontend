@@ -4,7 +4,7 @@ import imgButton from "../../asset/image-regular.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-function MainBoard({ setFeed, img, text, setImg, setText, setPost }) {
+function MainBoard({ addFeed, setFeed, img, text, setImg, setText, setPost }) {
   const [originImg, setOriginImg] = useState();
   const textarea = useRef();
   const imgbutton = useRef();
@@ -14,6 +14,12 @@ function MainBoard({ setFeed, img, text, setImg, setText, setPost }) {
   //redux store 로그인시 userId저장했고 그 값을 받아옴
   const userId = useSelector((store) => {
     return store.loginState.userId;
+  });
+  const email = useSelector((store) => {
+    return store.loginState.email;
+  });
+  const uimg = useSelector((store) => {
+    return store.loginState.uimg;
   });
 
   const onSubmit = (event) => {
@@ -59,17 +65,11 @@ function MainBoard({ setFeed, img, text, setImg, setText, setPost }) {
           }
         )
         .then((res) => {
+          console.log(res);
           if (res.data.status === "success") {
             console.log("게시글 작성완료");
-            // 게시글 작성에 성공하면 최근 게시물 6개를 다시 불러옴
-            axios
-              .get("http://13.125.96.165:3000/board/get/main")
-              .then((res) => {
-                setFeed(res.data.content);
-              })
-              .catch((err) => {
-                alert(err);
-              });
+            const now = new Date().toString();
+            addFeed(res.data.bid, res.data.bimg, [], text, now, email, 0, 0, userId, uimg);
           } else if (res.status === 500) {
             alert("서버에서 에러가 발생 하였습니다.");
           } else {
