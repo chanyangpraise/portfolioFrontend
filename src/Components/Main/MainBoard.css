@@ -99,3 +99,19 @@
   transition: 1s;
   transform: rotateX(180deg);
 }
+
+@media (max-width: 800px) {
+  .main_wrap {
+    margin-top: 10rem;
+  }
+  .main_input_img {
+    width: 40%;
+    height: 40%;
+    margin: 0 auto;
+    position: relative;
+    left: 55%;
+    transform: translateX(-50%);
+    margin-bottom: 1rem;
+    border-radius: 20px;
+  }
+}

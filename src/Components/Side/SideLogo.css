@@ -3,3 +3,10 @@
   height: 30px;
   margin-bottom: 5em;
 }
+
+@media (max-width: 800px) {
+  .sidebar_header {
+    position: absolute;
+    top: 13px;
+  }
+}

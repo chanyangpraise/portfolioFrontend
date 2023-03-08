@@ -20,3 +20,14 @@
   display: flex;
   font-size: 1vw;
 }
+
+@media (max-width: 800px) {
+  .sidebarProfile_user_name {
+    display: none;
+  }
+  .sidebarProfile {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+  }
+}

@@ -17,3 +17,21 @@
   width: 2rem;
   margin-right: 1rem;
 }
+
+@media (max-width: 800px) {
+  .sidebar_ul {
+    display: flex;
+    position: absolute;
+    top: 17px;
+    right: 1rem;
+    flex-direction: row;
+  }
+  .sidebar_icon {
+    display: none;
+  }
+  .sidebar_ul span {
+    font-size: 1.3rem;
+    margin-right: 1rem;
+    font-weight: bold;
+  }
+}

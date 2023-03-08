@@ -37,7 +37,7 @@ function Register() {
         url: "http://13.125.96.165:3000/users/register",
         data: {
           email: email,
-          password: password,
+          pwd: password,
           phone: phone,
         },
       })
