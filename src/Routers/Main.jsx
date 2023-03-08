@@ -6,6 +6,7 @@ import axios from "axios";
 import MainFeed from "../Components/Main/MainFeed";
 import upBtn from "../asset/upBtn.svg";
 import { useSelector } from "react-redux";
+import Loader from "../Components/Main/Loader";
 
 function Main() {
   const [text, setText] = useState();
@@ -149,7 +150,7 @@ function Main() {
             );
           }
         })}
-        {loading && <div className="loadingWrap">Loading...</div>}
+        {loading && <Loader />}
         {!hasMore && <div>No more posts</div>}
         <span onClick={TopBtnClick} className="upImg">
           <img style={{ width: "3vw" }} src={upBtn} alt=""></img>
