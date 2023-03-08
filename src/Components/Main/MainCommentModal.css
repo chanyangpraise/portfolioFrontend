@@ -1,5 +1,5 @@
 .main_comment_modal_wrap {
-  background-color: rgba(0, 0, 0, 0.359);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -13,6 +13,7 @@
 }
 
 .main_comment_modal_textarea {
+  z-index: 1000;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -47,6 +48,7 @@
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
+  z-index: 10000;
 }
 
 .main_comment_close_button {

@@ -20,6 +20,7 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
 
   const cmtSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     // 댓글 작성
     axios
       .post("http://13.125.96.165:3000/comment/write", {
@@ -58,13 +59,20 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
   };
   return (
     <>
-      <div className="main_comment_modal_wrap">
+      <div
+        className="main_comment_modal_wrap"
+        onClick={() => {
+          setCmtModal(false);
+          setComment("");
+        }}
+      >
         <form onSubmit={cmtSubmit}>
           <div className="main_comment_modal_in_wrap">
-            <span className="main_comment_close_button" onClick={() => setCmtModal(false)}>
+            {/* <span className="main_comment_close_button" onClick={() => setCmtModal(false)}>
               x
-            </span>
+            </span> */}
             <textarea
+              onClick={(e) => e.stopPropagation()} // 이벤트 전파 방지
               ref={commentTextArea}
               onChange={cmtTextAdd}
               className="main_comment_modal_textarea"
@@ -73,7 +81,9 @@ function MainCommentModal({ comment, setComment, setCmtModal, commentIndex, post
               rows={1}
               value={comment}
             />
-            <button className="main_comment_button">Send</button>
+            <button onClick={(e) => e.stopPropagation()} className="main_comment_button">
+              Send
+            </button>
           </div>
         </form>
       </div>
