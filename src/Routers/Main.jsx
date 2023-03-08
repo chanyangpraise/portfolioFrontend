@@ -149,7 +149,7 @@ function Main() {
             );
           }
         })}
-        {loading && <div>Loading...</div>}
+        {loading && <div className="loadingWrap">Loading...</div>}
         {!hasMore && <div>No more posts</div>}
         <span onClick={TopBtnClick} className="upImg">
           <img style={{ width: "3vw" }} src={upBtn} alt=""></img>

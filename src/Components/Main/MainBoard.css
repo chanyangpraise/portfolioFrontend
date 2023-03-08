@@ -6,8 +6,8 @@
   align-items: center;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
-  width: 82%;
-  border-radius: 40px;
+  width: 65%;
+  border-radius: 18px;
   border: 0.1px solid #e0e0e0;
   margin: 0 auto;
   margin-top: 2rem;
@@ -90,7 +90,7 @@
   all: unset;
   border: 3px solid #0000c5;
   background-color: #0000c5;
-  color: white;
+  color: #0000c5;
   padding: 0.8rem;
   border-radius: 1rem;
   cursor: pointer;
