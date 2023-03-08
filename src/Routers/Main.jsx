@@ -83,6 +83,23 @@ function Main() {
     });
     setFeed(newFeed);
   };
+
+  const changeFollow = (f, uid) => {
+    const newFeed = feed.map((v) => {
+      if (v.uid === uid) {
+        if (f === "follow") {
+          v.following = "1";
+          console.log(v);
+        } else {
+          v.following = "0";
+          console.log(v);
+        }
+      }
+      return v;
+    });
+    setFeed(newFeed);
+  };
+
   return (
     <>
       <MainBoard setFeed={setFeed} setPost={setPost} text={text} img={img} setText={setText} setImg={setImg} />
@@ -122,6 +139,7 @@ function Main() {
                   bid={v.bid}
                   commentIndex={commentIndex}
                   cmtList={v.cmt}
+                  changeFollow={changeFollow}
                 />
               </div>
             );
@@ -145,6 +163,7 @@ function Main() {
                   commentIndex={commentIndex}
                   cmtList={v.cmt}
                   addCmt={addCmt}
+                  changeFollow={changeFollow}
                 />
               </div>
             );

@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './Profile.css';
-import '../Components/Profile/css/Modal.css';
-import PostViewer from '../Components/Profile/PostViewer';
-import Modal from '../Components/Profile/Modal';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { setProfileUserEmail } from '../redux/store/store';
-import { setUserProfileImg } from '../redux/store/store';
+import React, { useState, useEffect, useRef } from "react";
+import "./Profile.css";
+import "../Components/Profile/css/Modal.css";
+import PostViewer from "../Components/Profile/PostViewer";
+import Modal from "../Components/Profile/Modal";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/slice/loginSlice";
 
 function Profile() {
   //모달
@@ -19,16 +18,20 @@ function Profile() {
   const [followers, setFollowers] = useState(0); //팔로워 카운팅
   const [following, setFollowing] = useState(0); //팔로우 카운팅
 
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  // const [avatarUrl, setAvatarUrl] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
 
-  const getId = '3';
+  const getId = "3";
 
   const [file, setFile] = useState(null);
 
   const userId = useSelector((store) => {
     return store.loginState.userId;
   });
+  const avatarUrl = useSelector((store) => {
+    return store.loginState.uimg;
+  });
+
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(0);
 
@@ -36,11 +39,11 @@ function Profile() {
 
   //userImg 전달
   const userProfileImg = avatarUrl;
-  dispatch(setUserProfileImg(userProfileImg));
+  // dispatch(setUserProfileImg(userProfileImg));
 
   //userEmail 전달
   const ProfileUserEmail = userEmail;
-  dispatch(setProfileUserEmail(ProfileUserEmail));
+  // dispatch(setProfileUserEmail(ProfileUserEmail));
 
   useEffect(() => {
     //컴포넌트 렌더링 되자마자 바로 6개 일단 불러오게
@@ -58,25 +61,23 @@ function Profile() {
 
       // 스크롤이 페이지의 하단에 도달했다면 fetchPosts 함수 호출
       if (scrollTop + clientHeight >= scrollHeight) {
-        console.log('스크롤 하단 도달!! fetchPosts 함수를 호출합니다.');
+        console.log("스크롤 하단 도달!! fetchPosts 함수를 호출합니다.");
         fetchPosts();
       }
     };
 
     // 스크롤 이벤트 리스너 추가
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [page]);
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get(
-        `http://13.125.96.165:3000/board/get/user/${userId}?page=${page}&count=6`
-      );
+      const res = await axios.get(`http://13.125.96.165:3000/board/get/user/${userId}?page=${page}&count=6`);
       setPosts(posts.concat(res.data.content));
       setPage((prevPage) => prevPage + 1);
       // console.log(posts);
@@ -93,28 +94,28 @@ function Profile() {
   };
 
   // 서버에서 사용자 프로필 이미지 가져오기
-  useEffect(() => {
-    axios
-      .get(`http://13.125.96.165:3000/profile/get/${userId}?getId=${getId}`)
-      .then((res) => {
-        if (res.data.status === 'success' && res.data.info.uimg) {
-          setAvatarUrl(res.data.info.uimg);
-        } else {
-          setAvatarUrl('/src/asset/defaultProfile.png');
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setAvatarUrl('/src/asset/defaultProfile.png');
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://13.125.96.165:3000/profile/get/${userId}?getId=${getId}`)
+  //     .then((res) => {
+  //       if (res.data.status === "success" && res.data.info.uimg) {
+  //         setAvatarUrl(res.data.info.uimg);
+  //       } else {
+  //         setAvatarUrl("/src/asset/defaultProfile.png");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       setAvatarUrl("/src/asset/defaultProfile.png");
+  //     });
+  // }, []);
 
   // 서버에서 사용자 이메일 가져오기
   useEffect(() => {
     axios
       .get(`http://13.125.96.165:3000/profile/get/${userId}?getId=${getId}`)
       .then((res) => {
-        if (res.data.status === 'success' && res.data.info.email) {
+        if (res.data.status === "success" && res.data.info.email) {
           setUserEmail(res.data.info.email);
         }
       })
@@ -126,13 +127,13 @@ function Profile() {
   // 파일 업로드 버튼 클릭 시 서버에 요청
   const handleUpload = async (files) => {
     try {
-      console.log('111');
-      console.log(files)
+      console.log("111");
+      console.log(files);
       const res = await axios.post(
-        'http://13.125.96.165:3000/users/upload',
+        "http://13.125.96.165:3000/users/upload",
         {
           image: files,
-          userId
+          userId,
         },
         {
           headers: {
@@ -140,10 +141,15 @@ function Profile() {
           },
         }
       );
-      console.log(res)
-      console.log(res.data.message);
-      console.log("성공적으로 업로드 되었습니다.")
+      if (res.status === 200) {
+        console.log(res);
+        console.log(res.data.message);
+        console.log("성공적으로 업로드 되었습니다.");
+        console.log(res.data.uImg);
+        dispatch(login({ uimg: res.data.uImg }));
+      }
     } catch (err) {
+      console.log(err);
       console.error(err.response.data.message);
     }
   };
@@ -154,20 +160,20 @@ function Profile() {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append("image", file);
 
     axios
       .put(`http://13.125.96.165:3000/profile-image/${userId}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
-        console.log('프로필 수정 성공: ');
+        console.log("프로필 수정 성공: ");
         console.log(response.data);
       })
       .catch((error) => {
-        console.log('프로필 수정 오류: ');
+        console.log("프로필 수정 오류: ");
         console.error(error);
       });
   };
@@ -177,14 +183,14 @@ function Profile() {
     axios
       .delete(`http://13.125.96.165:3000/users/profile-image/${userId}`)
       .then((res) => {
-        console.log('프로필 이미지 삭제 성공: ');
+        console.log("프로필 이미지 삭제 성공: ");
         console.log(res.data.message);
-        alert('삭제가 완료되었습니다. 새로고침 하세요.');
+        alert("삭제가 완료되었습니다. 새로고침 하세요.");
       })
       .catch((err) => {
-        console.log('프로필 이미지 삭제 오류 발생: ');
+        console.log("프로필 이미지 삭제 오류 발생: ");
         console.error(err);
-        alert('서버에 에러가 발생했습니다. 잠시 후 다시 시도하세요.');
+        alert("서버에 에러가 발생했습니다. 잠시 후 다시 시도하세요.");
       });
   };
 
@@ -254,17 +260,11 @@ function Profile() {
               />
               <label htmlFor="image">프로필 사진 수정</label>
 
-              <button
-                className="p_btn p_edit_btn modalBtn"
-                onClick={handleDelete}
-              >
+              <button className="p_btn p_edit_btn modalBtn" onClick={handleDelete}>
                 프로필 사진 삭제
               </button>
 
-              <button
-                className="p_btn p_edit_btn modalBtn"
-                onClick={() => setOpenModal(true)}
-              >
+              <button className="p_btn p_edit_btn modalBtn" onClick={() => setOpenModal(true)}>
                 계정 설정
               </button>
               <Modal open={openModal} onClose={() => setOpenModal(false)} />
@@ -289,12 +289,7 @@ function Profile() {
 
       <div className="g_container">
         <div className="gallery">
-          <PostViewer
-            open={openViewer}
-            onClose={() => setOpenViewer(false)}
-            bid={selectedBid}
-            bimg={selectedBimg}
-          />
+          <PostViewer open={openViewer} onClose={() => setOpenViewer(false)} bid={selectedBid} bimg={selectedBimg} />
 
           {posts.map((post, index) => (
             <div className="galleryContainer">
