@@ -1,7 +1,12 @@
-import React from 'react';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { reset } from "../../redux/slice/loginSlice";
 
 const Modal = ({ open, onClose }) => {
   if (!open) return null;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="modalOverlay">
       <div className="modalContainer">
@@ -10,9 +15,16 @@ const Modal = ({ open, onClose }) => {
             X
           </p>
           <div className="btnContainer">
-            <a href="/">
-              <button className="modalLogout"> 로그아웃 </button>
-            </a>
+            <button
+              onClick={() => {
+                dispatch(reset());
+                navigate("/");
+              }}
+              className="modalLogout"
+            >
+              {" "}
+              로그아웃{" "}
+            </button>
           </div>
         </div>
       </div>

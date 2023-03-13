@@ -5,7 +5,7 @@ import logo from "../Login/loginimg/Teamstagramlogo.png";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/slice/loginSlice";
 
-function Logindetail() {
+function Logindetail({ setLoggedIn }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const movetoforgotpw = () => {
@@ -48,10 +48,11 @@ function Logindetail() {
         } else if (response.data.message === "이메일을 찾을 수 없습니다.") {
           alert("이메일을 찾을 수 없습니다.");
         } else if (response.data.message === "로그인 성공") {
+          setLoggedIn(true);
           navigate("/main");
           console.log(response.data);
           //Login 시 userId를 redux store에 저장하여 전역으로 관리할수있게 만드는 코드
-          const user = { userId: response.data.info.id, uimg: response.data.info.uimg, email: email };
+          const user = { userId: response.data.info.id, uimg: response.data.info.uimg, email: email, isLogin: true };
           dispatch(login(user));
         }
       })

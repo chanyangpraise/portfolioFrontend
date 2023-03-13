@@ -20,9 +20,16 @@ const loginSlice = createSlice({
       state.email = action.payload.email || state.email;
       state.uimg = action.payload.uimg || state.uimg;
     },
+    reset: (state) => {
+      state.nick = "";
+      state.userId = "";
+      state.email = "";
+      state.uimg = null;
+      state.isLogin = false;
+    }
   },
 });
 
-export const { login } = loginSlice.actions;
+export const { login, reset } = loginSlice.actions;
 
 export default loginSlice.reducer;

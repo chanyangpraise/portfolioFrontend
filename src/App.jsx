@@ -12,20 +12,23 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./redux/store/store";
 import Main from "./Routers/Main";
+import { useState } from "react";
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <Routes>
             <Route path="/" element={<Login />}>
-              <Route index element={<Logindetail />} />
+              <Route index element={<Logindetail setLoggedIn={setLoggedIn} />} />
               <Route path="/register" element={<Register />} />
               <Route path="/changepw" element={<ChangePassword />} />
               <Route path="/forgotpw" element={<ForgotPassword />} />
-              <Route path="/verifyemail" element={<VerifyEmail />} />"
+              <Route path="/verifyemail" element={<VerifyEmail />} />
             </Route>
-            <Route element={<SideBar />}>
+            <Route element={<SideBar loggedIn={loggedIn} />}>
               <Route path="/main" element={<Main />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
@@ -35,5 +38,4 @@ function App() {
     </Provider>
   );
 }
-
 export default App;
