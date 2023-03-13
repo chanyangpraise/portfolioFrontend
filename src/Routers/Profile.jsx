@@ -276,10 +276,10 @@ function Profile() {
                   게시물 <span className="p_stat">{countPosts}</span>
                 </li>
                 <li>
-                  팔로워 <span className="p_stat">{followers}</span>
+                  팔로우<span className="p_stat">{followers}</span>
                 </li>
                 <li>
-                  팔로우 <span className="p_stat">{following}</span>
+                  팔로워 <span className="p_stat">{following}</span>
                 </li>
               </ul>
             </div>
